@@ -1,0 +1,17 @@
+{
+	"name": "com.icosa.open-brush-unity-tools",
+	"version": "0.0.1",
+	"displayName": "Open Brush Unity Tools",
+	"description": "Unity tools for Open Brush",
+	"unity": "2021.3",
+	"author": {
+		"name": "The Open Brush Team",
+		"email": "admin@icosa-foundation.org",
+		"url": "https://openbrush.app/"
+	},
+	"dependencies": {
+            "org.khronos.unitygltf": "https://github.com/icosa-mirror/UnityGLTF.git#dev"
+	},
+	"scopedRegistries": [
+	]
+}
