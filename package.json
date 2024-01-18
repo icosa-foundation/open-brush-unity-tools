@@ -10,7 +10,6 @@
 		"url": "https://openbrush.app/"
 	},
 	"dependencies": {
-            "org.khronos.unitygltf": "https://github.com/icosa-mirror/UnityGLTF.git#dev"
 	},
 	"scopedRegistries": [
 	]
