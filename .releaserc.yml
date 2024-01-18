@@ -10,14 +10,14 @@ plugins:
   - '@semantic-release/release-notes-generator'
   - - '@semantic-release/changelog'
     - preset: angular
-      changelogFile: PATH_TO_YOUR_CHANGELOG.MD
+      changelogFile: Packages/open-brush-unity-tools/CHANGELOG.MD
   - - '@semantic-release/npm'
     - npmPublish: false
-      pkgRoot: XYZ1
+      pkgRoot: Packages/open-brush-unity-tools
   - - '@semantic-release/git'
     - assets:
-        - XYZ2
-        - XYZ3
+        - Packages/open-brush-unity-tools/package.json
+        - Packages/open-brush-unity-tools/CHANGELOG.md
       message: |-
         chore(release): ${nextRelease.version} [skip ci]
 
