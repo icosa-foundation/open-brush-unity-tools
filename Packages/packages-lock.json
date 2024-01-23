@@ -4,9 +4,7 @@
       "version": "file:open-brush-unity-tools",
       "depth": 0,
       "source": "embedded",
-      "dependencies": {
-        "org.khronos.unitygltf": "https://github.com/icosa-mirror/UnityGLTF.git#dev"
-      }
+      "dependencies": {}
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -145,7 +143,7 @@
         "com.unity.modules.imageconversion": "1.0.0",
         "com.unity.shadergraph": "10.0.0"
       },
-      "hash": "caa3f4c14ece0985b66dd9b544419236ccca2a68"
+      "hash": "4ebe065f276025fcd3f1d873d4da55ff46e8e2c6"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
