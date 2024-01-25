@@ -65,14 +65,23 @@ namespace OpenBrushUnityTools
                 if (mr != null)
                 {
                     var existingMaterialName = mr.sharedMaterial.name.Replace("(Instance)", "").Trim();
-                    var mat = m_MaterialDictionary.GetMaterial(existingMaterialName);
-                    if (mat != null)
+                    Material mat = null;
+                    try
                     {
-                        mr.sharedMaterial = mat;
+                        mat = m_MaterialDictionary.GetMaterial(existingMaterialName);
+                    }
+                    catch (KeyNotFoundException e)
+                    {
+                        Debug.LogWarning($"MaterialRemapping: No match for {existingMaterialName} on {nodeObject.name}");
+                    }
+
+                    if (mat == null)
+                    {
+                        Debug.LogWarning($"MaterialRemapping: No material for {existingMaterialName} on {nodeObject.name}");
                     }
                     else
                     {
-                        Debug.LogWarning($"Failed to find material {existingMaterialName} in MaterialRemapping");
+                        mr.sharedMaterial = mat;
                     }
                 }
             }
