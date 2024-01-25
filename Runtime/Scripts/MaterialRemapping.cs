@@ -20,22 +20,23 @@ public class MaterialRemapping : ScriptableObject
         {
             InitializeDictionary();
         }
-        if (materialDictionary.TryGetValue(key, out Material material))
-        {
-            return material;
-        }
-        return null;
+        return materialDictionary[key];
     }
 
+    [ContextMenu("Re-Initialize Dictionary")]
     private void InitializeDictionary()
     {
         materialDictionary = new Dictionary<string, Material>();
         foreach (MaterialEntry entry in entries)
         {
-            if (!materialDictionary.ContainsKey(entry.key))
+            string key = $"ob-{entry.key}";
+            if (materialDictionary.ContainsKey(key))
             {
-                // Add the "ob-" prefix to the key
-                materialDictionary.Add($"ob-{entry.key}", entry.material);
+                Debug.LogError($"Duplicate key found in MaterialRemapping: {entry.key}");
+            }
+            else
+            {
+                materialDictionary.Add(key, entry.material);
             }
         }
     }
