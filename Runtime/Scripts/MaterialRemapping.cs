@@ -34,7 +34,8 @@ public class MaterialRemapping : ScriptableObject
         {
             if (!materialDictionary.ContainsKey(entry.key))
             {
-                materialDictionary.Add(entry.key, entry.material);
+                // Add the "ob-" prefix to the key
+                materialDictionary.Add($"ob-{entry.key}", entry.material);
             }
         }
     }
