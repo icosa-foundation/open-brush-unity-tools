@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: MaterialRemapping
   m_EditorClassIdentifier: 
   entries:
+  - key: AdditiveCutout
+    material: {fileID: 2100000, guid: bac1c2947c5943f4fb657f2bf562ac60, type: 2}
   - key: Bubbles
     material: {fileID: 2100000, guid: 4d24cf1c5fc5d174294759d0473ffda4, type: 2}
   - key: CelVinyl
@@ -25,6 +27,8 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 3706091e56063b947aabd55a0367680d, type: 2}
   - key: DiamondHull
     material: {fileID: 2100000, guid: d2e6bb39f4d2ac6499b22771a7e046eb, type: 2}
+  - key: DiffuseNoTextureDoubleSided
+    material: {fileID: 2100000, guid: 385a5e69e3ac58b4c8c7f1c29dad3a6a, type: 2}
   - key: Disco
     material: {fileID: 2100000, guid: 343b93f51e3d89a409370a84ca6a91c8, type: 2}
   - key: Dots
@@ -105,3 +109,91 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: ce31c42493e7a024bbccda2ab6b1fa46, type: 2}
   - key: Wire
     material: {fileID: 2100000, guid: 02c7014159304aa4e8df18910f3ce75f, type: 2}
+  - key: Additive
+    material: {fileID: 0}
+  - key: BubbleWand
+    material: {fileID: 0}
+  - key: Charcoal
+    material: {fileID: 0}
+  - key: DanceFloor
+    material: {fileID: 0}
+  - key: Diffuse
+    material: {fileID: 0}
+  - key: DotMarker
+    material: {fileID: 0}
+  - key: DoubleFlat
+    material: {fileID: 0}
+  - key: Drafting
+    material: {fileID: 0}
+  - key: DryBrush
+    material: {fileID: 0}
+  - key: DuctTapeSingleSided
+    material: {fileID: 0}
+  - key: FacetedTube
+    material: {fileID: 0}
+  - key: Fairy
+    material: {fileID: 0}
+  - key: Feather
+    material: {fileID: 0}
+  - key: Fire2
+    material: {fileID: 0}
+  - key: GouacheDoubleSided
+    material: {fileID: 0}
+  - key: Guts
+    material: {fileID: 0}
+  - key: InkSingleSided
+    material: {fileID: 0}
+  - key: KeijiroTube
+    material: {fileID: 0}
+  - key: Lacewing
+    material: {fileID: 0}
+  - key: LeakyPen
+    material: {fileID: 0}
+  - key: LeavesSingleSided
+    material: {fileID: 0}
+  - key: LitWire
+    material: {fileID: 0}
+  - key: LoftedHueShift
+    material: {fileID: 0}
+  - key: MarbledRainbow
+    material: {fileID: 0}
+  - key: Muscle
+    material: {fileID: 0}
+  - key: MylarTube
+    material: {fileID: 0}
+  - key: Plasma
+    material: {fileID: 0}
+  - key: Rain
+    material: {fileID: 0}
+  - key: RisingBubbles
+    material: {fileID: 0}
+  - key: SingleSided
+    material: {fileID: 0}
+  - key: SmoothHull
+    material: {fileID: 0}
+  - key: Space
+    material: {fileID: 0}
+  - key: Sparks
+    material: {fileID: 0}
+  - key: Square
+    material: {fileID: 0}
+  - key: Square3DPrintBrush
+    material: {fileID: 0}
+  - key: TaperedHueShift
+    material: {fileID: 0}
+  - key: TaperedMarkerGeo
+    material: {fileID: 0}
+  - key: TaperedWire
+    material: {fileID: 0}
+  - key: TubeToonInverted
+    material: {fileID: 0}
+  - key: WaveformFFT
+    material: {fileID: 0}
+  - key: WaveformParticles
+    material: {fileID: 0}
+  - key: WaveformTube
+    material: {fileID: 0}
+  - key: Wind
+    material: {fileID: 0}
+  - key: Wireframe
+    material: {fileID: 0}
