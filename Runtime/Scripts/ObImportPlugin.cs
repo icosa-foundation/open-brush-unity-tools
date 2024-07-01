@@ -64,13 +64,18 @@ namespace OpenBrushUnityTools
                 var mr = nodeObject.GetComponent<MeshRenderer>();
                 if (mr != null)
                 {
-                    var existingMaterialName = mr.sharedMaterial.name.Replace("(Instance)", "").Trim();
+                    var existingMaterialName = mr.sharedMaterial.name;
+                    if (!existingMaterialName.StartsWith("ob-")) return;
+                    existingMaterialName = existingMaterialName
+                        .Replace("(Instance)", "")
+                        .Replace(" ", "")
+                        .Trim();
                     Material mat = null;
                     try
                     {
                         mat = m_MaterialDictionary.GetMaterial(existingMaterialName);
                     }
-                    catch (KeyNotFoundException e)
+                    catch (KeyNotFoundException)
                     {
                         Debug.LogWarning($"MaterialRemapping: No match for {existingMaterialName} on {nodeObject.name}");
                     }

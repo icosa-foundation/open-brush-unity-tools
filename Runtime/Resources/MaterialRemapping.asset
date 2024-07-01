@@ -13,15 +13,13 @@ MonoBehaviour:
   m_Name: MaterialRemapping
   m_EditorClassIdentifier: 
   entries:
-  - key: AdditiveCutout
-    material: {fileID: 2100000, guid: bac1c2947c5943f4fb657f2bf562ac60, type: 2}
   - key: Bubbles
     material: {fileID: 2100000, guid: 4d24cf1c5fc5d174294759d0473ffda4, type: 2}
   - key: CelVinyl
     material: {fileID: 2100000, guid: 5e8aed3e0fd60834d97532d3bb460d3e, type: 2}
   - key: ChromaticWave
     material: {fileID: 2100000, guid: a53539a5e9dea7d46a7e9b7632c15253, type: 2}
-  - key: CoarseBristlesDoubleSided
+  - key: CoarseBristles
     material: {fileID: 2100000, guid: f071bff105b09434b94fc9ef06534cd9, type: 2}
   - key: Comet
     material: {fileID: 2100000, guid: 3706091e56063b947aabd55a0367680d, type: 2}
@@ -33,9 +31,11 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 343b93f51e3d89a409370a84ca6a91c8, type: 2}
   - key: Dots
     material: {fileID: 2100000, guid: 3ce480ce80d22e8429f12a7249d2eb07, type: 2}
-  - key: DoubleTaperedMarker
+  - key: DoubleTaperedFlat
     material: {fileID: 2100000, guid: 46a727689bd591e46b9b4c60c6d6207c, type: 2}
-  - key: DuctTapeDoubleSided
+  - key: DoubleTaperedMarker
+    material: {fileID: 2100000, guid: 9c5f1e4a7332f89408567cd963f47583, type: 2}
+  - key: DuctTape
     material: {fileID: 2100000, guid: 79edfa5802000684ca43bdede1cd4579, type: 2}
   - key: Electricity
     material: {fileID: 2100000, guid: 5262b8468e892fe4c91f092e924e4b05, type: 2}
@@ -43,15 +43,17 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: fecb87c3fb59e424e9f185865c2a48e0, type: 2}
   - key: Fire
     material: {fileID: 2100000, guid: c10410f7a0001ab4688598c3d0862ac9, type: 2}
-  - key: FlatDoubleSided
+  - key: Flat
     material: {fileID: 2100000, guid: ce6cfbde1d12876439d13cdfb23351ae, type: 2}
+  - key: Highlighter
+    material: {fileID: 2100000, guid: bac1c2947c5943f4fb657f2bf562ac60, type: 2}
   - key: HyperGrid
     material: {fileID: 2100000, guid: e8d3b76da0405464087001136c77b008, type: 2}
-  - key: HypercolorDoubleSided
+  - key: Hypercolor
     material: {fileID: 2100000, guid: 077bed1c8bd0753499e0c3adb693a3bc, type: 2}
   - key: Icing
     material: {fileID: 2100000, guid: 7aefda54941e0104fa7637c2d8593674, type: 2}
-  - key: InkDoubleSided
+  - key: Ink
     material: {fileID: 2100000, guid: f4d8ee95f6d1311438e53e78b3ef67bb, type: 2}
   - key: Light
     material: {fileID: 2100000, guid: 54787dce785e49044bd890a97dda8644, type: 2}
@@ -65,9 +67,9 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 62df3af3ef149504988da83c08cf7250, type: 2}
   - key: NeonPulse
     material: {fileID: 2100000, guid: 437b75d6014cf034d92f0bb4f110070e, type: 2}
-  - key: OilPaintDoubleSided
+  - key: OilPaint
     material: {fileID: 2100000, guid: e971ec661e0941b469f27acae1244f88, type: 2}
-  - key: PaperDoubleSided
+  - key: Paper
     material: {fileID: 2100000, guid: faf7f09d9e15d1c419af33d8dab6513a, type: 2}
   - key: Petal
     material: {fileID: 2100000, guid: b9879bd1140f7d94ea9340c1bc5e2a7c, type: 2}
@@ -83,17 +85,17 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: ab08354aa47d7084d9a65f993a3bccf3, type: 2}
   - key: Spikes
     material: {fileID: 2100000, guid: b96680bd138273a4bbcf96685df738a6, type: 2}
-  - key: SplatterDoubleSided
+  - key: Splatter
     material: {fileID: 2100000, guid: e3033b2ec92a3ab4b85aa5770a476452, type: 2}
   - key: Stars
     material: {fileID: 2100000, guid: 4f06ca6bf674d7548945803d5df22b23, type: 2}
   - key: Streamers
     material: {fileID: 2100000, guid: 21e96012a675b2d45ae1706d5dfb4969, type: 2}
-  - key: TaperedFlatDoubleSided
+  - key: TaperedFlat
     material: {fileID: 2100000, guid: 385a5e69e3ac58b4c8c7f1c29dad3a6a, type: 2}
   - key: TaperedMarker
     material: {fileID: 2100000, guid: 10eae5304118cb3468b104f4e0e64196, type: 2}
-  - key: ThickPaintDoubleSided
+  - key: ThickPaint
     material: {fileID: 2100000, guid: 5e18fa10121709e4595c27d919c75907, type: 2}
   - key: Toon
     material: {fileID: 2100000, guid: 66b410f19393cc04688b3b5b7a29b226, type: 2}
@@ -103,14 +105,14 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 5099a2d1be1fb094d95a6e208ae54f2e, type: 2}
   - key: Waveform
     material: {fileID: 2100000, guid: 9bf58314959371043a5b2a21c7846393, type: 2}
-  - key: WetPaintDoubleSided
+  - key: WetPaint
     material: {fileID: 2100000, guid: 2f6df575ca49b43468d179f665f4e16a, type: 2}
-  - key: WigglyGraphiteDoubleSided
+  - key: WigglyGraphite
     material: {fileID: 2100000, guid: ce31c42493e7a024bbccda2ab6b1fa46, type: 2}
   - key: Wire
     material: {fileID: 2100000, guid: 02c7014159304aa4e8df18910f3ce75f, type: 2}
-  - key: Additive
-    material: {fileID: 2100000, guid: c1c9b26d673a4dc6b37351715654ab96, type: 2}
+  - key: 3DPrintingBrush
+    material: {fileID: 2100000, guid: d3f3b18ada03f694b83828ba8e749a98, type: 2}
   - key: BubbleWand
     material: {fileID: 2100000, guid: eba3f993f9a14d35b84ebb08f48981a4, type: 2}
   - key: Charcoal
@@ -125,8 +127,6 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 492b36ffb337436aba5f1e87ee86747e, type: 2}
   - key: DryBrush
     material: {fileID: 2100000, guid: 725f4c6a6427652429abda371924adab, type: 2}
-  - key: DuctTapeSingleSided
-    material: {fileID: 2100000, guid: 3ca16e2fbdcd4da28631dcef342f40f1, type: 2}
   - key: FacetedTube
     material: {fileID: 2100000, guid: 4391ffaadf7343969e3331e4e4930b27, type: 2}
   - key: Fairy
@@ -135,11 +135,11 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: a555b809201746cbac26e63173d8f45e, type: 2}
   - key: Fire2
     material: {fileID: 2100000, guid: 53d753ef083c45e198e74459b4471219, type: 2}
-  - key: GouacheDoubleSided
+  - key: Gouache
     material: {fileID: 2100000, guid: 1b897b7e9b76425ab031a867c48df409, type: 2}
   - key: Guts
     material: {fileID: 2100000, guid: 99aafe96164544cd99bd979bc6ef37c5, type: 2}
-  - key: InkSingleSided
+  - key: InkGeometry
     material: {fileID: 2100000, guid: c00120953ffd40408ee1fc180d346eaa, type: 2}
   - key: KeijiroTube
     material: {fileID: 2100000, guid: f8ba3d1801fc4d7bb2d9b99d10b8e7cf, type: 2}
@@ -147,11 +147,9 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 1cf94f63f57a4a1aad14295af4f5ab5c, type: 2}
   - key: LeakyPen
     material: {fileID: 2100000, guid: ddda87454bb5ac5488b6d1480370583e, type: 2}
-  - key: LeavesSingleSided
+  - key: Leaves2
     material: {fileID: 2100000, guid: 7259cce541c1ec74c88578af28a31d95, type: 2}
-  - key: LitWire
-    material: {fileID: 2100000, guid: 62fef968e84232244a0e1fdb7cfb745c, type: 2}
-  - key: LoftedHueShift
+  - key: Lofted(HueShift)
     material: {fileID: 2100000, guid: c5da2e70a6e463a4898c5cfedef09c97, type: 2}
   - key: MarbledRainbow
     material: {fileID: 2100000, guid: c86c058d1bda2e9408dbf3d6a96ac4a1, type: 2}
@@ -173,14 +171,16 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: bdf65db21fb74202b5e0c6b5e3ea851e, type: 2}
   - key: Sparks
     material: {fileID: 2100000, guid: 50e99447386105f4697da1b96e771b98, type: 2}
-  - key: Square
+  - key: SquarePaper
     material: {fileID: 2100000, guid: 2e03b1bf3ebd46099d7ef4cafadc4dfa, type: 2}
-  - key: Square3DPrintBrush
-    material: {fileID: 2100000, guid: d3f3b18ada03f694b83828ba8e749a98, type: 2}
   - key: TaperedHueShift
     material: {fileID: 2100000, guid: 3d9755da56c772949b1d5ec349975f52, type: 2}
   - key: TaperedWire
     material: {fileID: 2100000, guid: 9568870f859460f41b20dfbc8a5eac0e, type: 2}
+  - key: ThickGeometry
+    material: {fileID: 2100000, guid: 3ca16e2fbdcd4da28631dcef342f40f1, type: 2}
+  - key: TubeAdditive
+    material: {fileID: 2100000, guid: c1c9b26d673a4dc6b37351715654ab96, type: 2}
   - key: TubeToonInverted
     material: {fileID: 2100000, guid: 9871385adf7343969e3331e4e4930b27, type: 2}
   - key: WaveformFFT
@@ -191,5 +191,7 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 0f5820dfcb6b4a6c960e56e4c8000eda, type: 2}
   - key: Wind
     material: {fileID: 2100000, guid: 7136a7291aabbd24f8b2ca88b6adfb67, type: 2}
+  - key: Wire(Lit)
+    material: {fileID: 2100000, guid: 62fef968e84232244a0e1fdb7cfb745c, type: 2}
   - key: Wireframe
     material: {fileID: 2100000, guid: 2c1a6a6365524d2386d758f6fba8581b, type: 2}
