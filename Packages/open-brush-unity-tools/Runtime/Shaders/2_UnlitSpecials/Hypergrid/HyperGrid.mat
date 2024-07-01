@@ -67,7 +67,7 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _EmissionGain: 0.7
+    - _EmissionGain: 0.3
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
