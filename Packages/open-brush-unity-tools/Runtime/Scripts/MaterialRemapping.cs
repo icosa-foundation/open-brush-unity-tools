@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -8,11 +9,11 @@ public class MaterialEntry
     public Material material;
 }
 
-[CreateAssetMenu(fileName = "MaterialRemapping", menuName = "ScriptableObjects/MaterialRemapping", order = 1)]
 public class MaterialRemapping : ScriptableObject
 {
     [SerializeField] private List<MaterialEntry> entries = new ();
     private Dictionary<string, Material> materialDictionary;
+    public Dictionary<string, Material> MaterialDictionary => materialDictionary;
 
     public Material GetMaterial(string key)
     {
@@ -23,9 +24,14 @@ public class MaterialRemapping : ScriptableObject
         return materialDictionary[key];
     }
 
-    [ContextMenu("Re-Initialize Dictionary")]
+    private void OnValidate()
+    {
+        InitializeDictionary();
+    }
+
     private void InitializeDictionary()
     {
+        Debug.Log("Initializing Material Dictionary");
         materialDictionary = new Dictionary<string, Material>();
         foreach (MaterialEntry entry in entries)
         {
