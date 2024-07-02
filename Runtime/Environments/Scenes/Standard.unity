@@ -19,7 +19,7 @@ RenderSettings:
   m_FogMode: 2
   m_FogDensity: 0.0025
   m_LinearFogStart: 0
-  m_LinearFogEnd: 0
+  m_LinearFogEnd: 0.01
   m_AmbientSkyColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
   m_AmbientEquatorColor: {r: 0.023598, g: 0.025875, b: 0.027531, a: 0.207}
   m_AmbientGroundColor: {r: 0.009729, g: 0.008901, b: 0.007245, a: 0.207}
@@ -289,6 +289,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BackGroundColor.r
       value: 0.15686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751646031587461587, guid: 77adda8435ac8fb4687b481da2b6f1d8,
+        type: 3}
+      propertyPath: m_Reverb
+      value: -1630
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751646031587461587, guid: 77adda8435ac8fb4687b481da2b6f1d8,
+        type: 3}
+      propertyPath: m_RoomHF
+      value: -4000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751646031587461587, guid: 77adda8435ac8fb4687b481da2b6f1d8,
+        type: 3}
+      propertyPath: m_DecayTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751646031587461587, guid: 77adda8435ac8fb4687b481da2b6f1d8,
+        type: 3}
+      propertyPath: m_Reflections
+      value: -1831
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751646031587461587, guid: 77adda8435ac8fb4687b481da2b6f1d8,
+        type: 3}
+      propertyPath: m_ReverbDelay
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751646031587461587, guid: 77adda8435ac8fb4687b481da2b6f1d8,
+        type: 3}
+      propertyPath: m_DecayHFRatio
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751646031587461587, guid: 77adda8435ac8fb4687b481da2b6f1d8,
+        type: 3}
+      propertyPath: m_ReverbPreset
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77adda8435ac8fb4687b481da2b6f1d8, type: 3}

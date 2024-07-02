@@ -19,7 +19,7 @@ RenderSettings:
   m_FogMode: 2
   m_FogDensity: 0.005
   m_LinearFogStart: 0
-  m_LinearFogEnd: 0
+  m_LinearFogEnd: 0.01
   m_AmbientSkyColor: {r: 0.7294118, g: 0.7294118, b: 0.7294118, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -249,6 +249,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.44259542
+      objectReference: {fileID: 0}
+    - target: {fileID: 615019414730140546, guid: 96c481793e8e9cd41b46cac45b124cb3,
+        type: 3}
+      propertyPath: m_Reverb
+      value: 207
+      objectReference: {fileID: 0}
+    - target: {fileID: 615019414730140546, guid: 96c481793e8e9cd41b46cac45b124cb3,
+        type: 3}
+      propertyPath: m_RoomHF
+      value: -6000
+      objectReference: {fileID: 0}
+    - target: {fileID: 615019414730140546, guid: 96c481793e8e9cd41b46cac45b124cb3,
+        type: 3}
+      propertyPath: m_DecayTime
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 615019414730140546, guid: 96c481793e8e9cd41b46cac45b124cb3,
+        type: 3}
+      propertyPath: m_Reflections
+      value: -1204
+      objectReference: {fileID: 0}
+    - target: {fileID: 615019414730140546, guid: 96c481793e8e9cd41b46cac45b124cb3,
+        type: 3}
+      propertyPath: m_ReverbDelay
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 615019414730140546, guid: 96c481793e8e9cd41b46cac45b124cb3,
+        type: 3}
+      propertyPath: m_DecayHFRatio
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 615019414730140546, guid: 96c481793e8e9cd41b46cac45b124cb3,
+        type: 3}
+      propertyPath: m_ReverbPreset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 615019414730140546, guid: 96c481793e8e9cd41b46cac45b124cb3,
+        type: 3}
+      propertyPath: m_ReflectionsDelay
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 1383298375419547722, guid: 96c481793e8e9cd41b46cac45b124cb3,
         type: 3}

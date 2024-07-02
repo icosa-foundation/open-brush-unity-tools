@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 3650928927073359873}
   - component: {fileID: 3650928927073359886}
   - component: {fileID: 3650928927073359887}
+  - component: {fileID: 4156032446161497999}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -233,6 +234,30 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!167 &4156032446161497999
+AudioReverbZone:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3650928927073359884}
+  m_Enabled: 1
+  m_MinDistance: 10
+  m_MaxDistance: 15
+  m_ReverbPreset: 3
+  m_Room: -1000
+  m_RoomHF: -454
+  m_DecayTime: 0.4
+  m_DecayHFRatio: 0.83
+  m_Reflections: -1646
+  m_ReflectionsDelay: 0.002
+  m_Reverb: 53
+  m_ReverbDelay: 0.003
+  m_HFReference: 5000
+  m_Diffusion: 100
+  m_Density: 100
+  m_LFReference: 250
+  m_RoomLF: 0
 --- !u!1 &3650928927822792707
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,3 +421,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnvironmentJson: {fileID: 4900000, guid: db41f2cc7344edd4ca3fef18c5f2e944, type: 3}
+  m_Guid: 

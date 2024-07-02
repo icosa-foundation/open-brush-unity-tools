@@ -19,7 +19,7 @@ RenderSettings:
   m_FogMode: 2
   m_FogDensity: 0
   m_LinearFogStart: 0
-  m_LinearFogEnd: 0
+  m_LinearFogEnd: 0.01
   m_AmbientSkyColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
   m_AmbientEquatorColor: {r: 0.023598, g: 0.025875, b: 0.027531, a: 0.207}
   m_AmbientGroundColor: {r: 0.009729, g: 0.008901, b: 0.007245, a: 0.207}
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.3
   m_CustomReflection: {fileID: 8900000, guid: f83cc5a806898db42b092b6dbda6bd0d, type: 3}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.3}
+  m_IndirectSpecularColor: {r: 0.081191994, g: 0.081191994, b: 0.10766033, a: 0.3}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -314,6 +314,61 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Shadows.m_Type
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156032446161497999, guid: 12a974ee2a9b1e649bbfb412ceb515f5,
+        type: 3}
+      propertyPath: m_Room
+      value: -1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156032446161497999, guid: 12a974ee2a9b1e649bbfb412ceb515f5,
+        type: 3}
+      propertyPath: m_Reverb
+      value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156032446161497999, guid: 12a974ee2a9b1e649bbfb412ceb515f5,
+        type: 3}
+      propertyPath: m_RoomHF
+      value: -454
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156032446161497999, guid: 12a974ee2a9b1e649bbfb412ceb515f5,
+        type: 3}
+      propertyPath: m_Density
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156032446161497999, guid: 12a974ee2a9b1e649bbfb412ceb515f5,
+        type: 3}
+      propertyPath: m_DecayTime
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156032446161497999, guid: 12a974ee2a9b1e649bbfb412ceb515f5,
+        type: 3}
+      propertyPath: m_Diffusion
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156032446161497999, guid: 12a974ee2a9b1e649bbfb412ceb515f5,
+        type: 3}
+      propertyPath: m_Reflections
+      value: -1646
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156032446161497999, guid: 12a974ee2a9b1e649bbfb412ceb515f5,
+        type: 3}
+      propertyPath: m_ReverbDelay
+      value: 0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156032446161497999, guid: 12a974ee2a9b1e649bbfb412ceb515f5,
+        type: 3}
+      propertyPath: m_DecayHFRatio
+      value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156032446161497999, guid: 12a974ee2a9b1e649bbfb412ceb515f5,
+        type: 3}
+      propertyPath: m_ReverbPreset
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156032446161497999, guid: 12a974ee2a9b1e649bbfb412ceb515f5,
+        type: 3}
+      propertyPath: m_ReflectionsDelay
+      value: 0.002
       objectReference: {fileID: 0}
     - target: {fileID: 6924556588587187674, guid: 12a974ee2a9b1e649bbfb412ceb515f5,
         type: 3}

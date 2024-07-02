@@ -285,5 +285,45 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8901878094819353975, guid: 4b874b882b6b6e54d83327001eb9c4be,
+        type: 3}
+      propertyPath: m_Reverb
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8901878094819353975, guid: 4b874b882b6b6e54d83327001eb9c4be,
+        type: 3}
+      propertyPath: m_RoomHF
+      value: -698
+      objectReference: {fileID: 0}
+    - target: {fileID: 8901878094819353975, guid: 4b874b882b6b6e54d83327001eb9c4be,
+        type: 3}
+      propertyPath: m_DecayTime
+      value: 7.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8901878094819353975, guid: 4b874b882b6b6e54d83327001eb9c4be,
+        type: 3}
+      propertyPath: m_Reflections
+      value: -1166
+      objectReference: {fileID: 0}
+    - target: {fileID: 8901878094819353975, guid: 4b874b882b6b6e54d83327001eb9c4be,
+        type: 3}
+      propertyPath: m_ReverbDelay
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 8901878094819353975, guid: 4b874b882b6b6e54d83327001eb9c4be,
+        type: 3}
+      propertyPath: m_DecayHFRatio
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8901878094819353975, guid: 4b874b882b6b6e54d83327001eb9c4be,
+        type: 3}
+      propertyPath: m_ReverbPreset
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8901878094819353975, guid: 4b874b882b6b6e54d83327001eb9c4be,
+        type: 3}
+      propertyPath: m_ReflectionsDelay
+      value: 0.02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b874b882b6b6e54d83327001eb9c4be, type: 3}
