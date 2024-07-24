@@ -24,6 +24,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd4c08c7d6d71f4ca7d83fb653d4f9b, type: 3}
   m_Name: TextMeshGameObjectExport
   m_EditorClassIdentifier: 
+--- !u!114 &-8526264916562457661
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473c2b5b3de547139304b32beee641e9, type: 3}
+  m_Name: AnimationPointerImport
+  m_EditorClassIdentifier: 
 --- !u!114 &-7771955658512268276
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -80,6 +92,18 @@ MonoBehaviour:
   KHR_materials_clearcoat: 1
   KHR_materials_pbrSpecularGlossiness: 1
   KHR_materials_emissive_strength: 1
+--- !u!114 &-4140976022567578994
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056f401eae1a4f76b6f580ebf76127a9, type: 3}
+  m_Name: GPUInstancingImport
+  m_EditorClassIdentifier: 
 --- !u!114 &-2371631639374231306
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -138,6 +162,8 @@ MonoBehaviour:
   - {fileID: -7343452227265953928}
   - {fileID: 5896492736974473917}
   - {fileID: -7054334652167985766}
+  - {fileID: -8526264916562457661}
+  - {fileID: -4140976022567578994}
   ExportPlugins:
   - {fileID: 6934152200562497392}
   - {fileID: -9153174019771851893}
