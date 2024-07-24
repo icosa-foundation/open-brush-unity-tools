@@ -64,20 +64,38 @@ namespace OpenBrushUnityTools
                 var mr = nodeObject.GetComponent<MeshRenderer>();
                 if (mr != null)
                 {
-                    var existingMaterialName = mr.sharedMaterial.name;
-                    if (!existingMaterialName.StartsWith("ob-")) return;
-                    existingMaterialName = existingMaterialName
-                        .Replace("(Instance)", "")
-                        .Replace(" ", "")
-                        .Trim();
+                    string existingMaterialName = mr.sharedMaterial.name;
                     Material mat = null;
-                    try
+                    if (existingMaterialName.StartsWith("ob-"))
                     {
-                        mat = m_MaterialDictionary.GetMaterial(existingMaterialName);
+                        string newMaterialName = existingMaterialName
+                            .Replace("(Instance)", "")
+                            .Replace(" ", "")
+                            .Trim();
+                        try
+                        {
+                            mat = m_MaterialDictionary.GetMaterialByName(newMaterialName);
+                        }
+                        catch (KeyNotFoundException)
+                        {
+                            Debug.LogWarning($"Material Remapping: No match for {existingMaterialName} on {nodeObject.name}");
+                        }
+
                     }
-                    catch (KeyNotFoundException)
+                    else if (existingMaterialName.StartsWith("material_"))
                     {
-                        Debug.LogWarning($"MaterialRemapping: No match for {existingMaterialName} on {nodeObject.name}");
+                        string guid = existingMaterialName
+                            .Replace("material_", "")
+                            .Trim();
+                        try
+                        {
+                            mat = m_MaterialDictionary.GetMaterialByGuid(guid);
+                        }
+                        catch (KeyNotFoundException)
+                        {
+                            Debug.LogWarning($"Material Remapping: No match for {guid} on {nodeObject.name}");
+                        }
+
                     }
 
                     if (mat == null)
