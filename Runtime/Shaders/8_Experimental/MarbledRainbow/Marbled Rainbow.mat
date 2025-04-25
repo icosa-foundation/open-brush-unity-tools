@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Marbled Rainbow
-  m_Shader: {fileID: -6465566751694194690, guid: b698f21caf81c6544a789e7f49527c11,
+  m_Shader: {fileID: -6465566751694194690, guid: 1a9f040da59157d488be5a827e2d4612,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -73,6 +73,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 6697d3cba218276429328ca416628c75, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Specular_RGB_TransGloss_A:
+        m_Texture: {fileID: 2800000, guid: 6697d3cba218276429328ca416628c75, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -102,7 +106,7 @@ Material:
     - _Mode: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _QueueControl: -1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _Shininess: 0.8
     - _Smoothness: 0
