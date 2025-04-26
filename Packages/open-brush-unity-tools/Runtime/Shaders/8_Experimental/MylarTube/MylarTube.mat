@@ -35,7 +35,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e87635077d4291e4d820b97e5810192a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Bump:
@@ -54,6 +54,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _AO: 1
@@ -62,7 +74,10 @@ Material:
     - _Cutoff: 0.5
     - _DisplacementIntensity: 0.1
     - _EmissionGain: 0.25
+    - _Float: 5.1
     - _InvFade: 1
+    - _QueueControl: 0
+    - _QueueOffset: 0
     - _Scroll1: 2
     - _Scroll2: -2
     - _ScrollJitterFrequency: 1
@@ -72,13 +87,13 @@ Material:
     - _Smoothness: 0.078125
     - _SqueezeAmount: 0.873
     - _Strength: 0.5
-    - _shininess: 1
+    - _shininess: 0.68
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+    - _MainColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.75, g: 0.75, b: 0.75, a: 0}
     - _TintColor: {r: 0.61764705, g: 0.61764705, b: 0.61764705, a: 1}
-    - __SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - __SpecColor: {r: 0.7490196, g: 0.7490196, b: 0.7490196, a: 1}
   m_BuildTextureStacks: []
 --- !u!1002 &2100001
 EditorExtensionImpl:
