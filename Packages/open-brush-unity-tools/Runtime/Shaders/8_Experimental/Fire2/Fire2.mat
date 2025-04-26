@@ -77,7 +77,7 @@ Material:
     - _FlameFadeMax: 30
     - _FlameFadeMin: 8.53
     - _InvFade: 1
-    - _QueueControl: -1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _Scroll1: 15
     - _Scroll2: 8

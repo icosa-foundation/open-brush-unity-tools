@@ -60,7 +60,7 @@ Material:
     - _EmissionScroll1: 15
     - _EmissionScroll2: -10
     - _InvFade: 1
-    - _QueueControl: -1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _Scroll1: 20
     - _Scroll2: 50

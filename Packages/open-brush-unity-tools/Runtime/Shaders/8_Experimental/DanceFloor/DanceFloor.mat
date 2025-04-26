@@ -80,7 +80,7 @@ Material:
     - _BaseGain: 0.4
     - _EmissionGain: 1
     - _InvFade: 1
-    - _QueueControl: -1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ScrollSpeed: 0
     - _Shininess: 0

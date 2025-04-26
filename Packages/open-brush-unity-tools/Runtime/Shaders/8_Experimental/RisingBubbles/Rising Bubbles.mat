@@ -109,7 +109,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _QueueControl: -1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ScrollJitterFrequency: 5
     - _ScrollJitterIntensity: 0.2

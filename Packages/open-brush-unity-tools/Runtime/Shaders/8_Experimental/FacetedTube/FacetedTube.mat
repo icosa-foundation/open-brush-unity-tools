@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FacetedTube
-  m_Shader: {fileID: -6465566751694194690, guid: b698f21caf81c6544a789e7f49527c11,
+  m_Shader: {fileID: -6465566751694194690, guid: 065e4d0b5350f7441843b8cf64bbceb9,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
