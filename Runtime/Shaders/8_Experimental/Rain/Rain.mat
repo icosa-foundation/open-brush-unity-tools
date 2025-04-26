@@ -113,7 +113,7 @@ Material:
     - _NumSides: 6
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _QueueControl: -1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _Scroll1: 2
     - _Scroll2: 3
