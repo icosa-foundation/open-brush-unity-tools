@@ -6,6 +6,19 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "com.romifauzi.amplifyocclusion": {
+      "version": "https://github.com/romifauzi/AmplifyOcclusion.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "643544aa94452861f293bfa4e126847b0b492897"
+    },
+    "com.uap.defaultplayables": {
+      "version": "file:../../DefaultPlayables",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
@@ -35,7 +48,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.34",
+      "version": "3.0.36",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -44,7 +57,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.22",
+      "version": "2.0.23",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -71,6 +84,15 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.recorder": {
+      "version": "3.0.4",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {
@@ -152,7 +174,7 @@
       }
     },
     "com.unity.xr.legacyinputhelpers": {
-      "version": "2.1.11",
+      "version": "2.1.12",
       "depth": 0,
       "source": "registry",
       "dependencies": {
