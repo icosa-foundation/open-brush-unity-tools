@@ -34,7 +34,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Wind
-  m_Shader: {fileID: -6465566751694194690, guid: bfbad5c8c0f6e8447aaeeebf21dc2e97,
+  m_Shader: {fileID: -6465566751694194690, guid: a67443de2c4f9d84a828d8b4b615d463,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -110,6 +110,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AO: 1
+    - _Animation_Speed: 0
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _BumpScale: 1
