@@ -37,6 +37,10 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 9c5f1e4a7332f89408567cd963f47583, type: 2}
   - key: DuctTape
     material: {fileID: 2100000, guid: 79edfa5802000684ca43bdede1cd4579, type: 2}
+  - key: DuctTapeSingleSided
+    material: {fileID: 2100000, guid: 79edfa5802000684ca43bdede1cd4579, type: 2}
+  - key: DuctTapeGeometry
+    material: {fileID: 2100000, guid: 79edfa5802000684ca43bdede1cd4579, type: 2}
   - key: Electricity
     material: {fileID: 2100000, guid: 5262b8468e892fe4c91f092e924e4b05, type: 2}
   - key: Embers
@@ -95,6 +99,8 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 385a5e69e3ac58b4c8c7f1c29dad3a6a, type: 2}
   - key: TaperedMarker
     material: {fileID: 2100000, guid: 10eae5304118cb3468b104f4e0e64196, type: 2}
+  - key: TaperedMarker_Flat
+    material: {fileID: 2100000, guid: 10eae5304118cb3468b104f4e0e64196, type: 2}
   - key: ThickPaint
     material: {fileID: 2100000, guid: 5e18fa10121709e4595c27d919c75907, type: 2}
   - key: Toon
@@ -117,6 +123,8 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: eba3f993f9a14d35b84ebb08f48981a4, type: 2}
   - key: Charcoal
     material: {fileID: 2100000, guid: fde6e7780f7ae58438d689d44cee59f6, type: 2}
+  - key: ConcaveHull
+    material: {fileID: 2100000, guid: 62df3af3ef149504988da83c08cf7250, type: 2}
   - key: DanceFloor
     material: {fileID: 2100000, guid: 6a1cf9f9032c45ec311ea6680bee32e9, type: 2}
   - key: DotMarker
@@ -136,6 +144,8 @@ MonoBehaviour:
   - key: Fire2
     material: {fileID: 2100000, guid: 53d753ef083c45e198e74459b4471219, type: 2}
   - key: Gouache
+    material: {fileID: 2100000, guid: 1b897b7e9b76425ab031a867c48df409, type: 2}
+  - key: GouacheDoubleSided
     material: {fileID: 2100000, guid: 1b897b7e9b76425ab031a867c48df409, type: 2}
   - key: Guts
     material: {fileID: 2100000, guid: 99aafe96164544cd99bd979bc6ef37c5, type: 2}
@@ -171,8 +181,12 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: bdf65db21fb74202b5e0c6b5e3ea851e, type: 2}
   - key: Sparks
     material: {fileID: 2100000, guid: 50e99447386105f4697da1b96e771b98, type: 2}
+  - key: Square
+    material: {fileID: 2100000, guid: 2e03b1bf3ebd46099d7ef4cafadc4dfa, type: 2}
   - key: SquarePaper
     material: {fileID: 2100000, guid: 2e03b1bf3ebd46099d7ef4cafadc4dfa, type: 2}
+  - key: Square3DPrintingBrush
+    material: {fileID: 2100000, guid: d3f3b18ada03f694b83828ba8e749a98, type: 2}
   - key: TaperedHueShift
     material: {fileID: 2100000, guid: 3d9755da56c772949b1d5ec349975f52, type: 2}
   - key: TaperedWire
