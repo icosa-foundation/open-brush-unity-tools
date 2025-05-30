@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GLTF.Extensions;
 using UnityGLTF.Plugins;
 using GLTF.Schema;
@@ -68,6 +69,7 @@ namespace OpenBrushUnityTools
                     Material mat = null;
                     if (existingMaterialName.StartsWith("ob-"))
                     {
+                        // This is a older legacy glb from Open Brush
                         string newMaterialName = existingMaterialName
                             .Replace("(Instance)", "")
                             .Replace(" ", "")
@@ -80,10 +82,10 @@ namespace OpenBrushUnityTools
                         {
                             Debug.LogWarning($"Material Remapping: No match for {existingMaterialName} on {nodeObject.name}");
                         }
-
                     }
                     else if (existingMaterialName.StartsWith("material_"))
                     {
+                        // This is a new glb from Open Brush
                         string guid = existingMaterialName
                             .Replace("material_", "")
                             .Trim();
@@ -95,7 +97,21 @@ namespace OpenBrushUnityTools
                         {
                             Debug.LogWarning($"Material Remapping: No match for {guid} on {nodeObject.name}");
                         }
-
+                    }
+                    else if (existingMaterialName.StartsWith("brush_"))
+                    {
+                        // This is a recent legacy glb from Open Brush
+                        string newMaterialName = existingMaterialName[6..] // Remove "brush_"
+                            .Replace(" ", "")
+                            .Trim();
+                        try
+                        {
+                            mat = m_MaterialDictionary.GetMaterialByName($"ob-{newMaterialName}");
+                        }
+                        catch (KeyNotFoundException)
+                        {
+                            Debug.LogWarning($"Material Remapping: No match for {existingMaterialName} on {nodeObject.name}");
+                        }
                     }
 
                     if (mat == null)

@@ -160,7 +160,6 @@ public class MaterialRemapping : ScriptableObject
 
     private void InitializeDictionaries()
     {
-        Debug.Log("Initializing Material Dictionary");
         nameDictionary = new Dictionary<string, Material>();
         foreach (MaterialEntry entry in entries)
         {
