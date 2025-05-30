@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LeakyPen
-  m_Shader: {fileID: -6465566751694194690, guid: b3844b15c535ed04db7b9b8e6c07ce3b,
+  m_Shader: {fileID: -6465566751694194690, guid: 2de056245b8dd70408172b79566d3716,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -21,6 +21,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Alpha_Mask:
+        m_Texture: {fileID: 2800000, guid: 69d2e7612c71ad14298c0f84c741c1e5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BGTex:
         m_Texture: {fileID: 2800000, guid: 05eafee566d1a0246aa955fe3b5c71e2, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -43,6 +47,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _DetailNormalMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Diffuse_Texture:
+        m_Texture: {fileID: 2800000, guid: 69d2e7612c71ad14298c0f84c741c1e5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -88,7 +96,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AO: 1
-    - _Alpha_Cutoff: 0.6
+    - _Alpha_Cutoff: 0.5
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _BumpScale: 1
@@ -114,7 +122,11 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+    - _Alpha_Mask_Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Alpha_Mask_Tiling: {r: 0.3, g: 0.5, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Diffuse_Texture_Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Diffuse_Texture_Tiling: {r: 1, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _LineColor: {r: 0.15158093, g: 0.62766045, b: 0.9411765, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}

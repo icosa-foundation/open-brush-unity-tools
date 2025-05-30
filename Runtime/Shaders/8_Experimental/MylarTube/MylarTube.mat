@@ -69,7 +69,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AO: 1
-    - _Apply_vertex_position: 1
+    - _Apply_vertex_position: 0
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _Cutoff: 0.5

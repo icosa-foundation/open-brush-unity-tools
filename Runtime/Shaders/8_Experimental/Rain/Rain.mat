@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Rain
-  m_Shader: {fileID: -6465566751694194690, guid: bfbad5c8c0f6e8447aaeeebf21dc2e97,
+  m_Shader: {fileID: -6465566751694194690, guid: e15818c071abb264cb48f1eaa442ac62,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -97,8 +97,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _AO: 1
+    - _Apply_Vertex_Shader: 1
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _Bulge: 2.25
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -121,6 +123,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 4
+    - _Speed_Scaling: 1
     - _SrcBlend: 1
     - _StretchDistortionExponent: 3
     - _UVSec: 0
@@ -129,7 +132,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _Tiling: {r: 4, g: 4, b: 0, a: 0}
+    - _Tiling: {r: 4, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8687602142527689904
 MonoBehaviour:
