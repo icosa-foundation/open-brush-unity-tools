@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Space
-  m_Shader: {fileID: -6465566751694194690, guid: b698f21caf81c6544a789e7f49527c11,
+  m_Shader: {fileID: -6465566751694194690, guid: 49c9fd0d2ebe1fd4ab1928ae0dbe46e6,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -46,6 +46,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -64,15 +68,21 @@ Material:
     - _Alpha_Cutoff: 0.5
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _Displacement: 0
     - _EmissionGain: 0.5
+    - _Emission_Gain: 0.5
+    - _InvFade: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Scroll1: 0
+    - _Scroll2: 0
     - _Shininess: 0
     m_Colors:
     - _Base: {r: 1, g: 1, b: 1, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   m_BuildTextureStacks: []
 --- !u!114 &3202938737399769089
 MonoBehaviour:

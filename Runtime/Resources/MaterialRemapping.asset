@@ -38,9 +38,9 @@ MonoBehaviour:
   - key: DuctTape
     material: {fileID: 2100000, guid: 79edfa5802000684ca43bdede1cd4579, type: 2}
   - key: DuctTapeSingleSided
-    material: {fileID: 2100000, guid: 79edfa5802000684ca43bdede1cd4579, type: 2}
+    material: {fileID: 2100000, guid: 3ca16e2fbdcd4da28631dcef342f40f1, type: 2}
   - key: DuctTapeGeometry
-    material: {fileID: 2100000, guid: 79edfa5802000684ca43bdede1cd4579, type: 2}
+    material: {fileID: 2100000, guid: 3ca16e2fbdcd4da28631dcef342f40f1, type: 2}
   - key: Electricity
     material: {fileID: 2100000, guid: 5262b8468e892fe4c91f092e924e4b05, type: 2}
   - key: Embers
