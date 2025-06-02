@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Plasma
-  m_Shader: {fileID: -6465566751694194690, guid: b698f21caf81c6544a789e7f49527c11,
+  m_Shader: {fileID: -6465566751694194690, guid: a28a1f284037e374ba0b15dd7c0112e3,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -60,6 +60,7 @@ Material:
     - _EmissionScroll1: 15
     - _EmissionScroll2: -10
     - _InvFade: 1
+    - _Opacity: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Scroll1: 20
