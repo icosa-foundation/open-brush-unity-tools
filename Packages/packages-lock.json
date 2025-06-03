@@ -13,12 +13,6 @@
       "dependencies": {},
       "hash": "643544aa94452861f293bfa4e126847b0b492897"
     },
-    "com.uap.defaultplayables": {
-      "version": "file:../../DefaultPlayables",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {}
-    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
@@ -184,7 +178,7 @@
       "url": "https://packages.unity.com"
     },
     "org.khronos.unitygltf": {
-      "version": "https://github.com/icosa-mirror/UnityGLTF.git#feature/should-node-export-hook",
+      "version": "https://github.com/KhronosGroup/UnityGLTF.git",
       "depth": 0,
       "source": "git",
       "dependencies": {
@@ -193,7 +187,7 @@
         "com.unity.shadergraph": "10.0.0",
         "com.unity.mathematics": "1.0.0"
       },
-      "hash": "59f0fd8d0722dd1156e0c4faf60964f841ced65b"
+      "hash": "1d3d93121c61ce9ba8e76189ec0ddf34ba374118"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
