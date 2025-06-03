@@ -1,0 +1,20 @@
+{
+    "name": "open-brush-unity-tools-editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:18d18f811ba286c49814567a3cfba688",
+        "GUID:40f39bff7bc9be34182ebe488fcf8228",
+        "GUID:567778b2882fb6a4f8f2fe706c7b7f6b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
