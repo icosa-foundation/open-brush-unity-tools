@@ -2028,10 +2028,10 @@
     "m_Guid": {
         "m_GuidSerialized": "7073c433-1b43-47a6-8bf7-d7546663116b"
     },
-    "m_Name": "SpecColor",
+    "m_Name": "SpecularColor",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "SpecColor",
-    "m_DefaultReferenceName": "_SpecColor",
+    "m_RefNameGeneratedByDisplayName": "SpecularColor",
+    "m_DefaultReferenceName": "_SpecularColor",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -2185,7 +2185,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "b56e27a93cc94011835bab5a3d3d1b4a",
     "m_Id": 0,
-    "m_DisplayName": "SpecColor",
+    "m_DisplayName": "SpecularColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
