@@ -1,12 +1,15 @@
 using System;
 using Newtonsoft.Json.Linq;
 using UnityEditor;
+#if UNITY_EDITOR
 using UnityEditor.SceneManagement;
+#endif
 using UnityEngine;
 
 [ExecuteInEditMode]
 public class EnvironmentSetup : MonoBehaviour
 {
+#if UNITY_EDITOR
     public TextAsset m_EnvironmentJson;
     public string m_Guid;
 
@@ -112,4 +115,5 @@ public class EnvironmentSetup : MonoBehaviour
         EditorUtility.SetDirty(RenderSettings.skybox);
         EditorSceneManager.MarkSceneDirty(gameObject.scene);
     }
+#endif
 }

@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Experimental Brushes.unity
+    guid: 8c7bb0d301b4a9241a7a25f5b38a81c8
   m_configObjects: {}

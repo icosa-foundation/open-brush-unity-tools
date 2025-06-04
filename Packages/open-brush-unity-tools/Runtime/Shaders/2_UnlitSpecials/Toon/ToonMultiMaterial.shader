@@ -66,10 +66,10 @@ Shader "TiltBrush/UnlitSpecials/Toon"
             float bulge = 0.0;
             float3 worldNormal = UnityObjectToWorldNormal(v.normal);
 
-            #ifdef AUDIO_REACTIVE
-	        float fft = tex2Dlod(_FFTTex, float4(_BeatOutputAccum.z*.25 + v.texcoord.x, 0,0,0)).g;
-	        bulge = fft * radius * 10.0;
-            #endif
+         //    #ifdef AUDIO_REACTIVE
+	        // float fft = tex2Dlod(_FFTTex, float4(_BeatOutputAccum.z*.25 + v.texcoord.x, 0,0,0)).g;
+	        // bulge = fft * radius * 10.0;
+         //    #endif
 
             //
             // Careful: perspective projection is non-afine, so math assumptions may not be valid here.
