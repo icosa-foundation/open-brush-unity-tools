@@ -24,10 +24,12 @@ namespace OpenBrushUnityTools
         {
 
             private MaterialRemapping m_MaterialDictionary;
+            private MaterialMultipassMapping m_MaterialMultipassMappings;
 
             public override void OnBeforeImport()
             {
                 m_MaterialDictionary = Resources.Load<MaterialRemapping>("MaterialRemapping");
+                m_MaterialMultipassMappings = Resources.Load<MaterialMultipassMapping>("MaterialMultipassMapping");
             }
 
             public override void OnAfterImportNode(Node node, int nodeIndex, GameObject nodeObject)
@@ -114,13 +116,24 @@ namespace OpenBrushUnityTools
                         }
                     }
 
+
+
                     if (mat == null)
                     {
                         Debug.LogWarning($"MaterialRemapping: No material for {existingMaterialName} on {nodeObject.name}");
                     }
                     else
                     {
-                        mr.sharedMaterial = mat;
+                        var materials = m_MaterialMultipassMappings.GetMultipassMaterials(mat);
+                        if (materials?.Count > 0)
+                        {
+                            Debug.Log($"Found {materials.Count} multipass materials for {existingMaterialName}");
+                            mr.materials = materials.ToArray();
+                        }
+                        else
+                        {
+                            mr.sharedMaterial = mat;
+                        }
                     }
                 }
             }

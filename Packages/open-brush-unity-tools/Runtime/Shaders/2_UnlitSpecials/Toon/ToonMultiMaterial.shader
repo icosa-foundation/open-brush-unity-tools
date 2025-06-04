@@ -111,7 +111,7 @@ Shader "TiltBrush/UnlitSpecials/Toon"
         v2f vert(appdata_t v)
         {
             v.color = TbVertToNative(v.color);
-            return vertInflate(v, 0);
+            return vertInflate(v, 1);
         }
 
         v2f vertEdge(appdata_t v)
