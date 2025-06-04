@@ -59,6 +59,7 @@ Material:
     - _EmissionGain: 0.5
     - _EmissionScroll1: 15
     - _EmissionScroll2: -10
+    - _Emission_Gain: 0.5
     - _InvFade: 1
     - _Opacity: 0.5
     - _QueueControl: 0

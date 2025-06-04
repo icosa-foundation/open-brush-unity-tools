@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ToonOutline
+  m_Name: TubeToonInverted Outline
   m_Shader: {fileID: 4800000, guid: fbaf2ed539242ce4cb715100b3cdf4cf, type: 3}
   m_ValidKeywords:
   - _Inflate
@@ -27,7 +27,7 @@ Material:
     - _Cull: 1
     - _DstBlend: 0
     - _InflateToggle: 1
-    - _OutlineMax: 0.131
+    - _OutlineMax: 0.002
     - _SrcBlend: 0
     - _ZWrite: 8
     m_Colors:

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945217f5fcac41f39707a63835d9261f, type: 3}
+  m_Name: MaterialMultipassMapping
+  m_EditorClassIdentifier: 
+  entries:
+  - key: {fileID: 2100000, guid: 5262b8468e892fe4c91f092e924e4b05, type: 2}
+    materials:
+    - {fileID: 2100000, guid: e690a4a42a030154ab70a1c9e9ee1e91, type: 2}
+    - {fileID: 2100000, guid: 09f2872048bb6e24691d5c79255b1e35, type: 2}
+  - key: {fileID: 2100000, guid: 66b410f19393cc04688b3b5b7a29b226, type: 2}
+    materials:
+    - {fileID: 2100000, guid: 6b451f5d7f8105b4ca6acf63a8fe2dbd, type: 2}
+  - key: {fileID: 2100000, guid: 9871385adf7343969e3331e4e4930b27, type: 2}
+    materials:
+    - {fileID: 2100000, guid: 00e9b781437629e429b52c40cbb2b2d7, type: 2}

@@ -23,7 +23,8 @@ Material:
   m_Name: DoubleTaperedMarker
   m_Shader: {fileID: -6465566751694194690, guid: bbe745735a56aba47a6b7d7260aac547,
     type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _BAKED_VERTEX_SHADER_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -48,6 +49,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _BAKED_VERTEX_SHADER: 1
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _QueueControl: 0
