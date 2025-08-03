@@ -41,9 +41,13 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _BaseGain: 4
+    - _BaseGain: 1
+    - _Displacement: 6
+    - _Frequency: 0.1
+    - _LEGACY_GLB: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _d: 8
     m_Colors:
     - _TintColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
