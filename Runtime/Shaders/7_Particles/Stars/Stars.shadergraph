@@ -242,6 +242,9 @@
         },
         {
             "m_Id": "15d5c1d3172f40fb9a047d70eb26a692"
+        },
+        {
+            "m_Id": "85d0383a4eb3463c8983a184f1922aa8"
         }
     ],
     "m_GroupDatas": [
@@ -938,6 +941,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "85d0383a4eb3463c8983a184f1922aa8"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "5971116d617b41b79adbc224aa33bae3"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "8f83ada2936e4e318a7bf72c262a8bd8"
                 },
                 "m_SlotId": 2
@@ -1554,8 +1571,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 7342.0,
-            "y": -71.00008392333985
+            "x": 7631.0,
+            "y": 8.0
         },
         "m_Blocks": [
             {
@@ -6404,6 +6421,43 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.SubGraphNode",
+    "m_ObjectId": "85d0383a4eb3463c8983a184f1922aa8",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "billboarding",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 7336.0,
+            "y": -124.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "eba384e03a024e83a6bf42ca7687c504"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedSubGraph": "{\n    \"subGraph\": {\n        \"fileID\": -5475051401550479605,\n        \"guid\": \"d8d47702d575e6c4099569dfc9dd103a\",\n        \"type\": 3\n    }\n}",
+    "m_PropertyGuids": [],
+    "m_PropertyIds": [],
+    "m_Dropdowns": [],
+    "m_DropdownSelectedEntries": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "866dc0971aca493992e52c88df40f460",
     "m_Id": 0,
@@ -9388,6 +9442,29 @@
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "eba384e03a024e83a6bf42ca7687c504",
+    "m_Id": 1,
+    "m_DisplayName": "Out_Vector3",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "OutVector3",
+    "m_StageCapability": 1,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
     "m_Labels": []
 }
 
