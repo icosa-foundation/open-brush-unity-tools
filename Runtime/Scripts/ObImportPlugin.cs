@@ -91,6 +91,16 @@ namespace OpenBrushUnityTools
                         string guid = existingMaterialName
                             .Replace("material_", "")
                             .Trim();
+
+                        // If the remaining string starts with a material name
+                        // eg "SoftHighlighter-accb32f5-4509-454f-93f8-1df3fd31df1b"
+                        // then remove the name portion
+                        int firstDashIndex = guid.IndexOf('-');
+                        if (firstDashIndex > 0 && Guid.TryParse(guid.Substring(firstDashIndex + 1), out _))
+                        {
+                            guid = guid.Substring(firstDashIndex + 1);
+                        }
+
                         try
                         {
                             mat = m_MaterialDictionary.GetMaterialByGuid(guid);
