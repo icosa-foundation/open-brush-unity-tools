@@ -10,6 +10,28 @@ namespace OpenBrushUnityTools
 {
     public class EnvironmentSetup
 {
+    private static bool IsSet(string s) => !string.IsNullOrWhiteSpace(s);
+
+    private static Color ParseColor(string s)
+    {
+        var parts = s.Split(',');
+        return new Color(
+            float.Parse(parts[0].Trim()),
+            float.Parse(parts[1].Trim()),
+            float.Parse(parts[2].Trim())
+        );
+    }
+
+    private static Vector3 ParseVector3(string s)
+    {
+        var parts = s.Split(',');
+        return new Vector3(
+            float.Parse(parts[0].Trim()),
+            float.Parse(parts[1].Trim()),
+            float.Parse(parts[2].Trim())
+        );
+    }
+
     public static void ApplyEnvironment(OpenBrushSketch sketch, TextAsset environmentJson)
     {
         Color getColor(JToken jToken)
@@ -32,18 +54,23 @@ namespace OpenBrushUnityTools
         JObject environments = JObject.Parse(environmentJson.text);
         var environment = environments[sketch.TB_EnvironmentGuid];
         var renderSettings = environment["renderSettings"];
-        string skyboxName = renderSettings["skyboxCubemap"]?.Value<string>();
-        if (String.IsNullOrEmpty(skyboxName))
-        {
-            skyboxName = "SkyboxGradient";
-        }
+
+        // Skybox
+        bool useGradient = IsSet(sketch.TB_UseGradient)
+            ? sketch.TB_UseGradient.ToLower() == "true"
+            : String.IsNullOrEmpty(renderSettings["skyboxCubemap"]?.Value<string>());
+        string skyboxName = useGradient ? "SkyboxGradient" : renderSettings["skyboxCubemap"].Value<string>();
         var mat = Resources.Load<Material>($"Environments/Materials/Skies/{skyboxName}");
         mat.name = skyboxName;
         RenderSettings.skybox = mat;
-        if (skyboxName == "SkyboxGradient")
+        if (useGradient)
         {
-            RenderSettings.skybox.SetColor("_ColorA", getColor(environment["skyboxColorA"]));
-            RenderSettings.skybox.SetColor("_ColorB", getColor(environment["skyboxColorB"]));
+            var colorA = IsSet(sketch.TB_SkyColorA) ? ParseColor(sketch.TB_SkyColorA) : getColor(environment["skyboxColorA"]);
+            var colorB = IsSet(sketch.TB_SkyColorB) ? ParseColor(sketch.TB_SkyColorB) : getColor(environment["skyboxColorB"]);
+            var gradientDir = IsSet(sketch.TB_SkyGradientDirection) ? ParseVector3(sketch.TB_SkyGradientDirection) : Vector3.up;
+            RenderSettings.skybox.SetColor("_ColorA", colorA);
+            RenderSettings.skybox.SetColor("_ColorB", colorB);
+            RenderSettings.skybox.SetVector("_GradientDirection", gradientDir);
         }
         else
         {
@@ -69,11 +96,11 @@ namespace OpenBrushUnityTools
         RenderSettings.reflectionIntensity = renderSettings["reflectionIntensity"].Value<float>();
         RenderSettings.fog = renderSettings["fogEnabled"].Value<bool>();
         RenderSettings.fogMode = FogMode.Exponential;
-        RenderSettings.fogColor = getColor(renderSettings["fogColor"]);
-        RenderSettings.fogDensity = renderSettings["fogDensity"].Value<float>();
+        RenderSettings.fogColor = IsSet(sketch.TB_FogColor) ? ParseColor(sketch.TB_FogColor) : getColor(renderSettings["fogColor"]);
+        RenderSettings.fogDensity = IsSet(sketch.TB_FogDensity) ? float.Parse(sketch.TB_FogDensity) : renderSettings["fogDensity"].Value<float>();
         RenderSettings.fogStartDistance = renderSettings["fogStartDistance"].Value<float>();
         RenderSettings.fogEndDistance = renderSettings["fogEndDistance"].Value<float>();
-        RenderSettings.ambientSkyColor = getColor(renderSettings["ambientColor"]);
+        RenderSettings.ambientSkyColor = IsSet(sketch.TB_AmbientLightColor) ? ParseColor(sketch.TB_AmbientLightColor) : getColor(renderSettings["ambientColor"]);
 
         var camera = sketch.gameObject.GetComponentInChildren<Camera>();
         camera.clearFlags = CameraClearFlags.Skybox;
@@ -85,9 +112,13 @@ namespace OpenBrushUnityTools
         {
             var light = lights[i];
             var envLight = envLights[i];
-            light.color = getColor(envLight["color"]);
+            light.color = i == 0 && IsSet(sketch.TB_SceneLight0Color) ? ParseColor(sketch.TB_SceneLight0Color)
+                        : i == 1 && IsSet(sketch.TB_SceneLight1Color) ? ParseColor(sketch.TB_SceneLight1Color)
+                        : getColor(envLight["color"]);
             light.transform.position = getVector3(envLight["position"]);
-            light.transform.rotation = Quaternion.Euler(getVector3(envLight["rotation"]));
+            light.transform.rotation = i == 0 && IsSet(sketch.TB_SceneLight0Rotation) ? Quaternion.Euler(ParseVector3(sketch.TB_SceneLight0Rotation))
+                                     : i == 1 && IsSet(sketch.TB_SceneLight1Rotation) ? Quaternion.Euler(ParseVector3(sketch.TB_SceneLight1Rotation))
+                                     : Quaternion.Euler(getVector3(envLight["rotation"]));
             light.type = (LightType)Enum.Parse(typeof(LightType), envLight["type"].Value<string>());
             light.range = envLight["range"].Value<float>();
             light.spotAngle = envLight["spotAngle"].Value<float>();
