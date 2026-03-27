@@ -103,8 +103,11 @@ namespace OpenBrushUnityTools
         RenderSettings.ambientSkyColor = IsSet(sketch.TB_AmbientLightColor) ? ParseColor(sketch.TB_AmbientLightColor) : getColor(renderSettings["ambientColor"]);
 
         var camera = sketch.gameObject.GetComponentInChildren<Camera>();
-        camera.clearFlags = CameraClearFlags.Skybox;
-        camera.backgroundColor = getColor(renderSettings["clearColor"]);
+        if (camera != null)
+        {
+            camera.clearFlags = CameraClearFlags.Skybox;
+            camera.backgroundColor = getColor(renderSettings["clearColor"]);
+        }
 
         var lights = sketch.gameObject.GetComponentsInChildren<Light>();
         var envLights = environment["lights"];
