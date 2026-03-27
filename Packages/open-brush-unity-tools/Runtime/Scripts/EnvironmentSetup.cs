@@ -1,20 +1,16 @@
 using System;
 using Newtonsoft.Json.Linq;
-using UnityEditor;
+using UnityEngine;
 #if UNITY_EDITOR
+using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
-using UnityEngine;
 
-[ExecuteInEditMode]
-public class EnvironmentSetup : MonoBehaviour
+namespace OpenBrushUnityTools
 {
-#if UNITY_EDITOR
-    public TextAsset m_EnvironmentJson;
-    public string m_Guid;
-
-    [ContextMenu("Apply Environment")]
-    void ApplyEnvironment()
+    public class EnvironmentSetup
+{
+    public static void ApplyEnvironment(OpenBrushSketch sketch, TextAsset environmentJson)
     {
         Color getColor(JToken jToken)
         {
@@ -33,16 +29,15 @@ public class EnvironmentSetup : MonoBehaviour
             return new Vector3(x, y, z);
         }
 
-        var environments = JObject.Parse(m_EnvironmentJson.text);
-        var environment = environments[m_Guid];
+        JObject environments = JObject.Parse(environmentJson.text);
+        var environment = environments[sketch.TB_EnvironmentGuid];
         var renderSettings = environment["renderSettings"];
         string skyboxName = renderSettings["skyboxCubemap"]?.Value<string>();
         if (String.IsNullOrEmpty(skyboxName))
         {
             skyboxName = "SkyboxGradient";
         }
-        var skyboxPath = $"Packages/com.icosa.open-brush-unity-tools/Runtime/Environments/Materials/Skies/{skyboxName}.mat";
-        var mat = (Material)AssetDatabase.LoadAssetAtPath(skyboxPath, typeof(Material));
+        var mat = Resources.Load<Material>($"Environments/Materials/Skies/{skyboxName}");
         mat.name = skyboxName;
         RenderSettings.skybox = mat;
         if (skyboxName == "SkyboxGradient")
@@ -59,21 +54,11 @@ public class EnvironmentSetup : MonoBehaviour
         var reflectTexName = renderSettings["reflectionCubemap"]?.Value<string>();
         if (reflectTexName != null)
         {
-            Cubemap tex;
-            var reflectionPath = $"Packages/com.icosa.open-brush-unity-tools/Runtime/Environments/Textures/Reflection Maps/{reflectTexName}";
-            tex = (Cubemap)AssetDatabase.LoadAssetAtPath($"{reflectionPath}.exr", typeof(Cubemap));
-            if (tex == null)
-            {
-                tex = (Cubemap)AssetDatabase.LoadAssetAtPath($"{reflectionPath}.png", typeof(Cubemap));
-                if (tex == null)
-                {
-                    tex = (Cubemap)AssetDatabase.LoadAssetAtPath($"{reflectionPath}.jpeg", typeof(Cubemap));
-                }
-            }
+            var tex = Resources.Load<Cubemap>($"Environments/Textures/ReflectionMaps/{reflectTexName}");
             if (tex != null)
             {
                 tex.name = reflectTexName;
-                RenderSettings.customReflection = tex;
+                RenderSettings.customReflectionTexture = tex;
             }
             else
             {
@@ -90,11 +75,11 @@ public class EnvironmentSetup : MonoBehaviour
         RenderSettings.fogEndDistance = renderSettings["fogEndDistance"].Value<float>();
         RenderSettings.ambientSkyColor = getColor(renderSettings["ambientColor"]);
 
-        var camera = GetComponentInChildren<Camera>();
+        var camera = sketch.gameObject.GetComponentInChildren<Camera>();
         camera.clearFlags = CameraClearFlags.Skybox;
         camera.backgroundColor = getColor(renderSettings["clearColor"]);
 
-        var lights = GetComponentsInChildren<Light>();
+        var lights = sketch.gameObject.GetComponentsInChildren<Light>();
         var envLights = environment["lights"];
         for (var i = 0; i < lights.Length; i++)
         {
@@ -110,10 +95,12 @@ public class EnvironmentSetup : MonoBehaviour
         }
 
         // TODO
-        // "environmentReverbZone": "EnvironmentAudio/ReverbZone_Arena",
+        // "environmentReverbZone": "EnvironmentAudio/ReverbZone_Arena"
 
+#if UNITY_EDITOR
         EditorUtility.SetDirty(RenderSettings.skybox);
-        EditorSceneManager.MarkSceneDirty(gameObject.scene);
-    }
+        EditorSceneManager.MarkSceneDirty(sketch.gameObject.scene);
 #endif
+    }
+}
 }

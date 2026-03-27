@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace OpenBrushUnityTools
 {
-    public class ObImportPlugin : GLTFImportPlugin
+    public class OpenBrushImportPlugin : GLTFImportPlugin
     {
         public override string DisplayName => "Open Brush Importer";
         public override string Description => "Handles Open Brush specific import logic.";
@@ -17,23 +17,25 @@ namespace OpenBrushUnityTools
 
         public override GLTFImportPluginContext CreateInstance(GLTFImportContext context)
         {
-            return new ObImportExtensionConfig();
+            return new OpenBrushImportPluginContext();
         }
 
-        public class ObImportExtensionConfig : GLTFImportPluginContext
+        private class OpenBrushImportPluginContext : GLTFImportPluginContext
         {
-
             private MaterialRemapping m_MaterialDictionary;
             private MaterialMultipassMapping m_MaterialMultipassMappings;
 
             public override void OnBeforeImport()
             {
+                base.OnBeforeImport();
                 m_MaterialDictionary = Resources.Load<MaterialRemapping>("MaterialRemapping");
                 m_MaterialMultipassMappings = Resources.Load<MaterialMultipassMapping>("MaterialMultipassMapping");
             }
 
             public override void OnAfterImportNode(Node node, int nodeIndex, GameObject nodeObject)
             {
+                base.OnAfterImportNode(node, nodeIndex, nodeObject);
+
                 var strokeJson = node?.Mesh?.Value?.Extras?["ICOSA_strokeInfo"];
                 if (strokeJson != null)
                 {
@@ -146,6 +148,32 @@ namespace OpenBrushUnityTools
                         }
                     }
                 }
+            }
+
+            public override void OnAfterImportScene(GLTFScene scene, int sceneIndex, GameObject sceneObject)
+            {
+                base.OnAfterImportScene(scene, sceneIndex, sceneObject);
+                var sketch = sceneObject.AddComponent<OpenBrushSketch>();
+                sketch.TB_EnvironmentGuid = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_EnvironmentGuid"]?.Value<string>();
+                sketch.TB_Environment = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_Environment"]?.Value<string>();
+                sketch.TB_UseGradient = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_UseGradient"]?.Value<string>();
+                sketch.TB_SkyColorA = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_SkyColorA"]?.Value<string>();
+                sketch.TB_SkyColorB = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_SkyColorB"]?.Value<string>();
+                sketch.TB_SkyGradientDirection = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_SkyGradientDirection"]?.Value<string>();
+                sketch.TB_FogColor = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_FogColor"]?.Value<string>();
+                sketch.TB_FogDensity = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_FogDensity"]?.Value<string>();
+                sketch.TB_AmbientLightColor = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_AmbientLightColor"]?.Value<string>();
+                sketch.TB_SceneLight0Color = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_SceneLight0Color"]?.Value<string>();
+                sketch.TB_SceneLight0Rotation = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_SceneLight0Rotation"]?.Value<string>();
+                sketch.TB_SceneLight1Color = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_SceneLight1Color"]?.Value<string>();
+                sketch.TB_SceneLight1Rotation = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_SceneLight1Rotation"]?.Value<string>();
+                sketch.TB_PoseTranslation = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_PoseTranslation"]?.Value<string>();
+                sketch.TB_PoseRotation = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_PoseRotation"]?.Value<string>();
+                sketch.TB_PoseScale = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_PoseScale"]?.Value<string>();
+                sketch.TB_ExportedFromVersion = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_ExportedFromVersion"]?.Value<string>();
+                sketch.TB_CameraTranslation = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_CameraTranslation"]?.Value<string>();
+                sketch.TB_CameraRotation = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_CameraRotation"]?.Value<string>();
+                sketch.TB_FlyMode = scene.Nodes.FirstOrDefault()?.Root?.Extras["TB_FlyMode"]?.Value<string>();
             }
         }
     }
