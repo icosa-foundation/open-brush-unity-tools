@@ -128,6 +128,27 @@ namespace OpenBrushUnityTools
             light.shadows = envLight["shadowsEnabled"].Value<bool>() ? LightShadows.Hard : LightShadows.None;
         }
 
+        // Environment prefab
+        var envPrefabPath = renderSettings["environmentPrefab"]?.Value<string>();
+        if (!string.IsNullOrEmpty(envPrefabPath))
+        {
+            var existing = sketch.transform.Find("EnvironmentPrefab");
+            if (existing != null)
+                UnityEngine.Object.DestroyImmediate(existing.gameObject);
+
+            string prefabName = envPrefabPath.Substring(envPrefabPath.LastIndexOf('/') + 1);
+            var prefab = Resources.Load<GameObject>($"Environments/Prefabs/{prefabName}");
+            if (prefab != null)
+            {
+                var instance = UnityEngine.Object.Instantiate(prefab, sketch.transform);
+                instance.name = "EnvironmentPrefab";
+            }
+            else
+            {
+                Debug.LogWarning($"Environment prefab not found: {prefabName}");
+            }
+        }
+
         // TODO
         // "environmentReverbZone": "EnvironmentAudio/ReverbZone_Arena"
 
