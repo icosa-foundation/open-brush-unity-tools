@@ -1,31 +1,29 @@
-Shader "TiltBrush/UnlitSpecials/Toon"
+Shader "TiltBrush/UnlitSpecials/ToonOutline"
 {
     Properties
     {
-        _OutlineMax ("Maximum Outline", Range (0,0.5)) = 0.01
+        _OutlineMax ("Maximum Outline", Range (0,0.5)) = 0.131
     }
 
     SubShader
     {
-        Cull Back
+        Cull Front
 
         CGINCLUDE
         #include "ToonCommon.cginc"
-        #pragma multi_compile __ AUDIO_REACTIVE
-        #pragma multi_compile __ TBT_LINEAR_TARGET
         #pragma multi_compile_fog
         #pragma target 3.0
 
         v2f vert(appdata_t v)
         {
-            v.color = TbVertToNative(v.color);
-            return vertInflate(v, 0);
+            return vertInflate(v, 1.0);
         }
 
         fixed4 frag(v2f i) : SV_Target
         {
-            UNITY_APPLY_FOG(i.fogCoord, i.color);
-            return i.color;
+            float4 color = float4(0, 0, 0, 1);
+            UNITY_APPLY_FOG(i.fogCoord, color);
+            return color;
         }
         ENDCG
 
@@ -48,7 +46,7 @@ Shader "TiltBrush/UnlitSpecials/Toon"
         Tags
         {
             "RenderPipeline" = "UniversalRenderPipeline"
-            "Queue" = "Geometry"
+            "Queue" = "Geometry-1"
         }
 
         HLSLINCLUDE
@@ -56,14 +54,14 @@ Shader "TiltBrush/UnlitSpecials/Toon"
 
         Varyings vert(Attributes IN)
         {
-            return vertInflate(IN, 0);
+            return vertInflate(IN, 1.0);
         }
 
         half4 frag(Varyings IN) : SV_Target
         {
             UNITY_SETUP_INSTANCE_ID(IN);
             UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
-            return IN.color;
+            return half4(0, 0, 0, 1);
         }
         ENDHLSL
 
@@ -73,7 +71,7 @@ Shader "TiltBrush/UnlitSpecials/Toon"
             Tags { "LightMode" = "UniversalForward" }
             Blend One Zero
             ZWrite On
-            Cull Back
+            Cull Front
 
             HLSLPROGRAM
             #pragma vertex vert

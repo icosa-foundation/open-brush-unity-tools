@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Toon 1
-  m_Shader: {fileID: 4800000, guid: fbaf2ed539242ce4cb715100b3cdf4cf, type: 3}
+  m_Shader: {fileID: 4800000, guid: a3f8c2e1d6b495708283f1c7b9d05a84, type: 3}
   m_ValidKeywords:
   - _Inflate
   m_InvalidKeywords: []
