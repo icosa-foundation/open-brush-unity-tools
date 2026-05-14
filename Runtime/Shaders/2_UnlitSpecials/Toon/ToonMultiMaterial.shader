@@ -11,6 +11,7 @@ Shader "TiltBrush/UnlitSpecials/Toon"
         _DstBlend("__dst", Float) = 0.0
         [Enum(UnityEngine.Rendering.CompareFunction)]_ZWrite("__zw", Float) = 1.0
         [Enum(UnityEngine.Rendering.CullMode)]_Cull("__cull", Float) = 2.0
+        _CullFront("__cull_front", Float) = 1.0
     }
 
     SubShader
@@ -144,7 +145,7 @@ Shader "TiltBrush/UnlitSpecials/Toon"
 
         Pass
         {
-            Cull Front
+            Cull[_CullFront]
             CGPROGRAM
             #pragma vertex vertEdge
             #pragma fragment fragBlack
