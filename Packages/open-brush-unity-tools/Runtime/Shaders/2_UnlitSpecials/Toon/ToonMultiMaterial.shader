@@ -142,9 +142,9 @@ Shader "TiltBrush/UnlitSpecials/Toon"
             ENDCG
         }
 
-        Cull Front
         Pass
         {
+            Cull Front
             CGPROGRAM
             #pragma vertex vertEdge
             #pragma fragment fragBlack
