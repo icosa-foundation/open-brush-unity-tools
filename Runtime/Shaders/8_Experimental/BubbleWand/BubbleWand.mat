@@ -67,7 +67,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2DAsset_210f07135f584e77ac51214b87ec9d4c_Out_0_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 7a23cfe16e9d8cf4b820c79d8d2b9c5a, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -115,7 +115,6 @@ Material:
     - _Vector3_1: {r: 0, g: 0, b: 0, a: 0}
     - _Vector3_2: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6
