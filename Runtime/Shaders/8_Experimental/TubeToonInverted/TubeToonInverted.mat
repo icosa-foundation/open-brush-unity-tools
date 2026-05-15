@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: TubeToonInverted
   m_Shader: {fileID: 4800000, guid: fbaf2ed539242ce4cb715100b3cdf4cf, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 5
@@ -17,6 +19,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -51,13 +54,14 @@ Material:
     - _BUILTIN_QueueOffset: 0
     - _Blend: 0
     - _Cull: 2
+    - _CullFront: 1
     - _Cutoff: 0.5
     - _DstBlend: 0
     - _EmissionGain: 0.5
     - _EmissionLM: 0
     - _InflateToggle: 0
     - _InvFade: 1
-    - _OutlineMax: 0.01
+    - _OutlineMax: 0
     - _QueueControl: -1
     - _QueueOffset: 0
     - _Smoothness: 0
