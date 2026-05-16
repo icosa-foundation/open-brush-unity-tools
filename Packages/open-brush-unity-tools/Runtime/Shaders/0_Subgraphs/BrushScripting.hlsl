@@ -19,22 +19,27 @@ float BrushScripting_Dither8x8(float2 screenPixelPos)
 // ScreenPos is raw clip-space position (divide by .w for NDC)
 // Dissolve: 1.0 = fully visible, 0.0 = fully dissolved
 // ClipEnd <= 0 means no clipping active
+#define BRUSHSCRIPTING_BODY(T4, T3, T1) \
+    Color = ColorIn; \
+    if (ClipEnd > 0 && !(VertexID > ClipStart && VertexID < ClipEnd)) \
+        clip(-1); \
+    if (Dissolve < 1) \
+    { \
+        float2 screenPixels = ScreenPos.xy / ScreenPos.w * _ScreenParams.xy; \
+        if (BrushScripting_Dither8x8(screenPixels) >= Dissolve) \
+            clip(-1); \
+    } \
+    ColorRGB = Color.rgb; \
+    Alpha = Color.a;
+
 void BrushScripting_float(
-    float4 ColorIn,
-    float VertexID,
-    float4 ScreenPos,
-    float Dissolve,
-    float ClipStart,
-    float ClipEnd,
-    out float4 ColorOut)
-{
-    ColorOut = ColorIn;
-    if (ClipEnd > 0 && !(VertexID > ClipStart && VertexID < ClipEnd))
-        clip(-1);
-    if (Dissolve < 1)
-    {
-        float2 screenPixels = ScreenPos.xy / ScreenPos.w * _ScreenParams.xy;
-        if (BrushScripting_Dither8x8(screenPixels) >= Dissolve)
-            clip(-1);
-    }
-}
+    float4 ColorIn, float VertexID, float4 ScreenPos,
+    float Dissolve, float ClipStart, float ClipEnd,
+    out float4 Color, out float3 ColorRGB, out float Alpha)
+{ BRUSHSCRIPTING_BODY(float4, float3, float) }
+
+void BrushScripting_half(
+    half4 ColorIn, half VertexID, half4 ScreenPos,
+    half Dissolve, half ClipStart, half ClipEnd,
+    out half4 Color, out half3 ColorRGB, out half Alpha)
+{ BRUSHSCRIPTING_BODY(half4, half3, half) }
