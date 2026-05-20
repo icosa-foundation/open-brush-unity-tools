@@ -11,9 +11,22 @@
         },
         {
             "m_Id": "21f87b93cc2346cdb72c4fab4113558d"
+        },
+        {
+            "m_Id": "b7000001000000000000000000000001"
+        },
+        {
+            "m_Id": "b7000002000000000000000000000001"
+        },
+        {
+            "m_Id": "b7000003000000000000000000000001"
         }
     ],
-    "m_Keywords": [],
+    "m_Keywords": [
+        {
+            "m_Id": "b7000004000000000000000000000001"
+        }
+    ],
     "m_Dropdowns": [],
     "m_CategoryData": [
         {
@@ -410,7 +423,7 @@
     "m_FragmentContext": {
         "m_Position": {
             "x": 195.0,
-            "y": 208.00001525878907
+            "y": 208.00001525878906
         },
         "m_Blocks": [
             {
@@ -475,7 +488,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -950.0,
-            "y": 208.00001525878907,
+            "y": 208.00001525878906,
             "width": 208.0,
             "height": 313.0
         }
@@ -514,7 +527,7 @@
             "x": -308.9999694824219,
             "y": 208.0,
             "width": 271.0,
-            "height": 421.99993896484377
+            "height": 421.99993896484375
         }
     },
     "m_Slots": [
@@ -634,7 +647,7 @@
     "m_DisplayName": "Cosine Time",
     "m_SlotType": 1,
     "m_Hidden": false,
-    "m_ShaderOutputName": "Cosine Time",
+    "m_ShaderOutputName": "CosineTime",
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
@@ -877,7 +890,7 @@
     "m_DisplayName": "Sine Time",
     "m_SlotType": 1,
     "m_Hidden": false,
-    "m_ShaderOutputName": "Sine Time",
+    "m_ShaderOutputName": "SineTime",
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
@@ -1095,7 +1108,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -1488.0001220703125,
-            "y": -161.00001525878907,
+            "y": -161.00001525878906,
             "width": 208.0,
             "height": 315.0
         }
@@ -1188,9 +1201,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -611.0000610351563,
+            "x": -611.0000610351562,
             "y": -511.9999694824219,
-            "width": 187.00006103515626,
+            "width": 187.00006103515625,
             "height": 34.0
         }
     },
@@ -1238,7 +1251,7 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -801.0000610351563,
+            "x": -801.0000610351562,
             "y": -981.9999389648438,
             "width": 208.0,
             "height": 307.0
@@ -1281,7 +1294,7 @@
             "serializedVersion": "2",
             "x": -1067.0,
             "y": -1313.0,
-            "width": 207.99993896484376,
+            "width": 207.99993896484375,
             "height": 315.0
         }
     },
@@ -1315,7 +1328,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -636.0,
-            "y": -566.0000610351563,
+            "y": -566.0000610351562,
             "width": 175.99996948242188,
             "height": 34.0
         }
@@ -1653,7 +1666,7 @@
             "serializedVersion": "2",
             "x": -1067.0,
             "y": -1628.0,
-            "width": 207.99993896484376,
+            "width": 207.99993896484375,
             "height": 315.0
         }
     },
@@ -1774,7 +1787,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -1208.0,
-            "y": -32.000022888183597,
+            "y": -32.000022888183594,
             "width": 208.0,
             "height": 278.0
         }
@@ -1801,7 +1814,7 @@
     "m_DisplayName": "Cosine Time",
     "m_SlotType": 1,
     "m_Hidden": false,
-    "m_ShaderOutputName": "Cosine Time",
+    "m_ShaderOutputName": "CosineTime",
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
@@ -1850,17 +1863,17 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.TimeNode",
+    "m_Type": "UnityEditor.ShaderGraph.CustomFunctionNode",
     "m_ObjectId": "9d7eba4687a3425b9606d0ea81abd62c",
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "Time",
+    "m_Name": "BrushTime (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -564.0000610351563,
+            "x": -564.0000610351562,
             "y": 34.99999237060547,
             "width": 124.0,
             "height": 173.0
@@ -1889,7 +1902,11 @@
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
-    }
+    },
+    "m_SourceType": 0,
+    "m_FunctionName": "BrushTime",
+    "m_FunctionSource": "0f8e7d6c5b4a39281726354433221100",
+    "m_FunctionBody": "Enter function body here..."
 }
 
 {
@@ -2107,7 +2124,7 @@
     "m_DisplayName": "Sine Time",
     "m_SlotType": 1,
     "m_Hidden": false,
-    "m_ShaderOutputName": "Sine Time",
+    "m_ShaderOutputName": "SineTime",
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
@@ -2122,7 +2139,7 @@
     "m_DisplayName": "Delta Time",
     "m_SlotType": 1,
     "m_Hidden": false,
-    "m_ShaderOutputName": "Delta Time",
+    "m_ShaderOutputName": "DeltaTime",
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
@@ -2276,7 +2293,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -593.0,
-            "y": -600.0000610351563,
+            "y": -600.0000610351562,
             "width": 127.99996948242188,
             "height": 34.0
         }
@@ -2311,7 +2328,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -216.0,
-            "y": -689.0000610351563,
+            "y": -689.0000610351562,
             "width": 265.0000915527344,
             "height": 422.0
         }
@@ -2421,20 +2438,20 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.TimeNode",
+    "m_Type": "UnityEditor.ShaderGraph.CustomFunctionNode",
     "m_ObjectId": "d716a04a3dee446286b281edadbc46e4",
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "Time",
+    "m_Name": "BrushTime (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -826.0000610351563,
+            "x": -826.0000610351562,
             "y": -636.0,
             "width": 124.0,
-            "height": 173.00003051757813
+            "height": 173.00003051757812
         }
     },
     "m_Slots": [
@@ -2460,7 +2477,11 @@
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
-    }
+    },
+    "m_SourceType": 0,
+    "m_FunctionName": "BrushTime",
+    "m_FunctionSource": "0f8e7d6c5b4a39281726354433221100",
+    "m_FunctionBody": "Enter function body here..."
 }
 
 {
@@ -2495,7 +2516,7 @@
     "m_DisplayName": "Smooth Delta",
     "m_SlotType": 1,
     "m_Hidden": false,
-    "m_ShaderOutputName": "Smooth Delta",
+    "m_ShaderOutputName": "SmoothDelta",
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
@@ -2593,6 +2614,18 @@
         },
         {
             "m_Id": "21f87b93cc2346cdb72c4fab4113558d"
+        },
+        {
+            "m_Id": "b7000001000000000000000000000001"
+        },
+        {
+            "m_Id": "b7000002000000000000000000000001"
+        },
+        {
+            "m_Id": "b7000003000000000000000000000001"
+        },
+        {
+            "m_Id": "b7000004000000000000000000000001"
         }
     ]
 }
@@ -2605,7 +2638,7 @@
     "m_DisplayName": "Delta Time",
     "m_SlotType": 1,
     "m_Hidden": false,
-    "m_ShaderOutputName": "Delta Time",
+    "m_ShaderOutputName": "DeltaTime",
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
@@ -2620,7 +2653,7 @@
     "m_DisplayName": "Smooth Delta",
     "m_SlotType": 1,
     "m_Hidden": false,
-    "m_ShaderOutputName": "Smooth Delta",
+    "m_ShaderOutputName": "SmoothDelta",
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
@@ -2712,3 +2745,108 @@
     "m_SerializedDescriptor": "SurfaceDescription.Emission"
 }
 
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector4ShaderProperty",
+    "m_ObjectId": "b7000001000000000000000000000001",
+    "m_Guid": {
+        "m_GuidSerialized": "1d9ca9f1-72ec-4c39-b832-8296116eea01"
+    },
+    "m_Name": "Time Override Value",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Time Override Value",
+    "m_DefaultReferenceName": "_TimeOverrideValue",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "b7000002000000000000000000000001",
+    "m_Guid": {
+        "m_GuidSerialized": "3ac65f2c-d6bd-44f7-b3bc-9f0b6ab74a02"
+    },
+    "m_Name": "Time Blend",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Time Blend",
+    "m_DefaultReferenceName": "_TimeBlend",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "b7000003000000000000000000000001",
+    "m_Guid": {
+        "m_GuidSerialized": "87e1ccaa-3d03-4393-9de7-5e4c56dfaa03"
+    },
+    "m_Name": "Time Speed",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Time Speed",
+    "m_DefaultReferenceName": "_TimeSpeed",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 1.0,
+    "m_FloatType": 0,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "b7000004000000000000000000000001",
+    "m_Guid": {
+        "m_GuidSerialized": "b5b7f030-e79b-4d46-a37c-6a7e3a919004"
+    },
+    "m_Name": "Shader Scripting",
+    "m_DefaultReferenceName": "_SHADER_SCRIPTING_ON",
+    "m_OverrideReferenceName": "SHADER_SCRIPTING_ON",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 1,
+    "m_KeywordScope": 1,
+    "m_KeywordStages": 63,
+    "m_Entries": [],
+    "m_Value": 0
+}

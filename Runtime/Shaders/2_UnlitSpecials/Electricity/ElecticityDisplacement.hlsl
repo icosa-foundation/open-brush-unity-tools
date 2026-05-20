@@ -1,3 +1,4 @@
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/BrushTime.hlsl"
 float4 mod289(float4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
 }
@@ -355,7 +356,7 @@ void displacement_float(float3 pos, float mod, out float3 disp) {
     disp = float3(0, 0, 0);
 
     // Noise
-    float time = _Time.w;
+    float time = GetBrushTime().w;
     
     float d = 30;
     float freq = .1 + mod;
@@ -363,7 +364,7 @@ void displacement_float(float3 pos, float mod, out float3 disp) {
     disp += float3(0,1,0) * curlY(pos * freq + time, d);
     disp += float3(0,0,1) * curlZ(pos * freq + time, d);
 
-    time = _Time.w*1.777;
+    time = GetBrushTime().w*1.777;
     d = 100;
     freq = .2 + mod;
     float3 disp2 = float3(1,0,0) * curlX(pos * freq + time, d);

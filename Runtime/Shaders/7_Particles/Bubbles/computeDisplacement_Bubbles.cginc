@@ -1,3 +1,4 @@
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/BrushTime.hlsl"
 float4 mod289(float4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
 }
@@ -300,15 +301,15 @@ void computeDisplacement_float(float3 seed, out float3 noise) {
     noise = float3(0.0f, 0.0f, 0.0f);
 
     float3 jitter; {
-        float t = _Time.y * 0.5 + 1;
-        jitter.x = sin(t       + _Time.y + seed.z * 0.2);
-        jitter.z = cos(t       + _Time.y + seed.x * 0.2);
-        jitter.y = cos(t * 1.2 + _Time.y + seed.x * 0.2);
+        float t = GetBrushTime().y * 0.5 + 1;
+        jitter.x = sin(t       + GetBrushTime().y + seed.z * 0.2);
+        jitter.z = cos(t       + GetBrushTime().y + seed.x * 0.2);
+        jitter.y = cos(t * 1.2 + GetBrushTime().y + seed.x * 0.2);
         jitter *= 0.02;
     }
 
     float3 curl; {
-        float3 v = (seed + jitter) * .1 + _Time.x * 5;
+        float3 v = (seed + jitter) * .1 + GetBrushTime().x * 5;
         float d = 30;
         curl = float3(curlX(v, d), curlY(v, d), curlZ(v, d)) * 10;
     }

@@ -1,6 +1,7 @@
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/BrushTime.hlsl"
 void findScrollUV_float(float2 uv0, out float2 scrollUV, out float2 scrollUV2, out float2 scrollUV3 )
 {
-    float time = _Time.y * - 1;
+    float time = GetBrushTime().y * - 1;
 
     scrollUV = uv0;
     scrollUV2 = uv0;
@@ -29,7 +30,7 @@ void cometFrag_float(float r, float g, float b, float2 uv0, out float out_uv)
 
 void findScrollUV_half(half2 uv0, out half2 scrollUV, out half2 scrollUV2, out half2 scrollUV3 )
 {
-    half time = _Time.y * - 1;
+    half time = GetBrushTime().y * - 1;
 
     scrollUV = uv0;
     scrollUV2 = uv0;

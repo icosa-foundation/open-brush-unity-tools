@@ -1,3 +1,4 @@
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/BrushTime.hlsl"
 float4 mod289(float4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
 }
@@ -303,7 +304,7 @@ void computeDisplacement_float(half3 pos, half seed, half t01, out half3 noise) 
 
   noise = float3(0.0f, 0.0f, 0.0f);
 
-  half t2 = _Time.y;
+  half t2 = GetBrushTime().y;
 
   // Animate the motion of the embers
   // Accumulate all displacement into a common, pre-transformed space.

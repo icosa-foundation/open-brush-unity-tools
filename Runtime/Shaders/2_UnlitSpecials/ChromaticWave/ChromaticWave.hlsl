@@ -1,3 +1,4 @@
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/BrushTime.hlsl"
 void chromaticWaveFrag_float(float2 uv, float4 vertexColor, float4 bloomColor, out float4 color, out float alpha)
 {
     alpha = 0;
@@ -6,9 +7,9 @@ void chromaticWaveFrag_float(float2 uv, float4 vertexColor, float4 bloomColor, o
     float envelope = sin(uv.x * 3.14159);
     uv.y += uv.x * 3;
 
-    float waveform_r = .15 * sin( -20 * vertexColor.r * _Time.w + uv.x * 100 * vertexColor.r);
-    float waveform_g = .15 * sin( -30 * vertexColor.g * _Time.w + uv.x * 100 * vertexColor.g);
-    float waveform_b = .15 * sin( -40 * vertexColor.b * _Time.w + uv.x * 100 * vertexColor.b);
+    float waveform_r = .15 * sin( -20 * vertexColor.r * GetBrushTime().w + uv.x * 100 * vertexColor.r);
+    float waveform_g = .15 * sin( -30 * vertexColor.g * GetBrushTime().w + uv.x * 100 * vertexColor.g);
+    float waveform_b = .15 * sin( -40 * vertexColor.b * GetBrushTime().w + uv.x * 100 * vertexColor.b);
 
     uv.y = fmod(uv.y + uv.x, 1);
     float procedural_line_r = saturate(1 - 40*abs(uv.y - .5 + waveform_r));
@@ -32,9 +33,9 @@ void chromaticWaveFrag_half(half2 uv, half4 vertexColor, half4 bloomColor, out h
     half envelope = sin(uv.x * 3.14159);
     uv.y += uv.x * 3;
 
-    half waveform_r = .15 * sin( -20 * vertexColor.r * _Time.w + uv.x * 100 * vertexColor.r);
-    half waveform_g = .15 * sin( -30 * vertexColor.g * _Time.w + uv.x * 100 * vertexColor.g);
-    half waveform_b = .15 * sin( -40 * vertexColor.b * _Time.w + uv.x * 100 * vertexColor.b);
+    half waveform_r = .15 * sin( -20 * vertexColor.r * GetBrushTime().w + uv.x * 100 * vertexColor.r);
+    half waveform_g = .15 * sin( -30 * vertexColor.g * GetBrushTime().w + uv.x * 100 * vertexColor.g);
+    half waveform_b = .15 * sin( -40 * vertexColor.b * GetBrushTime().w + uv.x * 100 * vertexColor.b);
 
     uv.y = fmod(uv.y + uv.x, 1);
     half procedural_line_r = saturate(1 - 40*abs(uv.y - .5 + waveform_r));
