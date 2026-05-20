@@ -27,8 +27,10 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - SHADER_SCRIPTING_ON
+  - _ISBAKEDEXPORT
   m_InvalidKeywords:
   - _EMISSION
+  - _POSITION_IS_BAKED
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -66,13 +68,18 @@ Material:
     - _ClipStart: 0.64
     - _Dissolve: 0.5
     - _EmissionGain: 0.5
+    - _ISBAKEDEXPORT: 1
     - _LightAO: 0.03
+    - _POSITION_IS_BAKED: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _TimeBlend: 0
+    - _TimeSpeed: 1
     - _shininess: 0.743
     m_Colors:
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _TimeOverrideValue: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5713678180090151794
 MonoBehaviour:

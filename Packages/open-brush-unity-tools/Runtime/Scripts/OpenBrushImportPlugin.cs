@@ -81,6 +81,17 @@ namespace OpenBrushUnityTools
                         try
                         {
                             mat = m_MaterialDictionary.GetMaterialByName(newMaterialName);
+                            // Modern OpenBrush bakes vertex shaders effects into the mesh when exporting
+                            if (mat != null && mat.HasProperty("_ISBAKEDEXPORT"))
+                            {
+                                // The inspector checkbox is bound to the float property, while the
+                                // shader branch keys off the keyword of the same name (the ShaderGraph
+                                // Boolean keyword's reference). Set both so they stay in sync.
+                                mat.SetFloat("_ISBAKEDEXPORT", 1f);
+                                var bakedKeyword = new UnityEngine.Rendering.LocalKeyword(mat.shader, "_ISBAKEDEXPORT");
+                                mat.SetKeyword(bakedKeyword, true);
+                            }
+
                         }
                         catch (KeyNotFoundException)
                         {
@@ -139,7 +150,6 @@ namespace OpenBrushUnityTools
                         var materials = m_MaterialMultipassMappings.GetMultipassMaterials(mat);
                         if (materials?.Count > 0)
                         {
-                            Debug.Log($"Found {materials.Count} multipass materials for {existingMaterialName}");
                             mr.materials = materials.ToArray();
                         }
                         else
