@@ -26,7 +26,8 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _ISBAKEDEXPORT
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -84,6 +85,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - SHADER_SCRIPTING: 0
     - _AO: 1
     - _Alpha_Cutoff: 0.5
     - _BUILTIN_QueueControl: 0
@@ -104,12 +106,15 @@ Material:
     - _Shininess: 0
     - _Smoothness: 0.078125
     - _Strength: 0.5
+    - _TimeBlend: 0
+    - _TimeSpeed: 1
     m_Colors:
     - _Base: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _TimeOverrideValue: {r: 0, g: 0, b: 0, a: 0}
     - _TintColor: {r: 0.61764705, g: 0.61764705, b: 0.61764705, a: 1}
     - _Vector3: {r: 0, g: 0, b: 0, a: 0}
     - _Vector3_1: {r: 0, g: 0, b: 0, a: 0}
