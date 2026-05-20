@@ -122,7 +122,7 @@ MonoBehaviour:
   - key: BubbleWand
     material: {fileID: 2100000, guid: eba3f993f9a14d35b84ebb08f48981a4, type: 2}
   - key: Charcoal
-    material: {fileID: 2100000, guid: fde6e7780f7ae58438d689d44cee59f6, type: 2}
+    material: {fileID: 2100000, guid: 204b4e56f573e2248b9a02321fbdda9f, type: 2}
   - key: ConcaveHull
     material: {fileID: 2100000, guid: 62df3af3ef149504988da83c08cf7250, type: 2}
   - key: DanceFloor
@@ -134,7 +134,7 @@ MonoBehaviour:
   - key: Drafting
     material: {fileID: 2100000, guid: 492b36ffb337436aba5f1e87ee86747e, type: 2}
   - key: DryBrush
-    material: {fileID: 2100000, guid: 725f4c6a6427652429abda371924adab, type: 2}
+    material: {fileID: 2100000, guid: a7f6d6eae9460914b9d8f06340c2a959, type: 2}
   - key: FacetedTube
     material: {fileID: 2100000, guid: 4391ffaadf7343969e3331e4e4930b27, type: 2}
   - key: Fairy
@@ -156,13 +156,13 @@ MonoBehaviour:
   - key: Lacewing
     material: {fileID: 2100000, guid: 1cf94f63f57a4a1aad14295af4f5ab5c, type: 2}
   - key: LeakyPen
-    material: {fileID: 2100000, guid: ddda87454bb5ac5488b6d1480370583e, type: 2}
+    material: {fileID: 2100000, guid: 1d6e6824036bf8c4e8039da92469b90a, type: 2}
   - key: Leaves2
-    material: {fileID: 2100000, guid: 7259cce541c1ec74c88578af28a31d95, type: 2}
+    material: {fileID: 2100000, guid: c363486a2acd7fd48bf5c8c16064b774, type: 2}
   - key: Lofted(HueShift)
-    material: {fileID: 2100000, guid: c5da2e70a6e463a4898c5cfedef09c97, type: 2}
+    material: {fileID: 2100000, guid: c632968258a7e5444b4e333fc4e784ce, type: 2}
   - key: MarbledRainbow
-    material: {fileID: 2100000, guid: c86c058d1bda2e9408dbf3d6a96ac4a1, type: 2}
+    material: {fileID: 2100000, guid: 88376eb5fa9f47543bdbce53085a9c0f, type: 2}
   - key: Muscle
     material: {fileID: 2100000, guid: f28c395ca57d464b8f0b558c59478fa3, type: 2}
   - key: MylarTube
@@ -170,9 +170,9 @@ MonoBehaviour:
   - key: Plasma
     material: {fileID: 2100000, guid: c33714d1b2f9412ebd501884c9d46336, type: 2}
   - key: Rain
-    material: {fileID: 2100000, guid: 03a529e1f5193dd4582d2d5cd92c3f4f, type: 2}
+    material: {fileID: 2100000, guid: a3075bd1e86e725448a2f00b5b1cce03, type: 2}
   - key: RisingBubbles
-    material: {fileID: 2100000, guid: a8147ce1005eabe488e809a1eaadcc89, type: 2}
+    material: {fileID: 2100000, guid: 86bf0e89adaada243b5c711ef79a262d, type: 2}
   - key: SingleSided
     material: {fileID: 2100000, guid: f0a2298abe80432c9feea86dcc06f4f9, type: 2}
   - key: SmoothHull
@@ -180,7 +180,7 @@ MonoBehaviour:
   - key: Space
     material: {fileID: 2100000, guid: bdf65db21fb74202b5e0c6b5e3ea851e, type: 2}
   - key: Sparks
-    material: {fileID: 2100000, guid: 50e99447386105f4697da1b96e771b98, type: 2}
+    material: {fileID: 2100000, guid: 41a706486e2190e408f4c5f0b4b7312f, type: 2}
   - key: Square
     material: {fileID: 2100000, guid: 2e03b1bf3ebd46099d7ef4cafadc4dfa, type: 2}
   - key: SquarePaper
@@ -188,9 +188,9 @@ MonoBehaviour:
   - key: Square3DPrintingBrush
     material: {fileID: 2100000, guid: d3f3b18ada03f694b83828ba8e749a98, type: 2}
   - key: TaperedHueShift
-    material: {fileID: 2100000, guid: 3d9755da56c772949b1d5ec349975f52, type: 2}
+    material: {fileID: 2100000, guid: a97b15031b599174594682d34d95167b, type: 2}
   - key: TaperedWire
-    material: {fileID: 2100000, guid: 9568870f859460f41b20dfbc8a5eac0e, type: 2}
+    material: {fileID: 2100000, guid: 4051b653344cd98478d2e2b6a21f2107, type: 2}
   - key: ThickGeometry
     material: {fileID: 2100000, guid: 3ca16e2fbdcd4da28631dcef342f40f1, type: 2}
   - key: TubeAdditive
@@ -204,8 +204,8 @@ MonoBehaviour:
   - key: WaveformTube
     material: {fileID: 2100000, guid: 0f5820dfcb6b4a6c960e56e4c8000eda, type: 2}
   - key: Wind
-    material: {fileID: 2100000, guid: 7136a7291aabbd24f8b2ca88b6adfb67, type: 2}
+    material: {fileID: 2100000, guid: bf5e9b6051a49b1458c0629913f50483, type: 2}
   - key: Wire(Lit)
-    material: {fileID: 2100000, guid: 62fef968e84232244a0e1fdb7cfb745c, type: 2}
+    material: {fileID: 2100000, guid: 1ee826215a15b2a4898700a09d624086, type: 2}
   - key: Wireframe
     material: {fileID: 2100000, guid: 2c1a6a6365524d2386d758f6fba8581b, type: 2}
