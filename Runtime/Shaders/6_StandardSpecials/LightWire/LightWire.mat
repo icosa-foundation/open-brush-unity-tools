@@ -27,7 +27,6 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - SHADER_SCRIPTING_ON
-  - _ISBAKEDEXPORT
   m_InvalidKeywords:
   - _EMISSION
   - _POSITION_IS_BAKED
@@ -68,7 +67,7 @@ Material:
     - _ClipStart: 0.64
     - _Dissolve: 0.5
     - _EmissionGain: 0.5
-    - _ISBAKEDEXPORT: 1
+    - _ISBAKEDEXPORT: 0
     - _LightAO: 0.03
     - _POSITION_IS_BAKED: 1
     - _QueueControl: 0
