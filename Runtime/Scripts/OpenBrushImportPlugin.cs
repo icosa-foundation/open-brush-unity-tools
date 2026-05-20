@@ -17,13 +17,23 @@ namespace OpenBrushUnityTools
 
         public override GLTFImportPluginContext CreateInstance(GLTFImportContext context)
         {
-            return new OpenBrushImportPluginContext();
+            return new OpenBrushImportPluginContext(context);
         }
 
         private class OpenBrushImportPluginContext : GLTFImportPluginContext
         {
+            private readonly GLTFImportContext m_Context;
             private MaterialRemapping m_MaterialDictionary;
             private MaterialMultipassMapping m_MaterialMultipassMappings;
+
+            // One baked copy per source material, reused across every stroke that shares it,
+            // so we don't dirty the shared project asset or create a copy per renderer.
+            private readonly Dictionary<Material, Material> m_BakedVariants = new();
+
+            public OpenBrushImportPluginContext(GLTFImportContext context)
+            {
+                m_Context = context;
+            }
 
             public override void OnBeforeImport()
             {
@@ -71,6 +81,9 @@ namespace OpenBrushUnityTools
                 {
                     string existingMaterialName = mr.sharedMaterial.name;
                     Material mat = null;
+                    // Modern OpenBrush bakes vertex shader effects into the mesh on export, so
+                    // legacy "ob-" sketches need the _ISBAKEDEXPORT keyword set on their materials.
+                    bool isBakedExport = false;
                     if (existingMaterialName.StartsWith("ob-"))
                     {
                         // This is a older legacy glb from Open Brush
@@ -81,17 +94,7 @@ namespace OpenBrushUnityTools
                         try
                         {
                             mat = m_MaterialDictionary.GetMaterialByName(newMaterialName);
-                            // Modern OpenBrush bakes vertex shaders effects into the mesh when exporting
-                            if (mat != null && mat.HasProperty("_ISBAKEDEXPORT"))
-                            {
-                                // The inspector checkbox is bound to the float property, while the
-                                // shader branch keys off the keyword of the same name (the ShaderGraph
-                                // Boolean keyword's reference). Set both so they stay in sync.
-                                mat.SetFloat("_ISBAKEDEXPORT", 1f);
-                                var bakedKeyword = new UnityEngine.Rendering.LocalKeyword(mat.shader, "_ISBAKEDEXPORT");
-                                mat.SetKeyword(bakedKeyword, true);
-                            }
-
+                            isBakedExport = true;
                         }
                         catch (KeyNotFoundException)
                         {
@@ -150,14 +153,38 @@ namespace OpenBrushUnityTools
                         var materials = m_MaterialMultipassMappings.GetMultipassMaterials(mat);
                         if (materials?.Count > 0)
                         {
-                            mr.materials = materials.ToArray();
+                            var assigned = isBakedExport
+                                ? materials.Select(GetBakedVariant)
+                                : materials;
+                            mr.sharedMaterials = assigned.ToArray();
                         }
                         else
                         {
-                            mr.sharedMaterial = mat;
+                            mr.sharedMaterial = isBakedExport ? GetBakedVariant(mat) : mat;
                         }
                     }
                 }
+            }
+
+            // Returns a copy of the material with the _ISBAKEDEXPORT keyword enabled, leaving the
+            // shared project asset untouched. Copies are cached per source material and, when
+            // imported in the editor, registered as sub-assets of the imported model so they
+            // persist (UnityGLTF only saves materials from its own cache, not ones we assign).
+            private Material GetBakedVariant(Material src)
+            {
+                if (src == null || !src.HasProperty("_ISBAKEDEXPORT")) return src;
+                if (m_BakedVariants.TryGetValue(src, out var baked)) return baked;
+
+                baked = new Material(src) { name = $"{src.name}-Baked" };
+                // The inspector checkbox is bound to the float property, while the shader branch
+                // keys off the keyword of the same name. Set both so they stay in sync.
+                baked.SetFloat("_ISBAKEDEXPORT", 1f);
+                baked.SetKeyword(new UnityEngine.Rendering.LocalKeyword(baked.shader, "_ISBAKEDEXPORT"), true);
+#if UNITY_EDITOR
+                m_Context?.AssetContext?.AddObjectToAsset(baked.name, baked);
+#endif
+                m_BakedVariants[src] = baked;
+                return baked;
             }
 
             public override void OnAfterImportScene(GLTFScene scene, int sceneIndex, GameObject sceneObject)
