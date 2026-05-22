@@ -78,6 +78,7 @@ Shader "TiltBrush/UnlitSpecials/Toon"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
             #pragma multi_compile __ AUDIO_REACTIVE
             #pragma target 2.0
             ENDHLSL
