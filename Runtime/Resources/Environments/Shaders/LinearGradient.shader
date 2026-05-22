@@ -22,7 +22,7 @@ Shader "Custom/LinearGradient" {
 
     SubShader
     {
-        Tags { "Queue"="Background" "RenderType"="Background" "PreviewType"="Skybox" }
+        Tags { "Queue"="Background" "RenderType"="Background" "PreviewType"="Skybox" "RenderPipeline"="UniversalPipeline" }
         Cull Off ZWrite Off
 
         Pass
@@ -30,6 +30,7 @@ Shader "Custom/LinearGradient" {
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
 
             #include "UnityCG.cginc"
 
@@ -45,7 +46,8 @@ Shader "Custom/LinearGradient" {
                 float2 uv : TEXCOORD0;
                 float3 modelpos : TEXCOORD1;
 
-                UNITY_VERTEX_OUTPUT_STEREO 
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+                UNITY_VERTEX_OUTPUT_STEREO
             };
 
             v2f vert(vertexIn input)
@@ -54,6 +56,7 @@ Shader "Custom/LinearGradient" {
 
                 UNITY_SETUP_INSTANCE_ID(input);
                 UNITY_INITIALIZE_OUTPUT(v2f, output);
+                UNITY_TRANSFER_INSTANCE_ID(input, output);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
                 output.pos = UnityObjectToClipPos(input.pos);
@@ -67,8 +70,9 @@ Shader "Custom/LinearGradient" {
 
             fixed4 frag(v2f input) : COLOR
             {
+                UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
                 float t = (dot(normalize(input.modelpos), _GradientDirection) + 1.0f) / 2.0f;
-            return lerp(_ColorA, _ColorB, t);
+                return lerp(_ColorA, _ColorB, t);
             }
             ENDCG
         }

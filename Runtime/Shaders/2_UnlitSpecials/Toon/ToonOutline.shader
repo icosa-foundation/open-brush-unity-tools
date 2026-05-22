@@ -76,6 +76,7 @@ Shader "TiltBrush/UnlitSpecials/ToonOutline"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
             #pragma target 2.0
             ENDHLSL
         }
