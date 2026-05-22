@@ -1,3 +1,5 @@
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/AudioReactive.hlsl"
+
 float4 bloomColor(float4 color, float emissionGain)
 {
     float3 emission = color.rgb * color.rgb * emissionGain;
@@ -36,7 +38,13 @@ void Fire2Fragment_float(
     flames *= mask;
 
     half4 tex = half4(flames, flames, flames, 1.0);
-    tex.xyz *= pow(1.0 - uv.x, flameFadeMin) * (flameFadeMin * 2);
+    float flameFade = flameFadeMin;
+#ifdef AUDIO_REACTIVE
+    // Original Fire2 lerped _FlameFadeMin.._FlameFadeMax by 1 - _BeatOutput.w.
+    // The ported graph only exposes the min value, so use the original max default.
+    flameFade = lerp(flameFadeMin, 30.0, 1.0 - saturate(_BeatOutput.w));
+#endif
+    tex.xyz *= pow(1.0 - uv.x, flameFade) * (flameFade * 2);
 
     vertexColor = bloomColor(vertexColor, emissionGain);
     float4 col = vertexColor * tex;

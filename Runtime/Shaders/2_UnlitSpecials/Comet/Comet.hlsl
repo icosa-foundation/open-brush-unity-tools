@@ -1,4 +1,23 @@
 #include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/AudioReactive.hlsl"
+
+void cometVertex_float(float3 positionOS, float3 normalOS, float4 uv0, out float3 outPositionOS)
+{
+#ifdef AUDIO_REACTIVE
+    outPositionOS = positionOS + _BeatOutput.y * normalOS * saturate((1.0 - smoothstep(0, 0.3, uv0.x)) * uv0.z);
+#else
+    outPositionOS = positionOS;
+#endif
+}
+
+void cometVertex_half(half3 positionOS, half3 normalOS, half4 uv0, out half3 outPositionOS)
+{
+#ifdef AUDIO_REACTIVE
+    outPositionOS = positionOS + _BeatOutput.y * normalOS * saturate((1.0h - smoothstep(0.0h, 0.3h, uv0.x)) * uv0.z);
+#else
+    outPositionOS = positionOS;
+#endif
+}
+
 void findScrollUV_float(float2 uv0, out float2 scrollUV, out float2 scrollUV2, out float2 scrollUV3 )
 {
 #ifdef AUDIO_REACTIVE
