@@ -104,6 +104,89 @@ void SampleFFT_half(float coord, out half4 fft)
     fft = (half4)SampleFFTTex(coord);
 }
 
+// Drop-in BaseColor intercept for brushes that are pure node graphs (no per-brush .hlsl):
+// applies the beat brightness pulse when AUDIO_REACTIVE is on, passes color through unchanged
+// when off. `band` selects the _BeatOutput channel (0=x, 1=y, 2=z, 3=w). Used by the Group A
+// node-injection script.
+void MusicReactiveColorBand_float(float3 colorIn, float band, out float3 colorOut)
+{
+#ifdef AUDIO_REACTIVE
+    float beat = band < 0.5 ? _BeatOutput.x
+               : band < 1.5 ? _BeatOutput.y
+               : band < 2.5 ? _BeatOutput.z
+                            : _BeatOutput.w;
+    colorOut = OB_MusicReactiveColor(float4(colorIn, 1), beat).rgb;
+#else
+    colorOut = colorIn;
+#endif
+}
+void MusicReactiveColorBand_half(half3 colorIn, half band, out half3 colorOut)
+{
+#ifdef AUDIO_REACTIVE
+    float beat = band < 0.5 ? _BeatOutput.x
+               : band < 1.5 ? _BeatOutput.y
+               : band < 2.5 ? _BeatOutput.z
+                            : _BeatOutput.w;
+    colorOut = (half3)OB_MusicReactiveColor(float4((float3)colorIn, 1), beat).rgb;
+#else
+    colorOut = colorIn;
+#endif
+}
+
+// Beat brightness boost: colorOut = colorIn * (1 + _BeatOutput[band]). Matches the common
+// `tex += tex * _BeatOutput.x` pattern (Streamers etc.). Gated; passthrough when off.
+void BeatColorBoost_float(float3 colorIn, float band, out float3 colorOut)
+{
+#ifdef AUDIO_REACTIVE
+    float beat = band < 0.5 ? _BeatOutput.x
+               : band < 1.5 ? _BeatOutput.y
+               : band < 2.5 ? _BeatOutput.z
+                            : _BeatOutput.w;
+    colorOut = colorIn * (1 + beat);
+#else
+    colorOut = colorIn;
+#endif
+}
+void BeatColorBoost_half(half3 colorIn, half band, out half3 colorOut)
+{
+#ifdef AUDIO_REACTIVE
+    float beat = band < 0.5 ? _BeatOutput.x
+               : band < 1.5 ? _BeatOutput.y
+               : band < 2.5 ? _BeatOutput.z
+                            : _BeatOutput.w;
+    colorOut = colorIn * (1 + beat);
+#else
+    colorOut = colorIn;
+#endif
+}
+
+// Embers beat colour: colorOut = colorIn * (0.5 + 2 * _BeatOutput[band]). Matches the original
+// `v.color.rgb = v.color.rgb*.5 + 2*_BeatOutput.x*v.color.rgb`. Gated; passthrough when off.
+void EmbersBeatColor_float(float3 colorIn, float band, out float3 colorOut)
+{
+#ifdef AUDIO_REACTIVE
+    float beat = band < 0.5 ? _BeatOutput.x
+               : band < 1.5 ? _BeatOutput.y
+               : band < 2.5 ? _BeatOutput.z
+                            : _BeatOutput.w;
+    colorOut = colorIn * (0.5 + 2 * beat);
+#else
+    colorOut = colorIn;
+#endif
+}
+void EmbersBeatColor_half(half3 colorIn, half band, out half3 colorOut)
+{
+#ifdef AUDIO_REACTIVE
+    float beat = band < 0.5 ? _BeatOutput.x
+               : band < 1.5 ? _BeatOutput.y
+               : band < 2.5 ? _BeatOutput.z
+                            : _BeatOutput.w;
+    colorOut = colorIn * (0.5 + 2 * beat);
+#else
+    colorOut = colorIn;
+#endif
+}
+
 void MusicReactiveColor_float(float4 color, float beat, out float4 outColor)
 {
     outColor = OB_MusicReactiveColor(color, beat);

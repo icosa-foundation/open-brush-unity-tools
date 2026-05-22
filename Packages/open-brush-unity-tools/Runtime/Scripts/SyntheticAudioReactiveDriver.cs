@@ -49,12 +49,24 @@ public class SyntheticAudioReactiveDriver : MonoBehaviour
 
     [Header("Beat pulse")]
     public bool generateBeat = true;
-    [Tooltip("Beat pulses per second.")]
+    [Tooltip("Base beat tempo, pulses per second (the _BeatOutput.x 'kick').")]
     public float beatsPerSecond = 2f;
+    [Tooltip("Per-band tempo multipliers. Each _BeatOutput/_BeatOutputAccum channel (x,y,z,w) " +
+             "pulses at beatsPerSecond * this, so the four channels are visibly distinct — useful " +
+             "since different brushes read different channels (Light=.y, SoftHighlighter=.z, " +
+             "Snow/VelvetInk=.w).")]
+    public Vector4 bandTempoMultipliers = new Vector4(1f, 0.5f, 0.75f, 0.25f);
     [Tooltip("Higher = sharper, more percussive pulse.")]
     public float beatSharpness = 6f;
     [Tooltip("How fast _BeatOutputAccum advances (the scroll / time driver).")]
     public float accumulationRate = 1f;
+
+    [Header("Beat test aid")]
+    [Tooltip("Hold _BeatOutput at a constant level on all bands instead of pulsing, so the effect " +
+             "is static and you can clearly compare AUDIO_REACTIVE on vs off. Useful for subtle " +
+             "brushes (Light, Embers) where a moving pulse is hard to spot.")]
+    public bool holdBeat = false;
+    [Range(0f, 1f)] public float holdBeatLevel = 1f;
 
     [Header("Cleanup")]
     [Tooltip("Reset the globals to silence when this component is disabled.")]
@@ -225,10 +237,19 @@ public class SyntheticAudioReactiveDriver : MonoBehaviour
     void WriteBeat(float dt)
     {
         Vector4 beat = Vector4.zero;
-        if (generateBeat)
+        if (holdBeat)
         {
-            // Per-band pulse with small phase offsets so the four channels differ.
-            beat = new Vector4(Pulse(0.00f), Pulse(0.10f), Pulse(0.20f), Pulse(0.30f));
+            // Static level on all bands — for comparing AUDIO_REACTIVE on vs off.
+            beat = new Vector4(holdBeatLevel, holdBeatLevel, holdBeatLevel, holdBeatLevel);
+        }
+        else if (generateBeat)
+        {
+            // Each band pulses at its own tempo so the four channels are clearly distinct.
+            beat = new Vector4(
+                Pulse(beatsPerSecond * bandTempoMultipliers.x),
+                Pulse(beatsPerSecond * bandTempoMultipliers.y),
+                Pulse(beatsPerSecond * bandTempoMultipliers.z),
+                Pulse(beatsPerSecond * bandTempoMultipliers.w));
         }
 
         _beatAccum += beat * (dt * accumulationRate);
@@ -245,10 +266,10 @@ public class SyntheticAudioReactiveDriver : MonoBehaviour
         Shader.SetGlobalVector(s_AudioVolume, new Vector4(vol, vol, vol, vol));
     }
 
-    // Instant attack, decaying tail; beatsPerSecond pulses per second.
-    float Pulse(float offset)
+    // Instant attack, decaying tail; `rate` pulses per second.
+    float Pulse(float rate)
     {
-        float phase = Mathf.Repeat((_time + offset) * beatsPerSecond, 1f);
+        float phase = Mathf.Repeat(_time * rate, 1f);
         return Mathf.Pow(1f - phase, Mathf.Max(0.01f, beatSharpness));
     }
 

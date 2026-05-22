@@ -1,3 +1,5 @@
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/AudioReactive.hlsl"
+
 void PlasmaFragment_float(
     float4 vertexColor,
     float2 uv,
@@ -15,6 +17,14 @@ void PlasmaFragment_float(
     float3 bRate = float3(1.5, 3.0, 2.25) + M * aRate;
     float3 LINE_POS = 0.5;
     float3 LINE_WIDTH = 0.012;
+
+#ifdef AUDIO_REACTIVE
+    // Audio path: displace the line field vertically by the waveform (matches original).
+    float waveformcoord = uv.x * .2f;
+    float envelope = sin(3.14159 * waveformcoord);
+    float waveform = SampleWaveformTex(waveformcoord).r - .5f;
+    uv.y += waveform * envelope * .5f;
+#endif
 
     // Calculate uvs for each line
     float3 us = A * uv.x - aRate * time;

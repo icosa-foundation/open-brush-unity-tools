@@ -1,4 +1,4 @@
-#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/BrushTime.hlsl"
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/AudioReactive.hlsl"
 float4 mod289(float4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
 }
@@ -371,4 +371,11 @@ void displacement_float(float3 pos, float mod, out float3 disp) {
     disp2 += float3(0,1,0) * curlY(pos * freq + time, d);
     disp2 += float3(0,0,1) * curlZ(pos * freq + time, d);
     disp = disp * 3 + disp2 * 7;
+
+#ifdef AUDIO_REACTIVE
+    // Audio path: pulse the displacement with the beat (original: disp *= _BeatOutput.x + .5).
+    // The original also added a waveform wiggle to disp.y and a beat color tint; those need a uv /
+    // vertex-color input this function doesn't expose, so they're deferred to a graph pass.
+    disp *= (_BeatOutput.x * 1 + .5);
+#endif
 }

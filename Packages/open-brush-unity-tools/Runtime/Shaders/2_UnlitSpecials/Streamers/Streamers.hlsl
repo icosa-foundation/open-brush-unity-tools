@@ -1,4 +1,4 @@
-#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/BrushTime.hlsl"
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/AudioReactive.hlsl"
 float rand_1_05(in float2 uv)
 {
     float2 noise = (frac(sin(dot(uv ,float2(12.9898,78.233)*2.0)) * 43758.5453));
@@ -18,5 +18,9 @@ void streamersUVS_float(float2 uv0, float4 vertexColor, out float2 uvs)
 
     // Scrolling UVs
     uvs.x *= .5 + row_rand * .3;
+#ifdef AUDIO_REACTIVE
+    uvs.x -= _BeatOutputAccum.x * (1 + fmod(row_id * 1.61803398875, 1) - 0.5);
+#else
     uvs.x -= GetBrushTime().y * (1 + fmod(row_id * 1.61803398875, 1) - 0.5);
+#endif
 }

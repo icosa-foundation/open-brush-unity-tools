@@ -28,6 +28,9 @@
     "m_Keywords": [
         {
             "m_Id": "bd2cd364ad6a4a4790d71a80960c4a31"
+        },
+        {
+            "m_Id": "8358aae17cd8467d8270448fc73239ad"
         }
     ],
     "m_Dropdowns": [],
@@ -463,6 +466,9 @@
         },
         {
             "m_Id": "b7000003000000000000000000000001"
+        },
+        {
+            "m_Id": "8358aae17cd8467d8270448fc73239ad"
         }
     ]
 }
@@ -1719,4 +1725,26 @@
         "x": 0.0,
         "y": 1.0
     }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "8358aae17cd8467d8270448fc73239ad",
+    "m_Guid": {
+        "m_GuidSerialized": "98420f5a-fcb1-4765-9dd6-37caa296f280"
+    },
+    "m_Name": "Audio Reactive",
+    "m_DefaultReferenceName": "_AUDIO_REACTIVE",
+    "m_OverrideReferenceName": "AUDIO_REACTIVE",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 1,
+    "m_KeywordScope": 0,
+    "m_KeywordStages": 63,
+    "m_Entries": [],
+    "m_Value": 0
 }

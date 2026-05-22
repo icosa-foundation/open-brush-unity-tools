@@ -34,6 +34,9 @@
     "m_Keywords": [
         {
             "m_Id": "65f78d1ac75946948efcf28f0ea2b638"
+        },
+        {
+            "m_Id": "7b0c53182d72421080b4c31da64e487e"
         }
     ],
     "m_Dropdowns": [],
@@ -396,6 +399,9 @@
         },
         {
             "m_Id": "8309a07d11d34238b6be469808c24001"
+        },
+        {
+            "m_Id": "50e33b7f362c441798a42d21e94f4ffd"
         }
     ],
     "m_GroupDatas": [
@@ -2154,20 +2160,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "79871a91f89142cd8e392a254b9bebeb"
-                },
-                "m_SlotId": 1
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "c0d947da6d5e400d8bc6b14d0c0a321f"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "be98faaabc2247f18e1fa231d1814fb5"
                 },
                 "m_SlotId": 0
@@ -2233,6 +2225,34 @@
                     "m_Id": "79871a91f89142cd8e392a254b9bebeb"
                 },
                 "m_SlotId": -1174405114
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "79871a91f89142cd8e392a254b9bebeb"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "50e33b7f362c441798a42d21e94f4ffd"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "50e33b7f362c441798a42d21e94f4ffd"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "c0d947da6d5e400d8bc6b14d0c0a321f"
+                },
+                "m_SlotId": 0
             }
         }
     ],
@@ -7813,6 +7833,9 @@
         },
         {
             "m_Id": "b7000003000000000000000000000001"
+        },
+        {
+            "m_Id": "7b0c53182d72421080b4c31da64e487e"
         }
     ]
 }
@@ -15677,4 +15700,132 @@
         "x": 0.0,
         "y": 1.0
     }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.CustomFunctionNode",
+    "m_ObjectId": "50e33b7f362c441798a42d21e94f4ffd",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "EmbersBeatColor (Custom Function)",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -320.0,
+            "y": -120.0,
+            "width": 260.0,
+            "height": 150.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "a69185efc8254e0bb58cb12337270d7c"
+        },
+        {
+            "m_Id": "9cbae03822a545c9aa44771877936a11"
+        },
+        {
+            "m_Id": "800aaaf46e724838bbe59451776965b1"
+        }
+    ],
+    "synonyms": [
+        "code",
+        "HLSL"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SourceType": 0,
+    "m_FunctionName": "EmbersBeatColor",
+    "m_FunctionSource": "a729c53fec43dd746975e874b65bb2e4",
+    "m_FunctionBody": "Enter function body here..."
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "a69185efc8254e0bb58cb12337270d7c",
+    "m_Id": 0,
+    "m_DisplayName": "colorIn",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "colorIn",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "9cbae03822a545c9aa44771877936a11",
+    "m_Id": 1,
+    "m_DisplayName": "band",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "band",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "800aaaf46e724838bbe59451776965b1",
+    "m_Id": 2,
+    "m_DisplayName": "colorOut",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "colorOut",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "7b0c53182d72421080b4c31da64e487e",
+    "m_Guid": {
+        "m_GuidSerialized": "0e3fd10c-cd0d-43d7-8db3-5c79195f5a75"
+    },
+    "m_Name": "Audio Reactive",
+    "m_DefaultReferenceName": "_AUDIO_REACTIVE",
+    "m_OverrideReferenceName": "AUDIO_REACTIVE",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 1,
+    "m_KeywordScope": 0,
+    "m_KeywordStages": 63,
+    "m_Entries": [],
+    "m_Value": 0
 }

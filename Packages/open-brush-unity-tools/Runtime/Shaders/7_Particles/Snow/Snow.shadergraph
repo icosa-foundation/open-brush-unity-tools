@@ -31,6 +31,9 @@
     "m_Keywords": [
         {
             "m_Id": "c1d40fbbea2f4bb2831fdce7e25e426f"
+        },
+        {
+            "m_Id": "e6e9dc19d7c34a2a9607353b06786be3"
         }
     ],
     "m_Dropdowns": [],
@@ -348,6 +351,9 @@
         },
         {
             "m_Id": "c02964478e6d407d9a1150b22a129715"
+        },
+        {
+            "m_Id": "88dffab3f18643ce84ea412366f812b3"
         }
     ],
     "m_GroupDatas": [
@@ -1938,20 +1944,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "35073063e1204656904a5302f648d4cc"
-                },
-                "m_SlotId": 1
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "c0d947da6d5e400d8bc6b14d0c0a321f"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "ec3253b94e02446a96fbf9c651c85c9d"
                 },
                 "m_SlotId": 0
@@ -2017,6 +2009,34 @@
                     "m_Id": "35073063e1204656904a5302f648d4cc"
                 },
                 "m_SlotId": -1174405114
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "35073063e1204656904a5302f648d4cc"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "88dffab3f18643ce84ea412366f812b3"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "88dffab3f18643ce84ea412366f812b3"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "c0d947da6d5e400d8bc6b14d0c0a321f"
+                },
+                "m_SlotId": 0
             }
         }
     ],
@@ -6714,6 +6734,9 @@
         },
         {
             "m_Id": "b7000003000000000000000000000001"
+        },
+        {
+            "m_Id": "e6e9dc19d7c34a2a9607353b06786be3"
         }
     ]
 }
@@ -13806,4 +13829,132 @@
         "x": 0.0,
         "y": 1.0
     }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.CustomFunctionNode",
+    "m_ObjectId": "88dffab3f18643ce84ea412366f812b3",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "MusicReactiveColorBand (Custom Function)",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -320.0,
+            "y": -120.0,
+            "width": 260.0,
+            "height": 150.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "a98b0bf6470a4ec9a07cebc49525bb66"
+        },
+        {
+            "m_Id": "fb565d96728845d298b5712248f02094"
+        },
+        {
+            "m_Id": "cb495b1242a14b50831228569a1c63f2"
+        }
+    ],
+    "synonyms": [
+        "code",
+        "HLSL"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SourceType": 0,
+    "m_FunctionName": "MusicReactiveColorBand",
+    "m_FunctionSource": "a729c53fec43dd746975e874b65bb2e4",
+    "m_FunctionBody": "Enter function body here..."
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "a98b0bf6470a4ec9a07cebc49525bb66",
+    "m_Id": 0,
+    "m_DisplayName": "colorIn",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "colorIn",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "fb565d96728845d298b5712248f02094",
+    "m_Id": 1,
+    "m_DisplayName": "band",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "band",
+    "m_StageCapability": 3,
+    "m_Value": 3.0,
+    "m_DefaultValue": 3.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "cb495b1242a14b50831228569a1c63f2",
+    "m_Id": 2,
+    "m_DisplayName": "colorOut",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "colorOut",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "e6e9dc19d7c34a2a9607353b06786be3",
+    "m_Guid": {
+        "m_GuidSerialized": "92b8d2e1-41dc-4f92-aed6-460dd4eede38"
+    },
+    "m_Name": "Audio Reactive",
+    "m_DefaultReferenceName": "_AUDIO_REACTIVE",
+    "m_OverrideReferenceName": "AUDIO_REACTIVE",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 1,
+    "m_KeywordScope": 0,
+    "m_KeywordStages": 63,
+    "m_Entries": [],
+    "m_Value": 0
 }

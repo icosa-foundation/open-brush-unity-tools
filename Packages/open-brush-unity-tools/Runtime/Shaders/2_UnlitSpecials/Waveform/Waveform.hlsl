@@ -1,12 +1,16 @@
-#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/BrushTime.hlsl"
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/AudioReactive.hlsl"
 void waveformFrag_float(float2 uv, float4 vertexColor, float4 bloomColor, out float4 color)
 {
     color = float4(1, 1, 1, 1);
     float envelope = sin(uv.x * 3.14159);
 
+#ifdef AUDIO_REACTIVE
+    float waveform = SampleWaveformTex(uv.x).r - .5;
+#else
     float waveform = .15 * sin( -30 * vertexColor.r * GetBrushTime().w + uv.x * 100 * vertexColor.r);
         waveform += .15 * sin( -40 * vertexColor.g * GetBrushTime().w + uv.x * 100 * vertexColor.g);
         waveform += .15 * sin( -50 * vertexColor.b * GetBrushTime().w + uv.x * 100 * vertexColor.b);
+#endif
 
     float pinch = (1 - envelope) * 40 + 20;
     float procedural_line = saturate(1 - pinch*abs(uv.y - .5 - waveform * envelope));
@@ -21,9 +25,13 @@ void waveformFrag_half(half2 uv, half4 vertexColor, half4 bloomColor, out half4 
     color = half4(1, 1, 1, 1);
     half envelope = sin(uv.x * 3.14159);
 
+#ifdef AUDIO_REACTIVE
+    half waveform = SampleWaveformTex(uv.x).r - .5;
+#else
     half waveform = .15 * sin( -30 * vertexColor.r * GetBrushTime().w + uv.x * 100 * vertexColor.r);
     waveform += .15 * sin( -40 * vertexColor.g * GetBrushTime().w + uv.x * 100 * vertexColor.g);
     waveform += .15 * sin( -50 * vertexColor.b * GetBrushTime().w + uv.x * 100 * vertexColor.b);
+#endif
 
     half pinch = (1 - envelope) * 40 + 20;
     half procedural_line = saturate(1 - pinch*abs(uv.y - .5 - waveform * envelope));

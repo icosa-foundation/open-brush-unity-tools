@@ -1,3 +1,5 @@
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/AudioReactive.hlsl"
+
 // Helper function for 8x8 Bayer Dithering
 // Expects screenPixelPos to be integer-based screen pixel coordinates.
 // Output is a float value in the range [0, 1).
@@ -32,8 +34,16 @@ void WireframeFragment_float(
 {
 
     float2 localTexCoord = TexCoord; // Use a local copy if modified
+#ifdef AUDIO_REACTIVE
+    // Audio path: displace the wire along x by the waveform; single-edge wire (matches original).
+    half waveform = SampleWaveformTex(localTexCoord.y).r - .5h;
+    half envelope = sin(localTexCoord.y * 3.141569);
+    localTexCoord.x += waveform * envelope;
+    half w = (abs(localTexCoord.x - 0.5f) > 0.5f) ? 1.0h : 0.0h;
+#else
     half w = (abs(localTexCoord.x - 0.5f) > 0.45f) ? 1.0h : 0.0h;
     w += (abs(localTexCoord.y - 0.5f) > 0.45f) ? 1.0h : 0.0h;
+#endif
 
     float4 Color = VertexColor * w;
     Color.a *= Opacity;

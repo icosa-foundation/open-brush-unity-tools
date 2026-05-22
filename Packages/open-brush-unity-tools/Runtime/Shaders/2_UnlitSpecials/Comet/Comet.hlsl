@@ -1,7 +1,11 @@
-#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/BrushTime.hlsl"
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/AudioReactive.hlsl"
 void findScrollUV_float(float2 uv0, out float2 scrollUV, out float2 scrollUV2, out float2 scrollUV3 )
 {
+#ifdef AUDIO_REACTIVE
+    float time = (GetBrushTime().x * 2 + _BeatOutputAccum.w) * -1;
+#else
     float time = GetBrushTime().y * - 1;
+#endif
 
     scrollUV = uv0;
     scrollUV2 = uv0;
@@ -30,7 +34,11 @@ void cometFrag_float(float r, float g, float b, float2 uv0, out float out_uv)
 
 void findScrollUV_half(half2 uv0, out half2 scrollUV, out half2 scrollUV2, out half2 scrollUV3 )
 {
+#ifdef AUDIO_REACTIVE
+    half time = (GetBrushTime().x * 2 + _BeatOutputAccum.w) * -1;
+#else
     half time = GetBrushTime().y * - 1;
+#endif
 
     scrollUV = uv0;
     scrollUV2 = uv0;
