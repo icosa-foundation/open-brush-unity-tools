@@ -1,4 +1,5 @@
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/AudioReactive.hlsl"
 
 CBUFFER_START(UnityPerMaterial)
 float _OutlineMax;
@@ -30,7 +31,14 @@ Varyings vertInflate(Attributes IN, float inflate)
     UNITY_TRANSFER_INSTANCE_ID(IN, OUT);
     UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
 
-    VertexPositionInputs baseInput = GetVertexPositionInputs(IN.positionOS.xyz);
+    float bulge = 0.0;
+#ifdef AUDIO_REACTIVE
+    // Audio path: FFT-driven bulge along the normal (matches original Toon vertInflate).
+    float fft = SampleFFTTex(_BeatOutputAccum.z * .25 + IN.texcoord.x).g;
+    bulge = fft * IN.texcoord.z * 10.0;
+#endif
+
+    VertexPositionInputs baseInput = GetVertexPositionInputs(IN.positionOS.xyz + IN.normalOS.xyz * bulge);
     OUT.positionCS = baseInput.positionCS;
 
     if (inflate > 0)

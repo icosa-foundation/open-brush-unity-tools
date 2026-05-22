@@ -374,8 +374,7 @@ void displacement_float(float3 pos, float mod, out float3 disp) {
 
 #ifdef AUDIO_REACTIVE
     // Audio path: pulse the displacement with the beat (original: disp *= _BeatOutput.x + .5).
-    // The original also added a waveform wiggle to disp.y and a beat color tint; those need a uv /
-    // vertex-color input this function doesn't expose, so they're deferred to a graph pass.
+    // Waveform y wiggle and beat color tint are injected in Electricity.shadergraph.
     disp *= (_BeatOutput.x * 1 + .5);
 #endif
 }

@@ -1,31 +1,24 @@
-Shader "TiltBrush/UnlitSpecials/Toon"
+Shader "TiltBrush/Experimental/TubeToonInvertedBase"
 {
-    Properties
-    {
-        _OutlineMax ("Maximum Outline", Range (0,0.5)) = 0.01
-    }
-
     SubShader
     {
         Cull Back
 
         CGINCLUDE
-        #include "ToonCommon.cginc"
-        #pragma multi_compile __ AUDIO_REACTIVE
-        #pragma multi_compile __ TBT_LINEAR_TARGET
+        #include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/2_UnlitSpecials/Toon/ToonCommon.cginc"
         #pragma multi_compile_fog
         #pragma target 3.0
 
         v2f vert(appdata_t v)
         {
-            v.color = TbVertToNative(v.color);
             return vertInflate(v, 0);
         }
 
         fixed4 frag(v2f i) : SV_Target
         {
-            UNITY_APPLY_FOG(i.fogCoord, i.color);
-            return i.color;
+            fixed4 color = fixed4(0, 0, 0, 1);
+            UNITY_APPLY_FOG(i.fogCoord, color);
+            return color;
         }
         ENDCG
 
@@ -52,7 +45,7 @@ Shader "TiltBrush/UnlitSpecials/Toon"
         }
 
         HLSLINCLUDE
-        #include "ToonCommon.hlsl"
+        #include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/2_UnlitSpecials/Toon/ToonCommon.hlsl"
 
         Varyings vert(Attributes IN)
         {
@@ -63,7 +56,7 @@ Shader "TiltBrush/UnlitSpecials/Toon"
         {
             UNITY_SETUP_INSTANCE_ID(IN);
             UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
-            return IN.color;
+            return half4(0, 0, 0, 1);
         }
         ENDHLSL
 
@@ -78,7 +71,6 @@ Shader "TiltBrush/UnlitSpecials/Toon"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma multi_compile __ AUDIO_REACTIVE
             #pragma target 2.0
             ENDHLSL
         }

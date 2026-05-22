@@ -9,7 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Toon
   m_Shader: {fileID: 4800000, guid: fbaf2ed539242ce4cb715100b3cdf4cf, type: 3}
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - AUDIO_REACTIVE
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

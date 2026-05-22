@@ -1,4 +1,4 @@
-#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/BrushTime.hlsl"
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/AudioReactive.hlsl"
 float4 mod289(float4 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
 }
@@ -313,6 +313,12 @@ void computeDisplacement_float(half3 pos, half seed, half t01, out half3 noise) 
   dispVec.x += sin(t01 * 5 + seed * 100 + t2 + pos.z) * 0.3;
   dispVec.y += (fmod(seed * 100, 1) - 0.5) * 6.0 * t01;
   dispVec.z += cos(t01 * 5 + seed * 100 + t2 + pos.x) * 0.3;
+
+#ifdef AUDIO_REACTIVE
+  // Original Embers adds FFT peak power to the upward displacement.
+  half fft = SampleFFTTex(pos.y).b * 2 + 0.1;
+  dispVec.y += fft;
+#endif
 
   // Allow scaling to affect particle speed and distance in toolkit
   noise =  dispVec * 0.1 * length(unity_ObjectToWorld[0].xyz);

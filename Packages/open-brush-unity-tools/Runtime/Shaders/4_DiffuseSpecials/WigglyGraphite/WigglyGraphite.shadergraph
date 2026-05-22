@@ -37,6 +37,9 @@
     "m_Keywords": [
         {
             "m_Id": "8cd15028215442a78f2679c5205dd5dc"
+        },
+        {
+            "m_Id": "840bdb82c267425780e1194069487047"
         }
     ],
     "m_Dropdowns": [],
@@ -165,6 +168,9 @@
         },
         {
             "m_Id": "7ac8944655b64515a41216478f61fa72"
+        },
+        {
+            "m_Id": "7d64c8f972cf423aae7e9dbc6c3c9540"
         }
     ],
     "m_GroupDatas": [],
@@ -210,20 +216,6 @@
                     "m_Id": "99310fd652b64a1fb16b4ce71b69f921"
                 },
                 "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "3a2ee58bfd784af99fd3b3057c6e188f"
-                },
-                "m_SlotId": 1
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "16a5c28629fa40c9be8d65e1641ae326"
-                },
-                "m_SlotId": 0
             }
         },
         {
@@ -574,6 +566,34 @@
                     "m_Id": "de697097cc6348878402ad3c9ae4bfbd"
                 },
                 "m_SlotId": -1174405114
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "5d98943fc34f4649aa4b4e6bba485c6e"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "7d64c8f972cf423aae7e9dbc6c3c9540"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "7d64c8f972cf423aae7e9dbc6c3c9540"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "16a5c28629fa40c9be8d65e1641ae326"
+                },
+                "m_SlotId": 0
             }
         }
     ],
@@ -3055,6 +3075,9 @@
         },
         {
             "m_Id": "b7000003000000000000000000000001"
+        },
+        {
+            "m_Id": "840bdb82c267425780e1194069487047"
         }
     ]
 }
@@ -4477,4 +4500,98 @@
         "x": 0.0,
         "y": 1.0
     }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.CustomFunctionNode",
+    "m_ObjectId": "7d64c8f972cf423aae7e9dbc6c3c9540",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "WigglyGraphiteAnim (Custom Function)",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -900.0,
+            "y": 100.0,
+            "width": 260.0,
+            "height": 120.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "caa32a3fca28475a822b80cc6cdcec12"
+        },
+        {
+            "m_Id": "150a5d660912456cbd6222f3f2fc6b36"
+        }
+    ],
+    "synonyms": [
+        "code",
+        "HLSL"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SourceType": 0,
+    "m_FunctionName": "WigglyGraphiteAnim",
+    "m_FunctionSource": "a729c53fec43dd746975e874b65bb2e4",
+    "m_FunctionBody": "Enter function body here..."
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "caa32a3fca28475a822b80cc6cdcec12",
+    "m_Id": 0,
+    "m_DisplayName": "timeY",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "timeY",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "150a5d660912456cbd6222f3f2fc6b36",
+    "m_Id": 1,
+    "m_DisplayName": "anim",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "anim",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "840bdb82c267425780e1194069487047",
+    "m_Guid": {
+        "m_GuidSerialized": "84766f34-9332-4159-a341-13fe7e880c95"
+    },
+    "m_Name": "Audio Reactive",
+    "m_DefaultReferenceName": "_AUDIO_REACTIVE",
+    "m_OverrideReferenceName": "AUDIO_REACTIVE",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 1,
+    "m_KeywordScope": 0,
+    "m_KeywordStages": 63,
+    "m_Entries": [],
+    "m_Value": 0
 }

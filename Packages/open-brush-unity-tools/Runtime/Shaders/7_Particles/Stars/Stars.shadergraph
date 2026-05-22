@@ -34,6 +34,9 @@
     "m_Keywords": [
         {
             "m_Id": "6ba860d5b5ef44acb5452f472a9ee6b3"
+        },
+        {
+            "m_Id": "26878e54725d4b8aa26ef14fd7e37fbc"
         }
     ],
     "m_Dropdowns": [],
@@ -288,6 +291,12 @@
         },
         {
             "m_Id": "0f39f09c7bb8409babe18e2460608d31"
+        },
+        {
+            "m_Id": "abf99931787c4337852c8abfeabaec5c"
+        },
+        {
+            "m_Id": "d63e90bfe02e48579f12f4c821b5b4dc"
         }
     ],
     "m_GroupDatas": [
@@ -1236,20 +1245,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "a82946da77854f7e89584b2c31987d83"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "ec552d44192b4920a02944352c0c6e9d"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "ae046b837bae47baaed11e00df38ffbb"
                 },
                 "m_SlotId": 1
@@ -1614,20 +1609,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "2ade3462742f4b49b7bc85a108d4cf06"
-                },
-                "m_SlotId": 1
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "c0d947da6d5e400d8bc6b14d0c0a321f"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "e7197874afc44fea858918d0354a079b"
                 },
                 "m_SlotId": 0
@@ -1693,6 +1674,62 @@
                     "m_Id": "2ade3462742f4b49b7bc85a108d4cf06"
                 },
                 "m_SlotId": -1174405114
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "2ade3462742f4b49b7bc85a108d4cf06"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "abf99931787c4337852c8abfeabaec5c"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "abf99931787c4337852c8abfeabaec5c"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "c0d947da6d5e400d8bc6b14d0c0a321f"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "a82946da77854f7e89584b2c31987d83"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "d63e90bfe02e48579f12f4c821b5b4dc"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "d63e90bfe02e48579f12f4c821b5b4dc"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "ec552d44192b4920a02944352c0c6e9d"
+                },
+                "m_SlotId": 0
             }
         }
     ],
@@ -5519,6 +5556,9 @@
         },
         {
             "m_Id": "b7000003000000000000000000000001"
+        },
+        {
+            "m_Id": "26878e54725d4b8aa26ef14fd7e37fbc"
         }
     ]
 }
@@ -10748,4 +10788,204 @@
         "x": 0.0,
         "y": 1.0
     }
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.CustomFunctionNode",
+    "m_ObjectId": "abf99931787c4337852c8abfeabaec5c",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "StarsBeatBrightness (Custom Function)",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -320.0,
+            "y": -120.0,
+            "width": 260.0,
+            "height": 150.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "57aa5509d1a34aabaf51b326e3ca9870"
+        },
+        {
+            "m_Id": "4a08b795a995451bb677d00bc9a3ae66"
+        },
+        {
+            "m_Id": "b11a860242ce4c69b041a9a58f9c9fca"
+        }
+    ],
+    "synonyms": [
+        "code",
+        "HLSL"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SourceType": 0,
+    "m_FunctionName": "StarsBeatBrightness",
+    "m_FunctionSource": "a729c53fec43dd746975e874b65bb2e4",
+    "m_FunctionBody": "Enter function body here..."
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "57aa5509d1a34aabaf51b326e3ca9870",
+    "m_Id": 0,
+    "m_DisplayName": "colorIn",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "colorIn",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "4a08b795a995451bb677d00bc9a3ae66",
+    "m_Id": 1,
+    "m_DisplayName": "band",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "band",
+    "m_StageCapability": 3,
+    "m_Value": 3.0,
+    "m_DefaultValue": 3.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "b11a860242ce4c69b041a9a58f9c9fca",
+    "m_Id": 2,
+    "m_DisplayName": "colorOut",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "colorOut",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "26878e54725d4b8aa26ef14fd7e37fbc",
+    "m_Guid": {
+        "m_GuidSerialized": "be5522c7-91d4-473c-a293-b6c6eb43f555"
+    },
+    "m_Name": "Audio Reactive",
+    "m_DefaultReferenceName": "_AUDIO_REACTIVE",
+    "m_OverrideReferenceName": "AUDIO_REACTIVE",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 1,
+    "m_KeywordScope": 0,
+    "m_KeywordStages": 63,
+    "m_Entries": [],
+    "m_Value": 0
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.CustomFunctionNode",
+    "m_ObjectId": "d63e90bfe02e48579f12f4c821b5b4dc",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "StarsSparkleTime (Custom Function)",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -360.0,
+            "y": 720.0,
+            "width": 260.0,
+            "height": 120.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "4d834752a8d24f729c2ac08f78256950"
+        },
+        {
+            "m_Id": "58c0192284734a01aa9abce72b25eaf4"
+        }
+    ],
+    "synonyms": [
+        "code",
+        "HLSL"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SourceType": 0,
+    "m_FunctionName": "StarsSparkleTime",
+    "m_FunctionSource": "a729c53fec43dd746975e874b65bb2e4",
+    "m_FunctionBody": "Enter function body here..."
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "4d834752a8d24f729c2ac08f78256950",
+    "m_Id": 0,
+    "m_DisplayName": "timeY",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "timeY",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "58c0192284734a01aa9abce72b25eaf4",
+    "m_Id": 1,
+    "m_DisplayName": "sparkleTime",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "sparkleTime",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }

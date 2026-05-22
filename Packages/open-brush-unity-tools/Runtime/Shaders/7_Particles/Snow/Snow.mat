@@ -25,7 +25,8 @@ Material:
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - AUDIO_REACTIVE
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -56,15 +57,22 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - AUDIO_REACTIVE: 1
+    - SHADER_SCRIPTING: 0
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _ClipEnd: -1
+    - _ClipStart: 0
+    - _Dissolve: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _TimeBlend: 0
+    - _TimeSpeed: 1
     - _test: 0
     m_Colors:
+    - _TimeOverrideValue: {r: 0, g: 0, b: 0, a: 0}
     - _TintColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &7510189007036946405
 MonoBehaviour:
   m_ObjectHideFlags: 11
