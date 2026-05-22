@@ -1,15 +1,23 @@
-#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/BrushTime.hlsl"
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/0_Subgraphs/AudioReactive.hlsl"
+
 void chromaticWaveFrag_float(float2 uv, float4 vertexColor, float4 bloomColor, out float4 color, out float alpha)
 {
     alpha = 0;
     color = float4(0, 0, 0, 1);
 
     float envelope = sin(uv.x * 3.14159);
-    uv.y += uv.x * 3;
+    uv.y += uv.x * 3 + _BeatOutputAccum.b * 3;
 
+#ifdef AUDIO_REACTIVE
+    // Audio path: three phase-shifted taps of the waveform texture (matches original).
+    float waveform_r = .5 * (SampleWaveformTex(uv.x).r - .5);
+    float waveform_g = .5 * (SampleWaveformTex(uv.x * 1.8).r - .5);
+    float waveform_b = .5 * (SampleWaveformTex(uv.x * 2.4).r - .5);
+#else
     float waveform_r = .15 * sin( -20 * vertexColor.r * GetBrushTime().w + uv.x * 100 * vertexColor.r);
     float waveform_g = .15 * sin( -30 * vertexColor.g * GetBrushTime().w + uv.x * 100 * vertexColor.g);
     float waveform_b = .15 * sin( -40 * vertexColor.b * GetBrushTime().w + uv.x * 100 * vertexColor.b);
+#endif
 
     uv.y = fmod(uv.y + uv.x, 1);
     float procedural_line_r = saturate(1 - 40*abs(uv.y - .5 + waveform_r));
@@ -31,11 +39,17 @@ void chromaticWaveFrag_half(half2 uv, half4 vertexColor, half4 bloomColor, out h
     color = half4(0, 0, 0, 1);
 
     half envelope = sin(uv.x * 3.14159);
-    uv.y += uv.x * 3;
+    uv.y += uv.x * 3 + _BeatOutputAccum.b * 3;
 
+#ifdef AUDIO_REACTIVE
+    half waveform_r = .5 * (SampleWaveformTex(uv.x).r - .5);
+    half waveform_g = .5 * (SampleWaveformTex(uv.x * 1.8).r - .5);
+    half waveform_b = .5 * (SampleWaveformTex(uv.x * 2.4).r - .5);
+#else
     half waveform_r = .15 * sin( -20 * vertexColor.r * GetBrushTime().w + uv.x * 100 * vertexColor.r);
     half waveform_g = .15 * sin( -30 * vertexColor.g * GetBrushTime().w + uv.x * 100 * vertexColor.g);
     half waveform_b = .15 * sin( -40 * vertexColor.b * GetBrushTime().w + uv.x * 100 * vertexColor.b);
+#endif
 
     uv.y = fmod(uv.y + uv.x, 1);
     half procedural_line_r = saturate(1 - 40*abs(uv.y - .5 + waveform_r));
