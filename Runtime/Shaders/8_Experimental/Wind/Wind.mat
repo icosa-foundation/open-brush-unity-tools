@@ -85,7 +85,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Main_Texture:
-        m_Texture: {fileID: 2800000, guid: f5f96a7864561b24abd0b9166b083174, type: 3}
+        m_Texture: {fileID: 2800000, guid: f4f7c8a97fcd57240a6ab627df708455, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -114,13 +114,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - SHADER_SCRIPTING: 0
     - _AO: 1
     - _Animation_Speed: 0
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _BumpScale: 1
+    - _ClipEnd: -1
+    - _ClipStart: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _Dissolve: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -136,6 +140,8 @@ Material:
     - _SpecularHighlights: 1
     - _Speed: 1
     - _SrcBlend: 1
+    - _TimeBlend: 0
+    - _TimeSpeed: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
@@ -143,5 +149,5 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _TimeOverrideValue: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1

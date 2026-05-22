@@ -38,8 +38,7 @@ Material:
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - AUDIO_REACTIVE
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -66,7 +65,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - AUDIO_REACTIVE: 1
+    - AUDIO_REACTIVE: 0
     - SHADER_SCRIPTING: 0
     - _BAKED_VERTEX_SHADER: 0
     - _BUILTIN_QueueControl: 0

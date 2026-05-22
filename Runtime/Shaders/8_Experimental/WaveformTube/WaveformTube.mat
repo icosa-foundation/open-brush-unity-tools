@@ -25,8 +25,7 @@ Material:
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - AUDIO_REACTIVE
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
@@ -65,12 +64,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - AUDIO_REACTIVE: 0
+    - SHADER_SCRIPTING: 0
     - _AO: 1
     - _Alpha_Cutoff: 0.5
-    - AUDIO_REACTIVE: 1
     - _AudioReactiveMode: 1
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _ClipEnd: -1
+    - _ClipStart: 0
+    - _Dissolve: 1
     - _EmissionGain: 0.51785713
     - _InvFade: 1
     - _QueueControl: 0
@@ -78,6 +81,8 @@ Material:
     - _ScrollSpeed: 0
     - _Shininess: 0
     - _Smoothness: 0
+    - _TimeBlend: 0
+    - _TimeSpeed: 1
     - _VertexDisplacement: 0
     m_Colors:
     - _Base: {r: 1, g: 1, b: 1, a: 0}
@@ -85,9 +90,9 @@ Material:
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _TimeOverrideValue: {r: 0, g: 0, b: 0, a: 0}
     - _TintColor: {r: 0.99999994, g: 0.99999994, b: 0.99999994, a: 1}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6

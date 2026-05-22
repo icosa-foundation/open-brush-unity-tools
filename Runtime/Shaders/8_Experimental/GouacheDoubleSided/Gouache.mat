@@ -27,11 +27,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: 6c1cf6c0ae3c96846946d476a0b86a09, type: 3}
+        m_Texture: {fileID: 2800000, guid: f69a00cd2cbcae54ea60b3ff6f8eb134, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Bump:
-        m_Texture: {fileID: 2800000, guid: 3a1bfa901a032c94e9a3e4adb6952d0f, type: 3}
+        m_Texture: {fileID: 2800000, guid: e8ce61f129352744682a6e7ca478e5cb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -84,13 +84,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - SHADER_SCRIPTING: 0
     - _AO: 1
     - _Alpha_Cutoff: 0.5
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _BumpScale: 1
+    - _ClipEnd: -1
+    - _ClipStart: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _Dissolve: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -105,6 +109,8 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _TimeBlend: 0
+    - _TimeSpeed: 1
     - _UVSec: 0
     - _ZWrite: 1
     - _shininess: 0.01
@@ -115,9 +121,9 @@ Material:
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _TimeOverrideValue: {r: 0, g: 0, b: 0, a: 0}
     - __SpecColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &1392468366221027441
 MonoBehaviour:
   m_ObjectHideFlags: 11

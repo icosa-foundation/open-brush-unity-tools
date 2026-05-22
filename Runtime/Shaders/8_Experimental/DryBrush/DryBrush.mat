@@ -31,7 +31,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_RGB_TransGloss_A:
-        m_Texture: {fileID: 2800000, guid: 576a5ce02d271ad46a5c2c0d90fd9543, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7b044195b17b2aa4e99a5e128f039a11, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Bump:
@@ -88,13 +88,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - AUDIO_REACTIVE: 0
+    - SHADER_SCRIPTING: 0
     - _AO: 1
     - _Alpha_Cutoff: 0.2
+    - _AudioReactiveMode: 0
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _BumpScale: 1
+    - _ClipEnd: -1
+    - _ClipStart: 0
     - _Cutoff: 0.2
     - _DetailNormalMapScale: 1
+    - _Dissolve: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -109,6 +115,8 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _TimeBlend: 0
+    - _TimeSpeed: 1
     - _UVSec: 0
     - _ZWrite: 1
     - _shininess: 0.4
@@ -121,9 +129,9 @@ Material:
     - _SpecColor: {r: 0, g: 0, b: 0, a: 0}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _TimeOverrideValue: {r: 0, g: 0, b: 0, a: 0}
     - __SpecColor: {r: 0.2352941, g: 0.2352941, b: 0.2352941, a: 1}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &2722846607945784066
 MonoBehaviour:
   m_ObjectHideFlags: 11

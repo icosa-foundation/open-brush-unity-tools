@@ -26,7 +26,6 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - AUDIO_REACTIVE
   - SHADER_SCRIPTING_ON
   m_InvalidKeywords:
   - _EMISSION
@@ -60,7 +59,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - AUDIO_REACTIVE: 1
+    - AUDIO_REACTIVE: 0
     - SHADER_SCRIPTING: 1
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
