@@ -12,8 +12,7 @@ Material:
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - SHADER_SCRIPTING_ON
+  m_ValidKeywords: []
   m_InvalidKeywords:
   - _EMISSION
   m_LightmapFlags: 2
@@ -49,7 +48,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - SHADER_SCRIPTING: 1
+    - SHADER_SCRIPTING: 0
     - _AO: 1
     - _Alpha_Cutoff: 0.5
     - _BUILTIN_QueueControl: 0
@@ -59,12 +58,15 @@ Material:
     - _Dissolve: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _TimeBlend: 0
+    - _TimeSpeed: 1
     - _shininess: 0.4
     m_Colors:
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.23529407, g: 0.23529407, b: 0.23529407, a: 1}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _TimeOverrideValue: {r: 0, g: 0, b: 0, a: 0}
     - __SpecColor: {r: 0.2352941, g: 0.2352941, b: 0.2352941, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &1171908229989967852

@@ -40,7 +40,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Base_RGB_TransGloss_A:
-        m_Texture: {fileID: 2800000, guid: 6092e34c8de5a054bad8c1f4824f959a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 56f9b3aebff3f2a499f84417fbfd2c34, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Bump:
@@ -97,14 +97,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - AUDIO_REACTIVE: 0
+    - SHADER_SCRIPTING: 0
     - _AO: 1
     - _Alpha_Cutoff: 0.5
+    - _AudioReactiveMode: 0
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _BaseGain: 0.4
     - _BumpScale: 1
+    - _ClipEnd: -1
+    - _ClipStart: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _Dissolve: 1
     - _DstBlend: 0
     - _EmissionGain: 300
     - _GlossMapScale: 1
@@ -127,6 +133,8 @@ Material:
     - _SpreadRate: 1.25
     - _SpreadSize: 1.25
     - _SrcBlend: 1
+    - _TimeBlend: 0
+    - _TimeSpeed: 1
     - _UVSec: 0
     - _WaveformFreq: 0.1
     - _ZWrite: 1
@@ -139,10 +147,10 @@ Material:
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _TimeOverrideValue: {r: 0, g: 0, b: 0, a: 0}
     - _TintColor: {r: 1, g: 1, b: 1, a: 1}
     - _WaveformIntensity: {r: 0, g: 15, b: 0, a: 0}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!114 &841341659837180598
 MonoBehaviour:
   m_ObjectHideFlags: 11
