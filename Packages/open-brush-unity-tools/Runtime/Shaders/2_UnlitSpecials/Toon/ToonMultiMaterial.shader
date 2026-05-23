@@ -7,40 +7,6 @@ Shader "TiltBrush/UnlitSpecials/Toon"
 
     SubShader
     {
-        Tags { "RenderPipeline" = "BuiltInPipeline" }
-        Cull Back
-
-        CGINCLUDE
-        #include "ToonCommon.cginc"
-        #pragma multi_compile __ AUDIO_REACTIVE
-        #pragma multi_compile __ TBT_LINEAR_TARGET
-        #pragma multi_compile_fog
-        #pragma target 3.0
-
-        v2f vert(appdata_t v)
-        {
-            v.color = TbVertToNative(v.color);
-            return vertInflate(v, 0);
-        }
-
-        fixed4 frag(v2f i) : SV_Target
-        {
-            UNITY_APPLY_FOG(i.fogCoord, i.color);
-            return i.color;
-        }
-        ENDCG
-
-        Pass
-        {
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            ENDCG
-        }
-    }
-
-    SubShader
-    {
         PackageRequirements
         {
             "com.unity.render-pipelines.universal": "11.0"
@@ -83,6 +49,39 @@ Shader "TiltBrush/UnlitSpecials/Toon"
             #pragma multi_compile __ AUDIO_REACTIVE
             #pragma target 3.5
             ENDHLSL
+        }
+    }
+
+    SubShader
+    {
+        Cull Back
+
+        CGINCLUDE
+        #include "ToonCommon.cginc"
+        #pragma multi_compile __ AUDIO_REACTIVE
+        #pragma multi_compile __ TBT_LINEAR_TARGET
+        #pragma multi_compile_fog
+        #pragma target 3.0
+
+        v2f vert(appdata_t v)
+        {
+            v.color = TbVertToNative(v.color);
+            return vertInflate(v, 0);
+        }
+
+        fixed4 frag(v2f i) : SV_Target
+        {
+            UNITY_APPLY_FOG(i.fogCoord, i.color);
+            return i.color;
+        }
+        ENDCG
+
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            ENDCG
         }
     }
 }

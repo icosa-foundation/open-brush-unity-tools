@@ -2,38 +2,6 @@ Shader "TiltBrush/Experimental/TubeToonInvertedBase"
 {
     SubShader
     {
-        Tags { "RenderPipeline" = "BuiltInPipeline" }
-        Cull Back
-
-        CGINCLUDE
-        #include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/2_UnlitSpecials/Toon/ToonCommon.cginc"
-        #pragma multi_compile_fog
-        #pragma target 3.0
-
-        v2f vert(appdata_t v)
-        {
-            return vertInflate(v, 0);
-        }
-
-        fixed4 frag(v2f i) : SV_Target
-        {
-            fixed4 color = fixed4(0, 0, 0, 1);
-            UNITY_APPLY_FOG(i.fogCoord, color);
-            return color;
-        }
-        ENDCG
-
-        Pass
-        {
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            ENDCG
-        }
-    }
-
-    SubShader
-    {
         PackageRequirements
         {
             "com.unity.render-pipelines.universal": "11.0"
@@ -75,6 +43,37 @@ Shader "TiltBrush/Experimental/TubeToonInvertedBase"
             #pragma multi_compile_instancing
             #pragma target 3.5
             ENDHLSL
+        }
+    }
+
+    SubShader
+    {
+        Cull Back
+
+        CGINCLUDE
+        #include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/2_UnlitSpecials/Toon/ToonCommon.cginc"
+        #pragma multi_compile_fog
+        #pragma target 3.0
+
+        v2f vert(appdata_t v)
+        {
+            return vertInflate(v, 0);
+        }
+
+        fixed4 frag(v2f i) : SV_Target
+        {
+            fixed4 color = fixed4(0, 0, 0, 1);
+            UNITY_APPLY_FOG(i.fogCoord, color);
+            return color;
+        }
+        ENDCG
+
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            ENDCG
         }
     }
 }
