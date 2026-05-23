@@ -7,38 +7,6 @@ Shader "TiltBrush/UnlitSpecials/ToonOutline"
 
     SubShader
     {
-        Tags { "RenderPipeline" = "BuiltInPipeline" }
-        Cull Front
-
-        CGINCLUDE
-        #include "ToonCommon.cginc"
-        #pragma multi_compile_fog
-        #pragma target 3.0
-
-        v2f vert(appdata_t v)
-        {
-            return vertInflate(v, 1.0);
-        }
-
-        fixed4 frag(v2f i) : SV_Target
-        {
-            float4 color = float4(0, 0, 0, 1);
-            UNITY_APPLY_FOG(i.fogCoord, color);
-            return color;
-        }
-        ENDCG
-
-        Pass
-        {
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            ENDCG
-        }
-    }
-
-    SubShader
-    {
         PackageRequirements
         {
             "com.unity.render-pipelines.universal": "11.0"
@@ -80,6 +48,37 @@ Shader "TiltBrush/UnlitSpecials/ToonOutline"
             #pragma multi_compile_instancing
             #pragma target 3.5
             ENDHLSL
+        }
+    }
+
+    SubShader
+    {
+        Cull Front
+
+        CGINCLUDE
+        #include "ToonCommon.cginc"
+        #pragma multi_compile_fog
+        #pragma target 3.0
+
+        v2f vert(appdata_t v)
+        {
+            return vertInflate(v, 1.0);
+        }
+
+        fixed4 frag(v2f i) : SV_Target
+        {
+            float4 color = float4(0, 0, 0, 1);
+            UNITY_APPLY_FOG(i.fogCoord, color);
+            return color;
+        }
+        ENDCG
+
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            ENDCG
         }
     }
 }
