@@ -7,6 +7,7 @@ Shader "TiltBrush/UnlitSpecials/ToonOutline"
 
     SubShader
     {
+        Tags { "RenderPipeline" = "BuiltInPipeline" }
         Cull Front
 
         CGINCLUDE
@@ -45,7 +46,7 @@ Shader "TiltBrush/UnlitSpecials/ToonOutline"
 
         Tags
         {
-            "RenderPipeline" = "UniversalRenderPipeline"
+            "RenderPipeline" = "UniversalPipeline"
             "Queue" = "Geometry-1"
         }
 
@@ -77,7 +78,7 @@ Shader "TiltBrush/UnlitSpecials/ToonOutline"
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile_instancing
-            #pragma target 2.0
+            #pragma target 3.5
             ENDHLSL
         }
     }

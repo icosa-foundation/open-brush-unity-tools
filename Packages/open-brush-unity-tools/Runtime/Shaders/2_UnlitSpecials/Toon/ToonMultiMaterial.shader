@@ -7,6 +7,7 @@ Shader "TiltBrush/UnlitSpecials/Toon"
 
     SubShader
     {
+        Tags { "RenderPipeline" = "BuiltInPipeline" }
         Cull Back
 
         CGINCLUDE
@@ -47,7 +48,7 @@ Shader "TiltBrush/UnlitSpecials/Toon"
 
         Tags
         {
-            "RenderPipeline" = "UniversalRenderPipeline"
+            "RenderPipeline" = "UniversalPipeline"
             "Queue" = "Geometry"
         }
 
@@ -80,7 +81,7 @@ Shader "TiltBrush/UnlitSpecials/Toon"
             #pragma fragment frag
             #pragma multi_compile_instancing
             #pragma multi_compile __ AUDIO_REACTIVE
-            #pragma target 2.0
+            #pragma target 3.5
             ENDHLSL
         }
     }

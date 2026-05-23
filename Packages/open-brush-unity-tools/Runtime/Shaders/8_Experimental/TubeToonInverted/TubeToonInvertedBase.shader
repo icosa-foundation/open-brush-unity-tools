@@ -2,6 +2,7 @@ Shader "TiltBrush/Experimental/TubeToonInvertedBase"
 {
     SubShader
     {
+        Tags { "RenderPipeline" = "BuiltInPipeline" }
         Cull Back
 
         CGINCLUDE
@@ -40,7 +41,7 @@ Shader "TiltBrush/Experimental/TubeToonInvertedBase"
 
         Tags
         {
-            "RenderPipeline" = "UniversalRenderPipeline"
+            "RenderPipeline" = "UniversalPipeline"
             "Queue" = "Geometry"
         }
 
@@ -71,7 +72,8 @@ Shader "TiltBrush/Experimental/TubeToonInvertedBase"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma target 2.0
+            #pragma multi_compile_instancing
+            #pragma target 3.5
             ENDHLSL
         }
     }
