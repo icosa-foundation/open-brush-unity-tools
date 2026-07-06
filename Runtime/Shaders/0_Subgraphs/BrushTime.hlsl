@@ -3,7 +3,7 @@
 
 float4 GetBrushTime()
 {
-#ifdef SHADER_SCRIPTING_ON
+#if defined(SHADER_SCRIPTING_ON) || defined(_SHADER_SCRIPTING_ON)
     return lerp(_Time * _TimeSpeed, _TimeOverrideValue, _TimeBlend);
 #else
     return _Time;

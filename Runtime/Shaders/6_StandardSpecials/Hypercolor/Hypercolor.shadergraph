@@ -287,7 +287,7 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "9c4fabddf5e946b8bc973d201218a501"
+                    "m_Id": "14476d46aa8942149ca3b19813879e05"
                 },
                 "m_SlotId": 0
             }
@@ -343,9 +343,9 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "14476d46aa8942149ca3b19813879e05"
+                    "m_Id": "eb2a22c8b5a74be3a08ef7fb2f01aea8"
                 },
-                "m_SlotId": 0
+                "m_SlotId": -1174405119
             }
         },
         {
@@ -455,9 +455,9 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "eb2a22c8b5a74be3a08ef7fb2f01aea8"
+                    "m_Id": "9c4fabddf5e946b8bc973d201218a501"
                 },
-                "m_SlotId": -1174405119
+                "m_SlotId": 0
             }
         },
         {
@@ -569,6 +569,20 @@
                 "m_Node": {
                     "m_Id": "623808f32497428d82f5e0f8357c2cc5"
                 },
+                "m_SlotId": 3
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "676416dff0404e06803b925d83f57ff4"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "623808f32497428d82f5e0f8357c2cc5"
+                },
                 "m_SlotId": 2
             }
         },
@@ -577,7 +591,7 @@
                 "m_Node": {
                     "m_Id": "623808f32497428d82f5e0f8357c2cc5"
                 },
-                "m_SlotId": 3
+                "m_SlotId": 4
             },
             "m_InputSlot": {
                 "m_Node": {
@@ -4576,6 +4590,9 @@
             "m_Id": "820d2a370dd24f0bbe23f2b55a4d75d8"
         },
         {
+            "m_Id": "6fd951e418914b7f8de2eaaab4db9f15"
+        },
+        {
             "m_Id": "c99cb589e2294d40a13071d290917068"
         },
         {
@@ -4646,9 +4663,32 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "6fd951e418914b7f8de2eaaab4db9f15",
+    "m_Id": 2,
+    "m_DisplayName": "tangentOS",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "tangentOS",
+    "m_StageCapability": 1,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "c99cb589e2294d40a13071d290917068",
-    "m_Id": 2,
+    "m_Id": 3,
     "m_DisplayName": "uv",
     "m_SlotType": 0,
     "m_Hidden": false,
@@ -4673,7 +4713,7 @@
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
     "m_ObjectId": "bfa1af51cfd441369bbf87ccaf1c9976",
-    "m_Id": 3,
+    "m_Id": 4,
     "m_DisplayName": "outPositionOS",
     "m_SlotType": 1,
     "m_Hidden": false,

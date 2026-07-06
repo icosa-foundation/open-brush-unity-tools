@@ -390,7 +390,7 @@ void ElectricityAudioColor_half(half3 colorIn, out half3 colorOut)
 #endif
 }
 
-void HypercolorFamilyAudioPosition_float(float3 positionOS, float3 normalOS, float4 uv, out float3 outPositionOS)
+void HypercolorFamilyAudioPositionWithDirection_float(float3 positionOS, float3 displacementOS, float4 uv, out float3 outPositionOS)
 {
     outPositionOS = positionOS;
 #ifdef AUDIO_REACTIVE
@@ -398,10 +398,21 @@ void HypercolorFamilyAudioPosition_float(float3 positionOS, float3 normalOS, flo
     float t = _BeatOutputAccum.z * 5.0;
     float waveIntensity = _BeatOutput.z * 0.1 * strokeWidth;
     float wave = pow(1.0 - (sin(t + uv.x * 5.0 + uv.y * 10.0) + 1.0), 2.0);
-    outPositionOS += wave * normalOS * waveIntensity;
+    outPositionOS += wave * displacementOS * waveIntensity;
 #endif
 }
-void HypercolorFamilyAudioPosition_half(half3 positionOS, half3 normalOS, half4 uv, out half3 outPositionOS)
+
+void HypercolorFamilyAudioPosition_float(float3 positionOS, float3 normalOS, float4 uv, out float3 outPositionOS)
+{
+    HypercolorFamilyAudioPositionWithDirection_float(positionOS, normalOS, uv, outPositionOS);
+}
+
+void HypercolorFamilyAudioPosition_float(float3 positionOS, float3 normalOS, float3 tangentOS, float4 uv, out float3 outPositionOS)
+{
+    HypercolorFamilyAudioPositionWithDirection_float(positionOS, cross(tangentOS, normalOS), uv, outPositionOS);
+}
+
+void HypercolorFamilyAudioPositionWithDirection_half(half3 positionOS, half3 displacementOS, half4 uv, out half3 outPositionOS)
 {
     outPositionOS = positionOS;
 #ifdef AUDIO_REACTIVE
@@ -409,8 +420,18 @@ void HypercolorFamilyAudioPosition_half(half3 positionOS, half3 normalOS, half4 
     half t = (half)(_BeatOutputAccum.z * 5.0);
     half waveIntensity = (half)_BeatOutput.z * 0.1h * strokeWidth;
     half wave = pow(1.0h - (sin(t + uv.x * 5.0h + uv.y * 10.0h) + 1.0h), 2.0h);
-    outPositionOS += wave * normalOS * waveIntensity;
+    outPositionOS += wave * displacementOS * waveIntensity;
 #endif
+}
+
+void HypercolorFamilyAudioPosition_half(half3 positionOS, half3 normalOS, half4 uv, out half3 outPositionOS)
+{
+    HypercolorFamilyAudioPositionWithDirection_half(positionOS, normalOS, uv, outPositionOS);
+}
+
+void HypercolorFamilyAudioPosition_half(half3 positionOS, half3 normalOS, half3 tangentOS, half4 uv, out half3 outPositionOS)
+{
+    HypercolorFamilyAudioPositionWithDirection_half(positionOS, cross(tangentOS, normalOS), uv, outPositionOS);
 }
 
 void HypercolorFamilyAudioSurface_float(float3 baseColorIn, float3 specularIn, out float3 baseColorOut, out float3 emissionOut, out float3 specularOut)

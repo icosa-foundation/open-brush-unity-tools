@@ -65,7 +65,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AO: 0
+    - _AO: 1
     - _Alpha_Cutoff: 0.2
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
@@ -82,10 +82,10 @@ Material:
     - _Color: {r: 0.7019608, g: 0.7019608, b: 0.7019608, a: 1}
     - _MainColor: {r: 0.851, g: 0.851, b: 0.851, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _SpecColor: {r: 0.431, g: 0.431, b: 0.431, a: 1}
+    - _SpecColor: {r: 0.5372549, g: 0.5372549, b: 0.5372549, a: 1}
     - _Specular_Color: {r: 0.764151, g: 0.764151, b: 0.764151, a: 1}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
-    - __SpecColor: {r: 0.2352941, g: 0.2352941, b: 0.2352941, a: 1}
+    - __SpecColor: {r: 0.5372549, g: 0.5372549, b: 0.5372549, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &3806849029394853041
