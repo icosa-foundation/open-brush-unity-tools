@@ -22,6 +22,7 @@ namespace OpenBrushUnityTools
 
         private class OpenBrushImportPluginContext : GLTFImportPluginContext
         {
+            private const string TimestampAttribute = "_TB_TIMESTAMP";
             private readonly GLTFImportContext m_Context;
             private MaterialRemapping m_MaterialDictionary;
             private MaterialMultipassMapping m_MaterialMultipassMappings;
@@ -45,6 +46,8 @@ namespace OpenBrushUnityTools
             public override void OnAfterImportNode(Node node, int nodeIndex, GameObject nodeObject)
             {
                 base.OnAfterImportNode(node, nodeIndex, nodeObject);
+
+                ImportStrokeTimestamps(node, nodeObject);
 
                 var strokeJson = node?.Mesh?.Value?.Extras?["ICOSA_strokeInfo"];
                 if (strokeJson != null)
@@ -164,6 +167,86 @@ namespace OpenBrushUnityTools
                         }
                     }
                 }
+            }
+
+            private void ImportStrokeTimestamps(Node node, GameObject nodeObject)
+            {
+                if (node?.Mesh?.Value?.Primitives == null)
+                {
+                    return;
+                }
+
+                var timestampAccessors = new HashSet<int>();
+                var timestamps = new List<Vector3>();
+                foreach (var primitive in node.Mesh.Value.Primitives)
+                {
+                    if (primitive.Attributes == null ||
+                        !primitive.Attributes.TryGetValue(TimestampAttribute, out AccessorId accessorId) ||
+                        !timestampAccessors.Add(accessorId.Id))
+                    {
+                        continue;
+                    }
+
+                    Accessor accessor = accessorId.Value;
+                    if (accessor.BufferView == null ||
+                        accessor.Type != GLTFAccessorAttributeType.VEC3 ||
+                        accessor.ComponentType != GLTFComponentType.Float ||
+                        accessor.Sparse != null)
+                    {
+                        Debug.LogWarning($"Ignoring unsupported {TimestampAttribute} accessor on {nodeObject.name}");
+                        return;
+                    }
+
+                    var bufferView = accessor.BufferView.Value;
+                    byte[] data = m_Context.SceneImporter.GetBufferViewData(bufferView).ToArray();
+                    int stride = bufferView.ByteStride > 0 ? (int)bufferView.ByteStride : sizeof(float) * 3;
+                    if (accessor.Count == 0 || accessor.Count > int.MaxValue ||
+                        accessor.ByteOffset > int.MaxValue || stride < sizeof(float) * 3)
+                    {
+                        Debug.LogWarning($"Ignoring invalid {TimestampAttribute} accessor on {nodeObject.name}");
+                        return;
+                    }
+
+                    int count = (int)accessor.Count;
+                    int offset = (int)accessor.ByteOffset;
+                    long requiredBytes = (long)offset + (long)(count - 1) * stride + sizeof(float) * 3;
+                    if (requiredBytes > data.Length)
+                    {
+                        Debug.LogWarning($"Ignoring truncated {TimestampAttribute} accessor on {nodeObject.name}");
+                        return;
+                    }
+
+                    for (int i = 0; i < count; ++i)
+                    {
+                        int vertexOffset = offset + i * stride;
+                        timestamps.Add(new Vector3(
+                            BitConverter.ToSingle(data, vertexOffset),
+                            BitConverter.ToSingle(data, vertexOffset + sizeof(float)),
+                            BitConverter.ToSingle(data, vertexOffset + sizeof(float) * 2)));
+                    }
+                }
+
+                if (timestamps.Count == 0)
+                {
+                    return;
+                }
+
+                Mesh mesh = nodeObject.GetComponent<MeshFilter>()?.sharedMesh;
+                if (mesh == null)
+                {
+                    mesh = nodeObject.GetComponent<SkinnedMeshRenderer>()?.sharedMesh;
+                }
+                if (mesh == null || mesh.vertexCount != timestamps.Count)
+                {
+                    Debug.LogWarning(
+                        $"Cannot import {TimestampAttribute} on {nodeObject.name}: " +
+                        $"found {timestamps.Count} timestamps for {mesh?.vertexCount ?? 0} vertices");
+                    return;
+                }
+
+                mesh.SetUVs(StrokeTimestampData.UvChannel, timestamps);
+                var metadata = nodeObject.AddComponent<StrokeTimestampData>();
+                metadata.Initialize(timestamps);
             }
 
             // Returns a copy of the material with the _ISBAKEDEXPORT keyword enabled, leaving the
