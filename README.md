@@ -8,21 +8,9 @@ To add it to an existing project.
 Using the Package Manager: "Add package from git URL" first add UnityGLTF: https://github.com/KhronosGroup/UnityGLTF.git (unless your project already contains it)
 Then add this package: https://github.com/icosa-foundation/open-brush-unity-tools.git#upm
 
-# Stroke draw-in example
+# Stroke draw-in playback
 
-Open Brush GLB files exported with `ExportStrokeTimestamp` enabled contain a per-vertex
-`_TB_TIMESTAMP` attribute. The importer stores this VEC3 data in Unity UV channel 4 and adds a
-`StrokeTimestampData` component to each imported object that contains it.
-
-Add `StrokeDrawInExample` to the imported sketch root to replay the sketch. The component uses the
-imported per-vertex times to drive the existing `_ClipStart`/`_ClipEnd` support in the brush shaders.
-It creates shared runtime material variants with `SHADER_SCRIPTING_ON` enabled and restores the
-original materials when disabled.
-
-Playback reads the timestamp channel from the mesh on the CPU. Enable **Read/Write Enabled** when
-importing GLB assets in the editor, or **Keep CPU Copy** when importing them at runtime. If the mesh
-is not CPU-readable, the helper skips it and logs a warning.
-
-The helper is intentionally a small example rather than a timeline system. Timestamp data must be
-monotonic in mesh vertex order for exact playback; if it is not, the helper reveals the largest
-chronological vertex prefix that the clipping shaders can represent.
+Open Brush sketches exported with stroke timestamps can be replayed in Unity with the included
+`StrokeDrawInExample` component. See the [stroke draw-in guide](Packages/open-brush-unity-tools/Documentation~/stroke-draw-in.md)
+for export and import requirements, setup, runtime controls, implementation details, limitations,
+and troubleshooting.
