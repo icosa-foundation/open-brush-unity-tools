@@ -19,6 +19,10 @@ imported per-vertex times to drive the existing `_ClipStart`/`_ClipEnd` support 
 It creates shared runtime material variants with `SHADER_SCRIPTING_ON` enabled and restores the
 original materials when disabled.
 
+Playback reads the timestamp channel from the mesh on the CPU. Enable **Read/Write Enabled** when
+importing GLB assets in the editor, or **Keep CPU Copy** when importing them at runtime. If the mesh
+is not CPU-readable, the helper skips it and logs a warning.
+
 The helper is intentionally a small example rather than a timeline system. Timestamp data must be
 monotonic in mesh vertex order for exact playback; if it is not, the helper reveals the largest
 chronological vertex prefix that the clipping shaders can represent.
