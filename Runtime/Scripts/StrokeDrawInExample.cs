@@ -21,6 +21,7 @@ namespace OpenBrushUnityTools
         private readonly List<Target> m_Targets = new();
         private readonly Dictionary<Material, Material> m_ShaderScriptingVariants = new();
         private readonly Dictionary<Renderer, Material[]> m_OriginalMaterials = new();
+        private readonly Dictionary<Renderer, MaterialPropertyBlock> m_OriginalPropertyBlocks = new();
         private MaterialPropertyBlock m_PropertyBlock;
         private float m_FirstTimestamp;
         private float m_LastTimestamp;
@@ -105,6 +106,14 @@ namespace OpenBrushUnityTools
                 {
                     continue;
                 }
+                if (!mesh.isReadable)
+                {
+                    Debug.LogWarning(
+                        $"Stroke draw-in requires a CPU-readable mesh on {timestampData.name}. " +
+                        "Enable Read/Write Enabled (or Keep CPU Copy for runtime imports) in UnityGLTF.",
+                        timestampData);
+                    continue;
+                }
 
                 var imported = new List<Vector3>();
                 mesh.GetUVs(StrokeTimestampData.UvChannel, imported);
@@ -176,6 +185,9 @@ namespace OpenBrushUnityTools
 
             if (supportsClipping)
             {
+                var originalPropertyBlock = new MaterialPropertyBlock();
+                renderer.GetPropertyBlock(originalPropertyBlock);
+                m_OriginalPropertyBlocks[renderer] = originalPropertyBlock;
                 m_OriginalMaterials[renderer] = sourceMaterials;
                 renderer.sharedMaterials = playbackMaterials;
             }
@@ -184,20 +196,14 @@ namespace OpenBrushUnityTools
 
         private void RestoreMaterials()
         {
-            if (m_PropertyBlock != null)
+            foreach (var pair in m_OriginalPropertyBlocks)
             {
-                foreach (Target target in m_Targets)
+                if (pair.Key != null)
                 {
-                    if (target.Renderer == null)
-                    {
-                        continue;
-                    }
-                    target.Renderer.GetPropertyBlock(m_PropertyBlock);
-                    m_PropertyBlock.SetFloat(ClipStart, -1);
-                    m_PropertyBlock.SetFloat(ClipEnd, -1);
-                    target.Renderer.SetPropertyBlock(m_PropertyBlock);
+                    pair.Key.SetPropertyBlock(pair.Value);
                 }
             }
+            m_OriginalPropertyBlocks.Clear();
 
             foreach (var pair in m_OriginalMaterials)
             {
