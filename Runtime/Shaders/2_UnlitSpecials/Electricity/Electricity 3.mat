@@ -75,7 +75,7 @@ Material:
     - _Displacement: 0.2
     - _Dissolve: 1
     - _Emission_Gain: 0.2
-    - _Mod: 1.77
+    - _Mod: 1.666
     - _QueueControl: 0
     - _QueueOffset: 0
     - _TimeBlend: 0
