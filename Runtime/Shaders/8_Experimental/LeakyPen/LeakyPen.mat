@@ -27,7 +27,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Alpha_Mask:
-        m_Texture: {fileID: 2800000, guid: ac6c3cb91ea0e1249ac81328ad24ade6, type: 3}
+        m_Texture: {fileID: 2800000, guid: c6a55f404d9f4b51b98e4cc0bba1f7d2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BGTex:
@@ -55,7 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Diffuse_Texture:
-        m_Texture: {fileID: 2800000, guid: ac6c3cb91ea0e1249ac81328ad24ade6, type: 3}
+        m_Texture: {fileID: 2800000, guid: c6a55f404d9f4b51b98e4cc0bba1f7d2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
