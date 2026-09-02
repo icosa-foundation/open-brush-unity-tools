@@ -1,19 +1,22 @@
-// Curl noise functions for displacement
-float curlX(float3 p, float d) {
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/8_Experimental/BubbleWand/BubbleWandNoise.hlsl"
+
+// Preserve the package's previous curl approximation for exported glTF meshes. The
+// original Tilt shader uses the noise implementation included above instead.
+float BubbleWandExportCurlX(float3 p, float d) {
     return (
         (sin(p.y + d) - sin(p.y - d)) * (sin(p.z + d) + sin(p.z - d)) -
         (sin(p.z + d) - sin(p.z - d)) * (sin(p.y + d) + sin(p.y - d))
     ) / (4.0 * d * d);
 }
 
-float curlY(float3 p, float d) {
+float BubbleWandExportCurlY(float3 p, float d) {
     return (
         (sin(p.z + d) - sin(p.z - d)) * (sin(p.x + d) + sin(p.x - d)) -
         (sin(p.x + d) - sin(p.x - d)) * (sin(p.z + d) + sin(p.z - d))
     ) / (4.0 * d * d);
 }
 
-float curlZ(float3 p, float d) {
+float BubbleWandExportCurlZ(float3 p, float d) {
     return (
         (sin(p.x + d) - sin(p.x - d)) * (sin(p.y + d) + sin(p.y - d)) -
         (sin(p.y + d) - sin(p.y - d)) * (sin(p.x + d) + sin(p.x - d))
@@ -23,10 +26,11 @@ float curlZ(float3 p, float d) {
 // The initial "bulge" displacement (radius * Normal * sin(uv0.x * PI)) is shared with
 // bakeBubbleWand.compute. When a sketch is exported, that compute shader pre-applies the
 // bulge to the vertex positions, drops uv0.z (glTF UV0 is only 2D), and preserves the
-// radius in uv1.x. The _ISBAKEDEXPORT keyword tells us which of those two meshes we have:
+// radius in uv1.x. The two source keywords distinguish all three supported layouts:
 //
-//   not set -> raw mesh: the bulge has NOT been applied, and the radius is still in uv0.z.
-//   set     -> baked mesh: the bulge IS already in Position, and the radius is now uv1.x.
+//   _IS_TILT_MESH   -> live or .tilt geometry using the original Tilt vertex layout.
+//   neither keyword -> legacy glTF behavior from the existing package shader.
+//   _ISBAKEDEXPORT  -> BrushBaker output with the bulge in Position and radius in uv1.x.
 //
 // Either way the scroll jitter and curl noise are time-based and are never baked, so they
 // must run in both paths. uv0.x (the parametric coordinate along the stroke) is part of
@@ -46,38 +50,62 @@ void BubbleWandVertex_float(
     out float3 DisplacedPosition,
     out float3 DisplacedNormal)
 {
-    // Bulge displacement, computed identically to the bake compute.
+    // Bulge displacement, computed identically to the bake compute and old Tilt shader.
     float wave = sin(UV0.x * 3.14159);
 #ifdef _ISBAKEDEXPORT
-    float radius = UV1.x; // baked: uv0.z was relocated here on export
+    float radius = UV1.x;
 #else
-    float radius = UV0.z; // raw: radius still lives in uv0.z
+    float radius = UV0.z;
 #endif
     float3 wave_displacement = radius * Normal * wave;
 
     float3 pos = Position;
 #ifndef _ISBAKEDEXPORT
-    // Raw mesh: the bulge is not in the vertex positions yet, so apply it here.
     pos += wave_displacement;
 #endif
-    // Baked mesh: Position already includes the bulge from bakeBubbleWand.compute, so we
-    // leave it alone and only layer the animated displacement below on top of it.
 
-    // Scroll jitter displacement (animated, never baked)
+#ifdef _IS_TILT_MESH
+    // The legacy shader uses scroll jitter only to choose where it samples curl noise.
+    // It does not apply the jitter itself as a vertex displacement.
+    float3 displacementSamplePosition = pos;
     float t = Time * ScrollRate;
-    pos.x += sin(t + Time + pos.z * ScrollJitterFrequency) * ScrollJitterIntensity * 0.1;
-    pos.z += cos(t + Time + pos.x * ScrollJitterFrequency) * ScrollJitterIntensity * 0.1;
-    pos.y += cos(t * 1.2 + Time + pos.x * ScrollJitterFrequency) * ScrollJitterIntensity * 0.1;
+    displacementSamplePosition.x +=
+        sin(t + Time + displacementSamplePosition.z * ScrollJitterFrequency) *
+        ScrollJitterIntensity;
+    displacementSamplePosition.z +=
+        cos(t + Time + displacementSamplePosition.x * ScrollJitterFrequency) *
+        ScrollJitterIntensity;
+    displacementSamplePosition.y +=
+        cos(t * 1.2 + Time + displacementSamplePosition.x * ScrollJitterFrequency) *
+        ScrollJitterIntensity;
 
-    // Curl noise displacement (animated, never baked)
+    // Curl noise displacement (animated, never baked). The old shader uses
+    // GetTime().x here; BrushTime supplies GetTime().y, which is 20x larger.
     float d = 30;
     float freq = 0.1;
-    float3 p = pos * freq + Time;
+    float curlTime = Time * 0.05;
+    float3 p = displacementSamplePosition * freq + curlTime;
     float3 curl_displacement = float3(
         curlX(p, d),
         curlY(p, d),
         curlZ(p, d)
     ) * ScrollJitterIntensity * 0.1; // kDecimetersToWorldUnits constant
+#else
+    // Preserve the package's pre-parity behavior for both exported glTF layouts.
+    float t = Time * ScrollRate;
+    pos.x += sin(t + Time + pos.z * ScrollJitterFrequency) * ScrollJitterIntensity * 0.1;
+    pos.z += cos(t + Time + pos.x * ScrollJitterFrequency) * ScrollJitterIntensity * 0.1;
+    pos.y += cos(t * 1.2 + Time + pos.x * ScrollJitterFrequency) * ScrollJitterIntensity * 0.1;
+
+    float d = 30;
+    float freq = 0.1;
+    float3 p = pos * freq + Time;
+    float3 curl_displacement = float3(
+        BubbleWandExportCurlX(p, d),
+        BubbleWandExportCurlY(p, d),
+        BubbleWandExportCurlZ(p, d)
+    ) * ScrollJitterIntensity * 0.1;
+#endif
 
     // Final position
     DisplacedPosition = pos + curl_displacement;

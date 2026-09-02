@@ -19,10 +19,17 @@ void BubbleWandSurface_float(
     half rim = 1.0 - abs(dot(normalize(ViewDirection), n));
     rim *= 1.0 - pow(rim, 5);
     
-    // Thin slit diffraction texture ramp lookup
-    float2 diffractionUV = float2(rim + Time + Normal.y, rim + Normal.y);
+    // The original Tilt shader sampled diffraction with GetTime().x. Shader Graph's
+    // BrushTime input supplies GetTime().y, whose Unity time-vector scale is 20x.
+#ifdef _IS_TILT_MESH
+    float diffractionTime = Time * 0.05;
+#else
+    // Preserve the package's existing exported-mesh behavior.
+    float diffractionTime = Time;
+#endif
+    float2 diffractionUV = float2(rim + diffractionTime + Normal.y, rim + Normal.y);
     float3 diffraction = DiffractionTexture.SampleLevel(DiffractionSampler, diffractionUV, 0).xyz;
     
     // Final emission
     Emission = rim * (0.25 * diffraction * rim + 0.75 * diffraction * BaseColor);
-} 
+}

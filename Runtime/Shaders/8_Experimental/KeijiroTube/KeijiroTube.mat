@@ -25,7 +25,8 @@ Material:
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _IS_TILT_MESH
   m_InvalidKeywords:
   - _EMISSION
   m_LightmapFlags: 3
@@ -108,6 +109,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _ISBAKEDEXPORT: 0
+    - _IS_TILT_MESH: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

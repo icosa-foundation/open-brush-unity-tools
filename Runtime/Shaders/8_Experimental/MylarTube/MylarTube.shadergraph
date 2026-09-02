@@ -44,7 +44,10 @@
         {
             "m_Id": "4f09264579944b3e8448321cb4d03897"
         }
-    ],
+    ,
+        {
+            "m_Id": "e714d5c51cb247d3970e2c1777a77e39"
+        }],
     "m_Dropdowns": [],
     "m_CategoryData": [
         {
@@ -8013,3 +8016,27 @@
     "m_Labels": []
 }
 
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ShaderKeyword",
+    "m_ObjectId": "e714d5c51cb247d3970e2c1777a77e39",
+    "m_Guid": {
+        "m_GuidSerialized": "2177528b-cbe3-4231-ad1e-629994866288"
+    },
+    "m_Name": "IsTiltMesh",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "IsTiltMesh",
+    "m_DefaultReferenceName": "_IS_TILT_MESH",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_KeywordType": 0,
+    "m_KeywordDefinition": 1,
+    "m_KeywordScope": 0,
+    "m_KeywordStages": 63,
+    "m_Entries": [],
+    "m_Value": 0,
+    "m_IsEditable": true
+}

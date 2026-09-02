@@ -25,7 +25,8 @@ Material:
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _IS_TILT_MESH
   m_InvalidKeywords:
   - _EMISSION
   - _POSITION_IS_BAKED
@@ -68,6 +69,7 @@ Material:
     - _Dissolve: 0.5
     - _EmissionGain: 0.5
     - _ISBAKEDEXPORT: 0
+    - _IS_TILT_MESH: 1
     - _LightAO: 0.03
     - _POSITION_IS_BAKED: 1
     - _QueueControl: 0

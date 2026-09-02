@@ -27,9 +27,11 @@ namespace OpenBrushUnityTools
             private MaterialRemapping m_MaterialDictionary;
             private MaterialMultipassMapping m_MaterialMultipassMappings;
 
-            // One baked copy per source material, reused across every stroke that shares it,
-            // so we don't dirty the shared project asset or create a copy per renderer.
-            private readonly Dictionary<Material, Material> m_BakedVariants = new();
+            // Imported meshes must not inherit the _IS_TILT_MESH state from the material used by
+            // live Open Brush and .tilt geometry. Cache one copy for each exported mesh layout so
+            // we don't dirty the shared project asset or create a copy per renderer.
+            private readonly Dictionary<Material, Material> m_LegacyImportedVariants = new();
+            private readonly Dictionary<Material, Material> m_BakedImportedVariants = new();
 
             public OpenBrushImportPluginContext(GLTFImportContext context)
             {
@@ -84,12 +86,13 @@ namespace OpenBrushUnityTools
                 {
                     string existingMaterialName = mr.sharedMaterial.name;
                     Material mat = null;
-                    // Modern OpenBrush bakes vertex shader effects into the mesh on export, so
-                    // legacy "ob-" sketches need the _ISBAKEDEXPORT keyword set on their materials.
+                    // Current BrushBaker exports use "ob-" material names and bake vertex shader
+                    // effects into their meshes. The older "material_" and "brush_" formats use
+                    // the legacy exported-mesh path instead.
                     bool isBakedExport = false;
                     if (existingMaterialName.StartsWith("ob-"))
                     {
-                        // This is a older legacy glb from Open Brush
+                        // This is a current BrushBaker glTF from Open Brush.
                         string newMaterialName = existingMaterialName
                             .Replace("(Instance)", "")
                             .Replace(" ", "")
@@ -156,14 +159,13 @@ namespace OpenBrushUnityTools
                         var materials = m_MaterialMultipassMappings.GetMultipassMaterials(mat);
                         if (materials?.Count > 0)
                         {
-                            var assigned = isBakedExport
-                                ? materials.Select(GetBakedVariant)
-                                : materials;
+                            var assigned = materials.Select(
+                                material => GetImportedVariant(material, isBakedExport));
                             mr.sharedMaterials = assigned.ToArray();
                         }
                         else
                         {
-                            mr.sharedMaterial = isBakedExport ? GetBakedVariant(mat) : mat;
+                            mr.sharedMaterial = GetImportedVariant(mat, isBakedExport);
                         }
                     }
                 }
@@ -249,25 +251,39 @@ namespace OpenBrushUnityTools
                 metadata.Initialize(timestamps);
             }
 
-            // Returns a copy of the material with the _ISBAKEDEXPORT keyword enabled, leaving the
-            // shared project asset untouched. Copies are cached per source material and, when
-            // imported in the editor, registered as sub-assets of the imported model so they
-            // persist (UnityGLTF only saves materials from its own cache, not ones we assign).
-            private Material GetBakedVariant(Material src)
+            // Returns a material copy configured for an imported glTF mesh. Source materials use
+            // _IS_TILT_MESH for live Open Brush and .tilt geometry, while _ISBAKEDEXPORT selects
+            // between the two supported glTF layouts. Copies are registered as imported sub-assets
+            // because UnityGLTF only persists materials from its own cache.
+            private Material GetImportedVariant(Material src, bool isBakedExport)
             {
-                if (src == null || !src.HasProperty("_ISBAKEDEXPORT")) return src;
-                if (m_BakedVariants.TryGetValue(src, out var baked)) return baked;
+                if (src == null) return null;
+                bool hasTiltMesh = src.HasProperty("_IS_TILT_MESH");
+                bool hasBakedExport = src.HasProperty("_ISBAKEDEXPORT");
+                if (!hasTiltMesh && !hasBakedExport) return src;
 
-                baked = new Material(src) { name = $"{src.name}-Baked" };
-                // The inspector checkbox is bound to the float property, while the shader branch
-                // keys off the keyword of the same name. Set both so they stay in sync.
-                baked.SetFloat("_ISBAKEDEXPORT", 1f);
-                baked.SetKeyword(new UnityEngine.Rendering.LocalKeyword(baked.shader, "_ISBAKEDEXPORT"), true);
+                var variants = isBakedExport
+                    ? m_BakedImportedVariants
+                    : m_LegacyImportedVariants;
+                if (variants.TryGetValue(src, out var imported)) return imported;
+
+                string layoutName = isBakedExport ? "Baked" : "Legacy";
+                imported = new Material(src) { name = $"{src.name}-{layoutName}" };
+                SetLocalBooleanKeyword(imported, "_IS_TILT_MESH", false);
+                SetLocalBooleanKeyword(imported, "_ISBAKEDEXPORT", isBakedExport);
 #if UNITY_EDITOR
-                m_Context?.AssetContext?.AddObjectToAsset(baked.name, baked);
+                m_Context?.AssetContext?.AddObjectToAsset(imported.name, imported);
 #endif
-                m_BakedVariants[src] = baked;
-                return baked;
+                variants[src] = imported;
+                return imported;
+            }
+
+            private static void SetLocalBooleanKeyword(Material material, string name, bool enabled)
+            {
+                if (!material.HasProperty(name)) return;
+                material.SetFloat(name, enabled ? 1f : 0f);
+                material.SetKeyword(
+                    new UnityEngine.Rendering.LocalKeyword(material.shader, name), enabled);
             }
 
             public override void OnAfterImportScene(GLTFScene scene, int sceneIndex, GameObject sceneObject)
