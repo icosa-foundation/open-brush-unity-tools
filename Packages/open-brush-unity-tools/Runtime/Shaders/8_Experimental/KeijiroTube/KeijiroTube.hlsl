@@ -6,12 +6,15 @@ void KeijiroTubeVertex_float(
     float3 normal,
     out float3 posOut)
 {
-    // float wave = sin(uv.x - time * 2);
-    // float pulse = smoothstep(.45, .5, saturate(wave));
+#ifdef _IS_TILT_MESH
+    float wave = sin(uv.x - time * 2);
+    float pulse = smoothstep(.45, .5, saturate(wave));
+    posOut = posIn - pulse * radius * normal;
+#else
+    // Exported meshes do not expose the Tilt radius in uv0.z. New exports already
+    // contain the contraction; legacy exports retain the package's fragment fallback.
     posOut = posIn;
-    // We don't currently have radius data in the mesh so this is commented out.
-    // We'll do clipping in the fragment shader instead.
-    // posOut.xyz -= pulse * radius * normal.xyz;
+#endif
 }
 
 void KeijiroTubeFragment_float(
@@ -19,6 +22,14 @@ void KeijiroTubeFragment_float(
     float time,
     out float alpha)
 {
+#ifdef _IS_TILT_MESH
+    alpha = 1.0;
+#elif defined(_ISBAKEDEXPORT)
+    // BrushBaker already applied the contraction to the exported positions.
+    alpha = 1.0;
+#else
+    // Preserve the package's previous fallback for legacy glTF meshes.
     float wave = sin(uv.x - time * 2);
     alpha = smoothstep(.45, .5, saturate(wave));
+#endif
 }
