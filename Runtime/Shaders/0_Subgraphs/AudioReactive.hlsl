@@ -214,6 +214,22 @@ void LightWireBeatColor_half(half3 colorIn, half band, out half3 colorOut)
 #endif
 }
 
+float3 LightWireLegacyEmission(float3 color, float4 uv, float on)
+{
+    float envelope = sin(fmod(uv.x * 2.0, 1.0) * 3.14159);
+    if (envelope >= 0.1) return 0.0;
+
+    int colorIndex = (int)fmod(uv.x * 2.0 + 0.5, 3.0);
+    float3 tint = colorIndex == 0 ? float3(0.2, 0.2, 1.0)
+                : colorIndex == 1 ? float3(1.0, 0.2, 0.2)
+                                  : float3(0.2, 1.0, 0.2);
+    color *= tint * on;
+    float cmin = length(color) * 0.05;
+    color = max(color, cmin.xxx);
+    color = pow(max(color, 0.0), 2.2);
+    return color * (2.0 * exp(0.7 * 10.0));
+}
+
 void LightWireChase_float(float3 colorIn, float4 uv, out float3 colorOut)
 {
     float t;
@@ -226,7 +242,7 @@ void LightWireChase_float(float3 colorIn, float4 uv, out float3 colorOut)
     float timeIndex = fmod(t, 7);
     float delta = abs(lightIndex - timeIndex);
     float on = 1 - saturate(delta * 1.5);
-    colorOut = colorIn * on;
+    colorOut = LightWireLegacyEmission(colorIn, uv, on);
 }
 void LightWireChase_half(half3 colorIn, half4 uv, out half3 colorOut)
 {
@@ -240,7 +256,7 @@ void LightWireChase_half(half3 colorIn, half4 uv, out half3 colorOut)
     float timeIndex = fmod(t, 7);
     float delta = abs(lightIndex - timeIndex);
     float on = 1 - saturate(delta * 1.5);
-    colorOut = colorIn * on;
+    colorOut = (half3)LightWireLegacyEmission((float3)colorIn, (float4)uv, on);
 }
 
 // HyperGrid / DanceFloor colour pattern: 2 * color + color.yzx * _BeatOutput[band].

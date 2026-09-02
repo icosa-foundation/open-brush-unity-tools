@@ -75,17 +75,17 @@ Material:
     m_Ints: []
     m_Floats:
     - _AO: 1
-    - _Alpha_Cutoff: 0.5
+    - _Alpha_Cutoff: 0.16
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _shininess: 0.4
+    - _shininess: 0.145
     m_Colors:
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _SpecColor: {r: 0.23529407, g: 0.23529407, b: 0.23529407, a: 1}
+    - _SpecColor: {r: 0.14117648, g: 0.14117648, b: 0.14117648, a: 1}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
-    - __SpecColor: {r: 0.2352941, g: 0.2352941, b: 0.2352941, a: 1}
+    - __SpecColor: {r: 0.14117648, g: 0.14117648, b: 0.14117648, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
