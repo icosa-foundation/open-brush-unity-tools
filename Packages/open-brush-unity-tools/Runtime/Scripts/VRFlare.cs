@@ -17,7 +17,7 @@ namespace TiltBrush
 {
 
     [System.Serializable]
-    public class VRFlareData
+    public class UnityToolsVRFlareData
     {
         public Transform m_Flare;
         public float m_DepthFactor;
@@ -28,7 +28,7 @@ namespace TiltBrush
     {
 
         [SerializeField]
-        private VRFlareData[] m_Flares;
+        private UnityToolsVRFlareData[] m_Flares;
 
         private Transform m_CameraTransform;
 
