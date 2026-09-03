@@ -101,7 +101,7 @@ Material:
     - SHADER_SCRIPTING: 0
     - _AO: 1
     - _Alpha_Cutoff: 0.5
-    - _AudioReactiveMode: 0
+    - _AudioReactiveMode: 5
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _BaseGain: 0.4

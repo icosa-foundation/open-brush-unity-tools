@@ -58,6 +58,10 @@ Material:
     m_Floats:
     - AUDIO_REACTIVE: 0
     - SHADER_SCRIPTING: 0
+    - _ScrollRate: 0.2
+    - _ScrollJitterFrequency: 12
+    - _ScrollJitterIntensity: 0.1
+    - _SpreadRate: 1.539
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _ClipEnd: -1
@@ -69,6 +73,7 @@ Material:
     - _TimeSpeed: 1
     - _test: 0
     m_Colors:
+    - _ScrollDistance: {r: 0, g: -3, b: 0, a: 1}
     - _TimeOverrideValue: {r: 0, g: 0, b: 0, a: 0}
     - _TintColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
