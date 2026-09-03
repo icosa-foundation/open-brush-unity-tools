@@ -26,6 +26,7 @@ float4 _BeatOutputAccum;
 float4 _PeakBandLevels;
 float4 _AudioVolume;
 
+
 // LOD sampling (mip 0) so these are safe in both the vertex and fragment stages.
 float4 SampleWaveformTex(float coord) { return tex2Dlod(_WaveFormTex, float4(coord, 0, 0, 0)); }
 float4 SampleFFTTex(float coord)      { return tex2Dlod(_FFTTex,      float4(coord, 0, 0, 0)); }
@@ -118,6 +119,7 @@ void MusicReactiveColorBand_float(float3 colorIn, float band, out float3 colorOu
     colorOut = OB_MusicReactiveColor(float4(colorIn, 1), beat).rgb;
 #else
     colorOut = colorIn;
+
 #endif
 }
 void MusicReactiveColorBand_half(half3 colorIn, half band, out half3 colorOut)
@@ -613,29 +615,33 @@ void DiscoAudioPosition_half(half3 graphPosition, half3 basePosition, half3 norm
 
 void HyperGridAudioPosition_float(float3 positionOS, float4 uv1, out float3 outPositionOS)
 {
-#ifdef AUDIO_REACTIVE
     float3 positionWS = mul(unity_ObjectToWorld, float4(positionOS, 1)).xyz;
     float lifetime = GetBrushTime().y - uv1.w;
     float release = saturate(lifetime);
+#ifdef AUDIO_REACTIVE
     positionWS.y -= release * fmod(_BeatOutputAccum.x - uv1.w, 5);
     positionWS.y += 0.3 * release * pow(sin(_BeatOutputAccum.x * 2 + positionWS.x), 5);
-    outPositionOS = mul(unity_WorldToObject, float4(positionWS, 1)).xyz;
-#else
-    outPositionOS = positionOS;
 #endif
+    float size = max(length(uv1.xyz), 0.0001);
+    float q = (1.0 / size) * 0.5;
+    q += 5.0 * saturate(1.0 - release * 10.0);
+    positionWS = ceil(positionWS * q) / q;
+    outPositionOS = mul(unity_WorldToObject, float4(positionWS, 1)).xyz;
 }
 void HyperGridAudioPosition_half(half3 positionOS, half4 uv1, out half3 outPositionOS)
 {
-#ifdef AUDIO_REACTIVE
     float3 positionWS = mul(unity_ObjectToWorld, float4((float3)positionOS, 1)).xyz;
-    float lifetime = GetBrushTime().y - uv1.w;
+    float lifetime = GetBrushTime().y - (float)uv1.w;
     float release = saturate(lifetime);
-    positionWS.y -= release * fmod(_BeatOutputAccum.x - uv1.w, 5);
+#ifdef AUDIO_REACTIVE
+    positionWS.y -= release * fmod(_BeatOutputAccum.x - (float)uv1.w, 5);
     positionWS.y += 0.3 * release * pow(sin(_BeatOutputAccum.x * 2 + positionWS.x), 5);
-    outPositionOS = (half3)mul(unity_WorldToObject, float4(positionWS, 1)).xyz;
-#else
-    outPositionOS = positionOS;
 #endif
+    float size = max(length((float3)uv1.xyz), 0.0001);
+    float q = (1.0 / size) * 0.5;
+    q += 5.0 * saturate(1.0 - release * 10.0);
+    positionWS = ceil(positionWS * q) / q;
+    outPositionOS = (half3)mul(unity_WorldToObject, float4(positionWS, 1)).xyz;
 }
 
 void MusicReactiveColor_float(float4 color, float beat, out float4 outColor)
@@ -767,41 +773,65 @@ float OB_AudioCurlZ(float3 p, float d)
         - (sin(p.y + d) - sin(p.y - d)) * (sin(p.x + d) + sin(p.x - d))) / (4.0 * d * d);
 }
 
-void StandardSingleSidedAudioPosition_float(float3 positionOS, float4 uv1, float mode, out float3 outPositionOS)
+void StandardSingleSidedAudioPosition_float(float3 positionOS, float3 normalOS, float2 uv, float4 uv1, float4 vertexColor, float mode, float displacementAmount, float displacementExponent, float scrollRate, float4 scrollDistance, float scrollJitterIntensity, float scrollJitterFrequency, out float3 outPositionOS)
 {
-#ifdef AUDIO_REACTIVE
     if (mode > 2.5 && mode < 3.5)
     {
         float lifetime = GetBrushTime().y - uv1.w;
+        float release = saturate(lifetime * 0.1);
+#ifdef AUDIO_REACTIVE
         lifetime = -lifetime * 0.1 + _BeatOutputAccum.x;
-        float3 positionWS = mul(unity_ObjectToWorld, float4(positionOS, 1)).xyz;
-        float3 p = positionWS * 0.1 + lifetime;
-        float d = 30.0;
+#endif
+        float3 perVertOffset = uv1.xyz;
+        float3 localMidpointPos = positionOS - perVertOffset;
+        float d = 10.0 + vertexColor.g * 3.0;
+        float freq = 1.5 + vertexColor.r;
+        float3 p = localMidpointPos * freq + lifetime;
         float3 curl = float3(OB_AudioCurlX(p, d), OB_AudioCurlY(p, d), OB_AudioCurlZ(p, d));
-        positionWS += curl * 0.25;
-        outPositionOS = mul(unity_WorldToObject, float4(positionWS, 1)).xyz;
+        localMidpointPos += release * curl * 10.0;
+        outPositionOS = localMidpointPos + perVertOffset;
         return;
     }
-#endif
+    if (mode > 3.5 && mode < 4.5)
+    {
+        outPositionOS = positionOS + normalOS * pow(saturate(uv.x), max(displacementExponent, 0.0001)) * displacementAmount;
+        return;
+    }
+    if (mode > 4.5 && mode < 5.5)
+    {
+        float seed = vertexColor.a;
+        float t01 = fmod(GetBrushTime().y * scrollRate + seed * 10.0, 1.0);
+        float t2 = GetBrushTime().y / 3.0;
+        float3 disp = scrollDistance.xyz * t01;
+        disp.x += sin(t01 * scrollJitterFrequency + seed * 10.0 + t2 + positionOS.z) * scrollJitterIntensity;
+        disp.y += (fmod(seed * 100.0, 1.0) - 0.5) * scrollDistance.y * t01;
+        disp.z += cos(t01 * scrollJitterFrequency + seed * 7.0 + t2 + positionOS.x) * scrollJitterIntensity;
+        outPositionOS = positionOS + disp * 0.1;
+        return;
+    }
     outPositionOS = positionOS;
 }
-void StandardSingleSidedAudioPosition_half(half3 positionOS, half4 uv1, half mode, out half3 outPositionOS)
+void StandardSingleSidedAudioPosition_half(half3 positionOS, half3 normalOS, half2 uv, half4 uv1, half4 vertexColor, half mode, half displacementAmount, half displacementExponent, half scrollRate, half4 scrollDistance, half scrollJitterIntensity, half scrollJitterFrequency, out half3 outPositionOS)
 {
-#ifdef AUDIO_REACTIVE
-    if (mode > 2.5h && mode < 3.5h)
-    {
-        float lifetime = GetBrushTime().y - (float)uv1.w;
-        lifetime = -lifetime * 0.1 + _BeatOutputAccum.x;
-        float3 positionWS = mul(unity_ObjectToWorld, float4((float3)positionOS, 1)).xyz;
-        float3 p = positionWS * 0.1 + lifetime;
-        float d = 30.0;
-        float3 curl = float3(OB_AudioCurlX(p, d), OB_AudioCurlY(p, d), OB_AudioCurlZ(p, d));
-        positionWS += curl * 0.25;
-        outPositionOS = (half3)mul(unity_WorldToObject, float4(positionWS, 1)).xyz;
-        return;
-    }
-#endif
-    outPositionOS = positionOS;
+    float3 outPosition;
+    StandardSingleSidedAudioPosition_float((float3)positionOS, (float3)normalOS, (float2)uv, (float4)uv1, (float4)vertexColor, (float)mode, (float)displacementAmount, (float)displacementExponent, (float)scrollRate, (float4)scrollDistance, (float)scrollJitterIntensity, (float)scrollJitterFrequency, outPosition);
+    outPositionOS = (half3)outPosition;
+}
+
+
+void SnowVertexPosition_float(float3 positionOS, float4 vertexColor, float scrollRate, float4 scrollDistance, float scrollJitterIntensity, float scrollJitterFrequency, out float3 outPositionOS)
+{
+    float t = fmod(GetBrushTime().y * scrollRate + vertexColor.a, 1.0);
+    float3 disp = (t - 0.5) * scrollDistance.xyz;
+    disp.x += sin(t * scrollJitterFrequency + GetBrushTime().y) * scrollJitterIntensity;
+    disp.z += cos(t * scrollJitterFrequency * 0.5 + GetBrushTime().y) * scrollJitterIntensity;
+    outPositionOS = positionOS + disp * 0.1;
+}
+void SnowVertexPosition_half(half3 positionOS, half4 vertexColor, half scrollRate, half4 scrollDistance, half scrollJitterIntensity, half scrollJitterFrequency, out half3 outPositionOS)
+{
+    float3 outPosition;
+    SnowVertexPosition_float((float3)positionOS, (float4)vertexColor, (float)scrollRate, (float4)scrollDistance, (float)scrollJitterIntensity, (float)scrollJitterFrequency, outPosition);
+    outPositionOS = (half3)outPosition;
 }
 
 #endif
