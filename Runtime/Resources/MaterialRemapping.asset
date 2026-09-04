@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: MaterialRemapping
   m_EditorClassIdentifier: 
   entries:
+  - key: BlocksBasic
+    material: {fileID: 2100000, guid: a42e33215e7e4c9fba2c1a88d2d590d9, type: 2}
+  - key: BlocksGem
+    material: {fileID: 2100000, guid: d5fe9e3c747c4143bce1de0a9ce21fc1, type: 2}
+  - key: BlocksGlass
+    material: {fileID: 2100000, guid: ea98d47c97114267b85ea1133cfb3259, type: 2}
   - key: Bubbles
     material: {fileID: 2100000, guid: 4d24cf1c5fc5d174294759d0473ffda4, type: 2}
   - key: CelVinyl
