@@ -76,4 +76,16 @@ void AddSelectionEmission_float(float3 Emission, out float3 Out)
 #endif
 }
 
+// Equivalent of the FRAG_MOBILESELECT macro, which unlit shaders applied to their final
+// colour: a 50/50 blend rather than an additive term. Use this on Base Color in Unlit
+// graphs, which have no Emission block.
+void ApplySelectionColor_float(float3 Color, out float3 Out)
+{
+#if defined(SELECTION_ON) || defined(HIGHLIGHT_ON)
+  Out = OpenBrushAddSelectColor(float4(Color, 1.0)).rgb;
+#else
+  Out = Color;
+#endif
+}
+
 #endif
