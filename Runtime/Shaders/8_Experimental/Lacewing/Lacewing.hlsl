@@ -12,6 +12,11 @@ void LacewingFragment_float(
     out float3 specColor,
     out float alpha) {
 
+    // The original used scroll = GetTime().z == 2t; the graph feeds BrushTime's
+    // Time output (_Time.y == t). The audio branch below overwrites scroll, so
+    // this only affects the non-audio path.
+    scroll *= 2.0;
+
 #ifdef AUDIO_REACTIVE
     // Fragment audio path from the original Lacewing shader. The original used
     // local world position for this phase term; this graph only exposes UV here.

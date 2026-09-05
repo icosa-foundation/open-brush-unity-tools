@@ -25,9 +25,13 @@ void FairyDotPattern_float(
     float2 uv,                // Input UV coordinates
     float3 color,             // Input color (sRGB)
     float emissionGain,       // Emission gain
-    float time,               // Time (z component of _Time)
+    float time,               // Seconds; BrushTime's Time output (_Time.y)
     out float4 outColor       // Output color (RGBA)
 ) {
+    // The original Fairy shader faded with GetTime().z == 2t, but the graph feeds
+    // BrushTime's Time output (_Time.y == t), which halved the fade rate.
+    time *= 2.0;
+
     float2 st = uv;
     st.x *= 5.0;
 

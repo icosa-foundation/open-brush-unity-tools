@@ -357,20 +357,24 @@ void StarsSparkleTime_half(half timeY, out half sparkleTime)
 #endif
 }
 
-void NeonPulseScroll_float(float timeX, out float scroll)
+// The original Brush/Visualizer/WaveformPulse shader scrolled by GetTime().x * 15,
+// and GetTime().x is _Time.x == t/20. The graph feeds this node BrushTime's Time
+// output, which is _Time.y == t (seconds), so the scale here is 15/20 = 0.75.
+// Feeding seconds through the old * 15.0 ran the pulse 20x too fast.
+void NeonPulseScroll_float(float timeSeconds, out float scroll)
 {
 #ifdef AUDIO_REACTIVE
     scroll = _BeatOutputAccum.z;
 #else
-    scroll = timeX * 15.0;
+    scroll = timeSeconds * 0.75;
 #endif
 }
-void NeonPulseScroll_half(half timeX, out half scroll)
+void NeonPulseScroll_half(half timeSeconds, out half scroll)
 {
 #ifdef AUDIO_REACTIVE
     scroll = _BeatOutputAccum.z;
 #else
-    scroll = timeX * 15.0h;
+    scroll = timeSeconds * 0.75h;
 #endif
 }
 

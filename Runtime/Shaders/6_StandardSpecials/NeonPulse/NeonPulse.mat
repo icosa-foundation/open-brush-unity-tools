@@ -59,7 +59,7 @@ Material:
     m_Floats:
     - AUDIO_REACTIVE: 0
     - SHADER_SCRIPTING: 0
-    - _AO: 0.08
+    - _AO: 1
     - _Alpha: 1
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
@@ -68,12 +68,12 @@ Material:
     - _QueueOffset: 0
     - _TimeBlend: 0
     - _TimeSpeed: 1
-    - _shininess: 0.981
+    - _shininess: 0.8
     m_Colors:
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
     - _TimeOverrideValue: {r: 0, g: 0, b: 0, a: 0}
-    - __SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - __SpecColor: {r: 0.05, g: 0.05, b: 0.05, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7987520749966744306
 MonoBehaviour:

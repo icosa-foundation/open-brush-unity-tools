@@ -1162,7 +1162,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.06800000369548798,
+    "m_Value": 1.0,
     "m_FloatType": 1,
     "m_RangeValues": {
         "x": 0.0,
@@ -1259,9 +1259,9 @@
     "m_ShaderOutputName": "BaseColor",
     "m_StageCapability": 2,
     "m_Value": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
     },
     "m_DefaultValue": {
         "x": 0.0,
@@ -2436,9 +2436,9 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "r": 0.20000001788139343,
-        "g": 0.20000001788139343,
-        "b": 0.20000001788139343,
+        "r": 0.05,
+        "g": 0.05,
+        "b": 0.05,
         "a": 1.0
     },
     "isMainColor": false,
@@ -2726,7 +2726,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.7429999709129333,
+    "m_Value": 0.8,
     "m_FloatType": 1,
     "m_RangeValues": {
         "x": 0.0,
@@ -4193,10 +4193,10 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "9acdff8f4c044db0a4c5ba5b5c6aeb32",
     "m_Id": 0,
-    "m_DisplayName": "timeX",
+    "m_DisplayName": "timeSeconds",
     "m_SlotType": 0,
     "m_Hidden": false,
-    "m_ShaderOutputName": "timeX",
+    "m_ShaderOutputName": "timeSeconds",
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,

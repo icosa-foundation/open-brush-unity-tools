@@ -145,6 +145,11 @@ void SpaceFragment_float(
     float emissionGain,
     out float4 outColor
 ) {
+    // The graph feeds BrushTime's Time output (_Time.y == t), but the original
+    // Space shader drove every fbm sample from GetTime().x == t/20. Without this
+    // the whole effect animates 20x too fast.
+    time = time / 20.0;
+
     float analog_spread = 0.1;
     float gain = 10;
     float gain2 = 0;
