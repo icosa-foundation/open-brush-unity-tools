@@ -32,7 +32,7 @@ float4 SampleWaveformTex(float coord) { return tex2Dlod(_WaveFormTex, float4(coo
 float4 SampleFFTTex(float coord)      { return tex2Dlod(_FFTTex,      float4(coord, 0, 0, 0)); }
 
 // --------------------------------------------------------------------------------------------
-// Shared "musicReactive" helpers, ported from Assets/Shaders/Include/Brush.cginc.
+// Shared "musicReactive" helpers, ported from Brush.cginc.
 // GetTime().w in the original is replaced with GetBrushTime().w (respects time override).
 // --------------------------------------------------------------------------------------------
 

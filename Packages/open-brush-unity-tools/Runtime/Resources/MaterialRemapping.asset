@@ -20,15 +20,15 @@ MonoBehaviour:
   - key: BlocksGlass
     material: {fileID: 2100000, guid: ea98d47c97114267b85ea1133cfb3259, type: 2}
   - key: Bubbles
-    material: {fileID: 2100000, guid: 4d24cf1c5fc5d174294759d0473ffda4, type: 2}
+    material: {fileID: 2100000, guid: 4e725746b44456641a06885575f9dd35, type: 2}
   - key: CelVinyl
-    material: {fileID: 2100000, guid: 5e8aed3e0fd60834d97532d3bb460d3e, type: 2}
+    material: {fileID: 2100000, guid: cf8c4213bc2e9174d97bd124e3362711, type: 2}
   - key: ChromaticWave
-    material: {fileID: 2100000, guid: a53539a5e9dea7d46a7e9b7632c15253, type: 2}
+    material: {fileID: 2100000, guid: a751977dd8e63e74a8edcc4acd579911, type: 2}
   - key: CoarseBristles
     material: {fileID: 2100000, guid: f071bff105b09434b94fc9ef06534cd9, type: 2}
   - key: Comet
-    material: {fileID: 2100000, guid: 3706091e56063b947aabd55a0367680d, type: 2}
+    material: {fileID: 2100000, guid: b1939bce768ea114cb876d97a44c8110, type: 2}
   - key: DiamondHull
     material: {fileID: 2100000, guid: d2e6bb39f4d2ac6499b22771a7e046eb, type: 2}
   - key: DiffuseNoTextureDoubleSided
@@ -36,29 +36,29 @@ MonoBehaviour:
   - key: Disco
     material: {fileID: 2100000, guid: 343b93f51e3d89a409370a84ca6a91c8, type: 2}
   - key: Dots
-    material: {fileID: 2100000, guid: 3ce480ce80d22e8429f12a7249d2eb07, type: 2}
+    material: {fileID: 2100000, guid: dca63d4b949721447a31a2beeebce657, type: 2}
   - key: DoubleTaperedFlat
     material: {fileID: 2100000, guid: 46a727689bd591e46b9b4c60c6d6207c, type: 2}
   - key: DoubleTaperedMarker
-    material: {fileID: 2100000, guid: 9c5f1e4a7332f89408567cd963f47583, type: 2}
+    material: {fileID: 2100000, guid: df12c27a75db40c459f671f7275b54e9, type: 2}
   - key: DuctTape
     material: {fileID: 2100000, guid: 79edfa5802000684ca43bdede1cd4579, type: 2}
   - key: DuctTapeSingleSided
-    material: {fileID: 2100000, guid: 3ca16e2fbdcd4da28631dcef342f40f1, type: 2}
+    material: {fileID: 2100000, guid: 79edfa5802000684ca43bdede1cd4579, type: 2}
   - key: DuctTapeGeometry
     material: {fileID: 2100000, guid: 3ca16e2fbdcd4da28631dcef342f40f1, type: 2}
   - key: Electricity
-    material: {fileID: 2100000, guid: 5262b8468e892fe4c91f092e924e4b05, type: 2}
+    material: {fileID: 2100000, guid: a709ae2f9cf91324282b04171accf134, type: 2}
   - key: Embers
-    material: {fileID: 2100000, guid: fecb87c3fb59e424e9f185865c2a48e0, type: 2}
+    material: {fileID: 2100000, guid: fbc91e3a286104046b64d42732cec4fa, type: 2}
   - key: Fire
-    material: {fileID: 2100000, guid: c10410f7a0001ab4688598c3d0862ac9, type: 2}
+    material: {fileID: 2100000, guid: 62f631d5d8f801d4e9ab6091e9dff07e, type: 2}
   - key: Flat
     material: {fileID: 2100000, guid: ce6cfbde1d12876439d13cdfb23351ae, type: 2}
   - key: Highlighter
-    material: {fileID: 2100000, guid: bac1c2947c5943f4fb657f2bf562ac60, type: 2}
+    material: {fileID: 2100000, guid: 291ccd49343698a48b758a8822a27b92, type: 2}
   - key: HyperGrid
-    material: {fileID: 2100000, guid: e8d3b76da0405464087001136c77b008, type: 2}
+    material: {fileID: 2100000, guid: 7ca834fcf117cbe459e98b469f71085c, type: 2}
   - key: Hypercolor
     material: {fileID: 2100000, guid: 077bed1c8bd0753499e0c3adb693a3bc, type: 2}
   - key: Icing
@@ -66,13 +66,13 @@ MonoBehaviour:
   - key: Ink
     material: {fileID: 2100000, guid: f4d8ee95f6d1311438e53e78b3ef67bb, type: 2}
   - key: Light
-    material: {fileID: 2100000, guid: 54787dce785e49044bd890a97dda8644, type: 2}
+    material: {fileID: 2100000, guid: dc334052d116e2941991cd35816da889, type: 2}
   - key: LightWire
     material: {fileID: 2100000, guid: fe576bea4f21c33408a217e91353dca9, type: 2}
   - key: Lofted
     material: {fileID: 2100000, guid: 454c50acb53ca684db6787f31fc61e25, type: 2}
   - key: Marker
-    material: {fileID: 2100000, guid: 98457acef3be5094f9e1111df1c8087e, type: 2}
+    material: {fileID: 2100000, guid: aacfdf40f1bcb264a8b67bbe213b5021, type: 2}
   - key: MatteHull
     material: {fileID: 2100000, guid: 62df3af3ef149504988da83c08cf7250, type: 2}
   - key: NeonPulse
@@ -84,71 +84,71 @@ MonoBehaviour:
   - key: Petal
     material: {fileID: 2100000, guid: b9879bd1140f7d94ea9340c1bc5e2a7c, type: 2}
   - key: Rainbow
-    material: {fileID: 2100000, guid: b93b105975c60724baf0d1b0f5d47287, type: 2}
+    material: {fileID: 2100000, guid: 163c766db774cd449ab7b71b0484d7f9, type: 2}
   - key: ShinyHull
     material: {fileID: 2100000, guid: 6a81b9dffc0f06848be063699d4ca747, type: 2}
   - key: Smoke
-    material: {fileID: 2100000, guid: 25e8adf75d62a2d49963468bbb586c1c, type: 2}
+    material: {fileID: 2100000, guid: 6f4145f74ac05b9449a7bdbed72bca63, type: 2}
   - key: Snow
-    material: {fileID: 2100000, guid: ea808433902c7a540bca2910ca91fb9a, type: 2}
+    material: {fileID: 2100000, guid: d9b61806f687734429fc724853fb9085, type: 2}
   - key: SoftHighlighter
-    material: {fileID: 2100000, guid: ab08354aa47d7084d9a65f993a3bccf3, type: 2}
+    material: {fileID: 2100000, guid: 2fa2cdb55781cef4e9723c4f08abda15, type: 2}
   - key: Spikes
     material: {fileID: 2100000, guid: b96680bd138273a4bbcf96685df738a6, type: 2}
   - key: Splatter
     material: {fileID: 2100000, guid: e3033b2ec92a3ab4b85aa5770a476452, type: 2}
   - key: Stars
-    material: {fileID: 2100000, guid: 4f06ca6bf674d7548945803d5df22b23, type: 2}
+    material: {fileID: 2100000, guid: 2b586b958dc9fe846ad73133f0cfd285, type: 2}
   - key: Streamers
-    material: {fileID: 2100000, guid: 21e96012a675b2d45ae1706d5dfb4969, type: 2}
+    material: {fileID: 2100000, guid: d32f874d3c0a7454aaf5208dd984f0b1, type: 2}
   - key: TaperedFlat
     material: {fileID: 2100000, guid: 385a5e69e3ac58b4c8c7f1c29dad3a6a, type: 2}
   - key: TaperedMarker
-    material: {fileID: 2100000, guid: 10eae5304118cb3468b104f4e0e64196, type: 2}
+    material: {fileID: 2100000, guid: 848eecf12724db540b371b0528c9de33, type: 2}
   - key: TaperedMarker_Flat
-    material: {fileID: 2100000, guid: 10eae5304118cb3468b104f4e0e64196, type: 2}
+    material: {fileID: 2100000, guid: 1a26b8c08a074f8a9facd2ef36e0cad0, type: 2}
   - key: ThickPaint
     material: {fileID: 2100000, guid: 5e18fa10121709e4595c27d919c75907, type: 2}
   - key: Toon
-    material: {fileID: 2100000, guid: 66b410f19393cc04688b3b5b7a29b226, type: 2}
+    material: {fileID: 2100000, guid: 46d424e4b93d748d4be5a08b4227f14f, type: 2}
   - key: UnlitHull
     material: {fileID: 2100000, guid: 5ae6d84f05f1b294db68b2919d5e1fb4, type: 2}
   - key: VelvetInk
-    material: {fileID: 2100000, guid: 5099a2d1be1fb094d95a6e208ae54f2e, type: 2}
+    material: {fileID: 2100000, guid: fba1a3305042c9346939237f38460aa6, type: 2}
   - key: Waveform
-    material: {fileID: 2100000, guid: 9bf58314959371043a5b2a21c7846393, type: 2}
+    material: {fileID: 2100000, guid: cd900cf24af16d043bc5c5d36e576434, type: 2}
   - key: WetPaint
     material: {fileID: 2100000, guid: 2f6df575ca49b43468d179f665f4e16a, type: 2}
   - key: WigglyGraphite
     material: {fileID: 2100000, guid: ce31c42493e7a024bbccda2ab6b1fa46, type: 2}
   - key: Wire
-    material: {fileID: 2100000, guid: 02c7014159304aa4e8df18910f3ce75f, type: 2}
+    material: {fileID: 2100000, guid: 2f42ba3ecd1abb24bbe058768f5a13b9, type: 2}
   - key: 3DPrintingBrush
-    material: {fileID: 2100000, guid: d3f3b18ada03f694b83828ba8e749a98, type: 2}
+    material: {fileID: 2100000, guid: c26b5a6e52da87a46a042ca0f6869f20, type: 2}
   - key: BubbleWand
     material: {fileID: 2100000, guid: eba3f993f9a14d35b84ebb08f48981a4, type: 2}
   - key: Charcoal
     material: {fileID: 2100000, guid: 204b4e56f573e2248b9a02321fbdda9f, type: 2}
   - key: ConcaveHull
-    material: {fileID: 2100000, guid: 62df3af3ef149504988da83c08cf7250, type: 2}
+    material: {fileID: 2100000, guid: ce6cfbde1d12876439d13cdfb23351ae, type: 2}
   - key: DanceFloor
-    material: {fileID: 2100000, guid: 6a1cf9f9032c45ec311ea6680bee32e9, type: 2}
+    material: {fileID: 2100000, guid: 38d89079b4a7e544b8b7a898f1cbfd2d, type: 2}
   - key: DotMarker
-    material: {fileID: 2100000, guid: d1d991f2e7a04cf1b328f57e915e6260, type: 2}
+    material: {fileID: 2100000, guid: fb02a5860cda282429d922496ba8c963, type: 2}
   - key: DoubleFlat
     material: {fileID: 2100000, guid: f4a0550c332a4e1a9793b71508f4a454, type: 2}
   - key: Drafting
-    material: {fileID: 2100000, guid: 492b36ffb337436aba5f1e87ee86747e, type: 2}
+    material: {fileID: 2100000, guid: df236ac2f66e3564f88a33cc9a83c00d, type: 2}
   - key: DryBrush
     material: {fileID: 2100000, guid: a7f6d6eae9460914b9d8f06340c2a959, type: 2}
   - key: FacetedTube
-    material: {fileID: 2100000, guid: 4391ffaadf7343969e3331e4e4930b27, type: 2}
+    material: {fileID: 2100000, guid: 992f723db393b4ff58d881df7227d25f, type: 2}
   - key: Fairy
-    material: {fileID: 2100000, guid: d9cc5e99ace14d1296e04a7c18c99cfc, type: 2}
+    material: {fileID: 2100000, guid: 9030155f396b6d840a99b48e65902b48, type: 2}
   - key: Feather
-    material: {fileID: 2100000, guid: a555b809201746cbac26e63173d8f45e, type: 2}
+    material: {fileID: 2100000, guid: 4a62b0f49e9c25c4ca20fb5e2af8568b, type: 2}
   - key: Fire2
-    material: {fileID: 2100000, guid: 53d753ef083c45e198e74459b4471219, type: 2}
+    material: {fileID: 2100000, guid: 835630d0b08db5c43ab59dbe9f187254, type: 2}
   - key: Gouache
     material: {fileID: 2100000, guid: 1b897b7e9b76425ab031a867c48df409, type: 2}
   - key: GouacheDoubleSided
@@ -174,44 +174,44 @@ MonoBehaviour:
   - key: MylarTube
     material: {fileID: 2100000, guid: 8e58ceea783049b4aba96215104ab52a, type: 2}
   - key: Plasma
-    material: {fileID: 2100000, guid: c33714d1b2f9412ebd501884c9d46336, type: 2}
+    material: {fileID: 2100000, guid: cd84c86f2d373404d9883ae3b537b569, type: 2}
   - key: Rain
-    material: {fileID: 2100000, guid: a3075bd1e86e725448a2f00b5b1cce03, type: 2}
+    material: {fileID: 2100000, guid: 0a08ac55c9c7c774192adc9f7177f972, type: 2}
   - key: RisingBubbles
-    material: {fileID: 2100000, guid: 86bf0e89adaada243b5c711ef79a262d, type: 2}
+    material: {fileID: 2100000, guid: aadb21bef06a83440ad086465af0782b, type: 2}
   - key: SingleSided
     material: {fileID: 2100000, guid: f0a2298abe80432c9feea86dcc06f4f9, type: 2}
   - key: SmoothHull
     material: {fileID: 2100000, guid: 355b3579bf1d4ff5a200704437fe684b, type: 2}
   - key: Space
-    material: {fileID: 2100000, guid: bdf65db21fb74202b5e0c6b5e3ea851e, type: 2}
+    material: {fileID: 2100000, guid: 535a529bd93e7904caa979b6a24abd6c, type: 2}
   - key: Sparks
-    material: {fileID: 2100000, guid: 41a706486e2190e408f4c5f0b4b7312f, type: 2}
+    material: {fileID: 2100000, guid: 4aacc68ef76cee74084447a53a61c12c, type: 2}
   - key: Square
     material: {fileID: 2100000, guid: 2e03b1bf3ebd46099d7ef4cafadc4dfa, type: 2}
   - key: SquarePaper
     material: {fileID: 2100000, guid: 2e03b1bf3ebd46099d7ef4cafadc4dfa, type: 2}
   - key: Square3DPrintingBrush
-    material: {fileID: 2100000, guid: d3f3b18ada03f694b83828ba8e749a98, type: 2}
+    material: {fileID: 2100000, guid: c26b5a6e52da87a46a042ca0f6869f20, type: 2}
   - key: TaperedHueShift
-    material: {fileID: 2100000, guid: a97b15031b599174594682d34d95167b, type: 2}
+    material: {fileID: 2100000, guid: 4bddbe8a31fba304380eaacf44e06882, type: 2}
   - key: TaperedWire
     material: {fileID: 2100000, guid: 4051b653344cd98478d2e2b6a21f2107, type: 2}
   - key: ThickGeometry
     material: {fileID: 2100000, guid: 3ca16e2fbdcd4da28631dcef342f40f1, type: 2}
   - key: TubeAdditive
-    material: {fileID: 2100000, guid: c1c9b26d673a4dc6b37351715654ab96, type: 2}
+    material: {fileID: 2100000, guid: 74f4a47fc3b034e2d963491f4e514174, type: 2}
   - key: TubeToonInverted
-    material: {fileID: 2100000, guid: 9871385adf7343969e3331e4e4930b27, type: 2}
+    material: {fileID: 2100000, guid: 175538d5a24264e109b76297bee9c3b6, type: 2}
   - key: WaveformFFT
-    material: {fileID: 2100000, guid: d120944d772f406299c646a6f219eeaf, type: 2}
+    material: {fileID: 2100000, guid: 36165655506f72a479504afc66086926, type: 2}
   - key: WaveformParticles
-    material: {fileID: 2100000, guid: 6a1cf9f9032c45ec9b6ea6680bee30f7, type: 2}
+    material: {fileID: 2100000, guid: a281b8caca2469e4dba7680667e77366, type: 2}
   - key: WaveformTube
-    material: {fileID: 2100000, guid: 0f5820dfcb6b4a6c960e56e4c8000eda, type: 2}
+    material: {fileID: 2100000, guid: d9fd19fc41f10694db3364b39de32501, type: 2}
   - key: Wind
-    material: {fileID: 2100000, guid: bf5e9b6051a49b1458c0629913f50483, type: 2}
+    material: {fileID: 2100000, guid: 459af5ba3d6b4ca4da6076eb4d61189f, type: 2}
   - key: Wire(Lit)
     material: {fileID: 2100000, guid: 1ee826215a15b2a4898700a09d624086, type: 2}
   - key: Wireframe
-    material: {fileID: 2100000, guid: 2c1a6a6365524d2386d758f6fba8581b, type: 2}
+    material: {fileID: 2100000, guid: 87a6674ce5e30c340910aa0fbd117254, type: 2}

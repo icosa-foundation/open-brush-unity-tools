@@ -23,7 +23,7 @@
 // Outside Open Brush none of these globals are set and neither keyword is enabled, so
 // this compiles out to a passthrough.
 //
-// Ported from Open Brush's Assets/Shaders/Include/MobileSelection.cginc. Kept
+// Ported from Open Brush's MobileSelection.cginc. Kept
 // self-contained so the package does not depend on files in the app project - if you
 // change the maths here, change it there too. The unused _PatternSpeed and
 // _InverseLimitedScaleSceneMatrix globals that file declares are not carried over.
