@@ -19,7 +19,7 @@
 // from OdsSlice / OdsStereoCubemap; outside Open Brush the globals are never set and the
 // keywords are never enabled, so this compiles out to a passthrough.
 //
-// Ported from Open Brush's Assets/Shaders/Include/Ods.cginc. Kept self-contained so the
+// Ported from Open Brush's Ods.cginc. Kept self-contained so the
 // package does not depend on files in the app project - if you change the maths here,
 // change it there too.
 //
