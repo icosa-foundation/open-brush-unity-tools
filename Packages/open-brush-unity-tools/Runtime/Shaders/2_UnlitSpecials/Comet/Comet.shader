@@ -39,7 +39,6 @@ Category {
   SubShader {
     Pass {
       Name "Comet"
-      Tags { "LightMode"="UniversalForward" }
 
       CGPROGRAM
       #pragma multi_compile __ SHADER_SCRIPTING_ON

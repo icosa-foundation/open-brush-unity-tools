@@ -96,7 +96,8 @@ CGINCLUDE
     // Magnitude is a scaling factor to shrink large outlines down to a max width, in NDC space.
     // Notice here we're only measuring 2D displacment in X and Y.
     float mag = length(disp.xy);
-    mag = min(_OutlineMax, mag) / mag;
+    // The body pass and glTF meshes without a stored radius can have zero displacement.
+    mag = mag > 0 ? min(_OutlineMax, mag) / mag : 0;
 
     // Ideally we would project back into world space to do the scaling, but the inverse
     // projection matrix is not currently available. So instead, we multiply back in the w
@@ -161,13 +162,14 @@ ENDCG
 
 
 SubShader {
-  Tags { "RenderType"="Opaque" }
+  // Universal Render Pipeline: retain the existing forward/outline pass tags.
+  Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Opaque" }
   // For exportManifest.json:
   //   GltfCull Back
-  Cull Back
   Pass{
     Name "Forward"
     Tags { "LightMode" = "UniversalForward" }
+    Cull Back
     CGPROGRAM
       #pragma multi_compile __ SHADER_SCRIPTING_ON
     #pragma vertex vert
@@ -175,16 +177,40 @@ SubShader {
     ENDCG
     }
 
-  Cull Front
   Pass{
     Name "Outline"
     Tags { "LightMode" = "SRPDefaultUnlit" }
+    Cull Front
     CGPROGRAM
       #pragma multi_compile __ SHADER_SCRIPTING_ON
     #pragma vertex vertEdge
     #pragma fragment fragBlack
     ENDCG
     }
-  }
+}
+
+SubShader {
+  // Built-in render pipeline. No LightMode tags, so both passes draw as "Always".
+  Tags { "RenderType"="Opaque" }
+  Pass{
+    Name "Forward"
+    Cull Back
+    CGPROGRAM
+      #pragma multi_compile __ SHADER_SCRIPTING_ON
+    #pragma vertex vert
+    #pragma fragment fragColor
+    ENDCG
+    }
+
+  Pass{
+    Name "Outline"
+    Cull Front
+    CGPROGRAM
+      #pragma multi_compile __ SHADER_SCRIPTING_ON
+    #pragma vertex vertEdge
+    #pragma fragment fragBlack
+    ENDCG
+    }
+}
 Fallback "Diffuse"
 }

@@ -111,11 +111,12 @@ ENDCG
 
 
 SubShader {
-  Tags { "RenderType"="Opaque" }
-  Cull Back
+  // Universal Render Pipeline: retain the existing forward/outline pass tags.
+  Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Opaque" }
   Pass{
     Name "Forward"
     Tags { "LightMode" = "UniversalForward" }
+    Cull Back
     CGPROGRAM
       #pragma multi_compile __ SHADER_SCRIPTING_ON
     #pragma vertex vert
@@ -123,16 +124,40 @@ SubShader {
     ENDCG
     }
 
-  Cull Front
   Pass{
     Name "Outline"
     Tags { "LightMode" = "SRPDefaultUnlit" }
+    Cull Front
     CGPROGRAM
       #pragma multi_compile __ SHADER_SCRIPTING_ON
     #pragma vertex vertEdge
     #pragma fragment fragColor
     ENDCG
     }
-  }
+}
+
+SubShader {
+  // Built-in render pipeline. No LightMode tags, so both passes draw as "Always".
+  Tags { "RenderType"="Opaque" }
+  Pass{
+    Name "Forward"
+    Cull Back
+    CGPROGRAM
+      #pragma multi_compile __ SHADER_SCRIPTING_ON
+    #pragma vertex vert
+    #pragma fragment fragBlack
+    ENDCG
+    }
+
+  Pass{
+    Name "Outline"
+    Cull Front
+    CGPROGRAM
+      #pragma multi_compile __ SHADER_SCRIPTING_ON
+    #pragma vertex vertEdge
+    #pragma fragment fragColor
+    ENDCG
+    }
+}
 Fallback "Diffuse"
 }

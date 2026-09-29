@@ -15,6 +15,12 @@
 // Shader calculates normals per triangle using a geometry shader.
 // Uses Blinn-Phong lighting model for the main directional light and SH
 // for all additional lighting.
+//
+// Contains two SubShaders so the shader works in both the Universal Render
+// Pipeline and the built-in render pipeline. Unity selects the compatible
+// one at runtime: the URP SubShader carries the "UniversalPipeline" tag and a
+// PackageRequirements block (so it is skipped when URP is not installed), and
+// the untagged SubShader below is the original pre-URP implementation.
 Shader "Brush/FlatLit" {
 
 Properties {
@@ -27,8 +33,14 @@ Properties {
 	_ClipEnd("Clip End", Float) = -1
 }
 
+// ---------------------------------------------------------------------------
+// Universal Render Pipeline
+// ---------------------------------------------------------------------------
 SubShader {
-    Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Opaque" }
+  PackageRequirements {
+    "com.unity.render-pipelines.universal": "11.0"
+  }
+  Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Opaque" }
   Pass {
     Tags { "LightMode" = "UniversalForward" }
     Blend SrcAlpha OneMinusSrcAlpha
@@ -260,6 +272,192 @@ SubShader {
     }
 
     ENDHLSL
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Built-in Render Pipeline
+// ---------------------------------------------------------------------------
+SubShader {
+  Tags { "RenderType" = "Opaque" }
+  Pass {
+    Tags { "LightMode" = "ForwardBase" }
+    Blend SrcAlpha OneMinusSrcAlpha
+    Cull Back
+    CGPROGRAM
+
+    #pragma vertex vert
+    #pragma geometry geom
+    #pragma fragment frag
+    #pragma multi_compile __ SHADER_SCRIPTING_ON
+    #pragma multi_compile _ SHADOWS_SCREEN
+    #pragma multi_compile_instancing
+    #pragma target 4.0
+    #pragma require geometry
+
+    #include "UnityCG.cginc"
+    #include "AutoLight.cginc"
+    #include "UnityLightingCommon.cginc"
+
+    float _Smoothness;
+    float _Metallic;
+    sampler2D _MainTex;
+    float4 _MainTex_ST;
+
+    uniform half _ClipStart;
+    uniform half _ClipEnd;
+    uniform half _Dissolve;
+
+    float Dither8x8(float2 position) {
+      const float DitherSize = 8.0;
+      float2 ditherPosition = position % DitherSize;
+      int x = int(ditherPosition.x);
+      int y = int(ditherPosition.y);
+
+      const float dither8x8[64] = {
+        0,32,8,40,2,34,10,42,
+        48,16,56,24,50,18,58,26,
+        12,44,4,36,14,46,6,38,
+        60,28,52,20,62,30,54,22,
+        3,35,11,43,1,33,9,41,
+        51,19,59,27,49,17,57,25,
+        15,47,7,39,13,45,5,37,
+        63,31,55,23,61,29,53,21
+      };
+
+      return dither8x8[y * 8 + x] / 64.0;
+    }
+
+    struct appdata {
+      float4 vertex : POSITION;
+      float2 uv : TEXCOORD0;
+      float4 color : COLOR;
+      uint id : SV_VertexID;
+
+      UNITY_VERTEX_INPUT_INSTANCE_ID
+    };
+
+    struct v2f {
+      float4 pos : SV_POSITION;
+      float2 uv : TEXCOORD0;
+      float3 normal : TEXCOORD1;
+      float3 worldPos : TEXCOORD2;
+      float4 color : TEXCOORD3;
+      float id : TEXCOORD4;
+      SHADOW_COORDS(5)
+
+      UNITY_VERTEX_OUTPUT_STEREO
+    };
+
+    v2f vert(appdata v) {
+      v2f o;
+
+      UNITY_SETUP_INSTANCE_ID(v);
+      UNITY_INITIALIZE_OUTPUT(v2f, o);
+      UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+
+      o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+      o.pos = UnityObjectToClipPos(v.vertex);
+      o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+      o.color = v.color;
+      o.id = (float)v.id;
+      TRANSFER_SHADOW(o);
+
+      // normal is set in geom method
+      return o;
+    }
+
+    // Called once per triangle primitive, values outputted to triangle's
+    // pixels' frag methods.
+    [maxvertexcount(3)]
+    void geom(triangle v2f i[3], inout TriangleStream<v2f> stream) {
+      float3 p0 = i[0].worldPos;
+      float3 p1 = i[1].worldPos;
+      float3 p2 = i[2].worldPos;
+
+      float3 v0 = p1 - p0;
+      float3 v1 = p2 - p0;
+
+      float3 triangleNormal = normalize(cross(v0, v1));
+
+      i[0].normal = triangleNormal;
+      i[1].normal = triangleNormal;
+      i[2].normal = triangleNormal;
+
+      stream.Append(i[0]);
+      stream.Append(i[1]);
+      stream.Append(i[2]);
+    }
+
+    float4 frag(v2f i) : SV_TARGET {
+      UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);
+
+      #ifdef SHADER_SCRIPTING_ON
+      if (_ClipEnd > 0 && !(i.id > _ClipStart && i.id < _ClipEnd)) discard;
+      if (_Dissolve < 1 && Dither8x8(i.pos.xy) >= _Dissolve) discard;
+      #endif
+
+      // Apply shadows
+      UNITY_LIGHT_ATTENUATION(attenuation, i, i.worldPos);
+      float3 lightColor = _LightColor0.rgb * attenuation;
+
+      // Add main directional light's effect.
+
+      // Calculate vectors to be used in lighting model.
+      float3 normal = i.normal;
+      float3 lightDir = _WorldSpaceLightPos0.xyz;
+      float3 viewDir = normalize(_WorldSpaceCameraPos - i.worldPos);
+      float3 halfDir = normalize(lightDir + viewDir);
+      float nDotl = saturate(dot(normal, normalize(lightDir)));
+
+      float3 albedo = tex2D(_MainTex, i.uv).rgb * (1 - _Metallic);
+      // This is an oversimplification, even pure dielectrics can have some specular
+      // reflection, but its good enough for this purpose (and can be toggled in inspector).
+      float3 specularTint = albedo * (_Metallic);
+
+      // Blinn-Phong model
+      float3 diffuse = albedo * lightColor * nDotl;
+      float3 specular = specularTint * lightColor *
+                        pow(saturate(dot(halfDir, normal)), _Smoothness * 100);
+      float3 lighting = diffuse + specular;
+
+      // Add all other lights in scene.
+
+      // Reduce this component to minimize double counting of main directional light.
+      lighting += float3(ShadeSH9(half4(normal, 1.0))) * 0.5;
+
+      return float4(lighting * i.color.rgb, i.color.a);
+    }
+
+    ENDCG
+  }
+
+  // Cast shadows
+  Pass {
+    Tags { "LightMode" = "ShadowCaster"}
+
+    CGPROGRAM
+
+    #pragma target 4.0
+    #pragma vertex vert
+    #pragma fragment frag
+
+    #include "UnityCG.cginc"
+
+    struct appdata {
+      float4 position : POSITION;
+    };
+
+    float4 vert(appdata v) : SV_POSITION {
+      float4 position = UnityObjectToClipPos(v.position);
+      return UnityApplyLinearShadowBias(position);
+    }
+
+    half4 frag() : SV_TARGET {
+      return 0;
+    }
+
+    ENDCG
   }
 }
 }
