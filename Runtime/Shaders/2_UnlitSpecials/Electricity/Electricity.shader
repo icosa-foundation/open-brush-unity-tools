@@ -28,13 +28,11 @@ Properties {
 	_ClipEnd("Clip End", Float) = -1
 
   // Mesh layout selection, set per material by OpenBrushImportPlugin on import.
-  _IS_TILT_MESH("Is Tilt Mesh", Float) = 0
   _ISBAKEDEXPORT("Is Baked Export", Float) = 0
 }
 
 CGINCLUDE
   #pragma multi_compile __ SELECTION_ON
-  #pragma multi_compile_local __ _IS_TILT_MESH
   #pragma multi_compile_local __ _ISBAKEDEXPORT
   #include "UnityCG.cginc"
   #include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/Include/Brush.cginc"
