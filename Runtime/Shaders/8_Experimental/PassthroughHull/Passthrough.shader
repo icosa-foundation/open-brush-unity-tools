@@ -6,7 +6,7 @@ Shader "Special/Passthrough"
     }
     SubShader
     {
-        Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Opaque" }
+        Tags { "RenderType"="Opaque" }
         LOD 100
         Cull Off
 

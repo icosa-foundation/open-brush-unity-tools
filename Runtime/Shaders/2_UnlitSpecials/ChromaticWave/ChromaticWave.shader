@@ -23,6 +23,10 @@ Properties {
   _Dissolve ("Dissolve", Range(0, 1)) = 1
 	_ClipStart("Clip Start", Float) = 0
 	_ClipEnd("Clip End", Float) = -1
+
+  // Mesh layout selection, set per material by OpenBrushImportPlugin on import.
+  _IS_TILT_MESH("Is Tilt Mesh", Float) = 0
+  _ISBAKEDEXPORT("Is Baked Export", Float) = 0
 }
 
 Category {
@@ -36,7 +40,6 @@ Category {
   SubShader {
     Pass {
       Name "ChromaticWave"
-      Tags { "LightMode"="UniversalForward" }
 
       CGPROGRAM
       #pragma multi_compile __ SHADER_SCRIPTING_ON
@@ -48,6 +51,8 @@ Category {
       #pragma multi_compile __ HDR_EMULATED HDR_SIMPLE
       #pragma multi_compile __ ODS_RENDER ODS_RENDER_CM
       #pragma multi_compile __ SELECTION_ON
+      #pragma multi_compile_local __ _IS_TILT_MESH
+      #pragma multi_compile_local __ _ISBAKEDEXPORT
       #pragma target 3.0
 
       #include "UnityCG.cginc"
@@ -92,6 +97,11 @@ Category {
 
         o.pos = UnityObjectToClipPos(v.vertex);
         o.texcoord = v.texcoord;
+#ifdef _ISBAKEDEXPORT
+        // The exporter flips V into glTF space but the importer keeps UVs raw, so the imported
+        // mesh's V is mirrored relative to the runtime mesh. Undo it for the imported layout.
+        o.texcoord.y = 1.0 - o.texcoord.y;
+#endif
         o.color = bloomColor(v.color, _EmissionGain);
         o.unbloomedColor = v.color;
         o.id = (float2)v.id;

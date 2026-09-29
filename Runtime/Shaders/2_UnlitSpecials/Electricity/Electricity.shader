@@ -26,10 +26,16 @@ Properties {
     _Dissolve("Dissolve", Range(0, 1)) = 1
 	_ClipStart("Clip Start", Float) = 0
 	_ClipEnd("Clip End", Float) = -1
+
+  // Mesh layout selection, set per material by OpenBrushImportPlugin on import.
+  _IS_TILT_MESH("Is Tilt Mesh", Float) = 0
+  _ISBAKEDEXPORT("Is Baked Export", Float) = 0
 }
 
 CGINCLUDE
   #pragma multi_compile __ SELECTION_ON
+  #pragma multi_compile_local __ _IS_TILT_MESH
+  #pragma multi_compile_local __ _ISBAKEDEXPORT
   #include "UnityCG.cginc"
   #include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/Include/Brush.cginc"
 
@@ -50,6 +56,10 @@ CGINCLUDE
     float3 tangent : TANGENT;
     float2 texcoord0 : TEXCOORD0;
     float3 texcoord1 : TEXCOORD1;
+#ifdef _ISBAKEDEXPORT
+    // Baked exports put (midpointPos.z, widthiness) here.
+    float2 texcoord2 : TEXCOORD2;
+#endif
     uint id : SV_VertexID;
 
     UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -72,16 +82,16 @@ CGINCLUDE
     UNITY_VERTEX_OUTPUT_STEREO
   };
 
-  float3 displacement(float3 pos, float mod) {
+  float3 displacementAtTime(float3 pos, float mod, float animationTime) {
     // Noise
-    float time = GetTime().w;
+    float time = animationTime;
     float d = 30;
     float freq = .1 + mod;
     float3 disp = float3(1,0,0) * curlX(pos * freq + time, d);
     disp += float3(0,1,0) * curlY(pos * freq + time, d);
     disp += float3(0,0,1) * curlZ(pos * freq + time, d);
 
-    time = GetTime().w*1.777;
+    time = animationTime*1.777;
     d = 100;
     freq = .2 + mod;
     float3 disp2 = float3(1,0,0) * curlX(pos * freq + time, d);
@@ -91,6 +101,10 @@ CGINCLUDE
     return disp;
   }
 
+
+  float3 displacement(float3 pos, float mod) {
+    return displacementAtTime(pos, mod, GetTime().w);
+  }
 
   v2f vertModulated (appdata_t v, float mod, float dir)
   {
@@ -102,6 +116,37 @@ CGINCLUDE
     UNITY_INITIALIZE_OUTPUT(v2f, o);
     UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
+    float3 positionOS = v.vertex.xyz;
+
+#ifdef _ISBAKEDEXPORT
+    // BrushBaker baked the ribbon reconstruction into the position and kept the
+    // midpoint and widthiness in UV1/UV2 so the animated curl can be recomputed.
+    float envelope = sin(v.texcoord0.x * (3.14159));
+    float envelopePow =  (1-pow(1  - envelope, 10));
+
+    float3 midpointPos_CS = float3(v.texcoord1.xy, v.texcoord2.x);
+    float widthiness_CS = v.texcoord2.y;
+    // Older baked exports have no UV2 animation data. Keep their baked position
+    // instead of dividing by zero (also covers zero-width ribbon vertices).
+    if (widthiness_CS > 0)
+    {
+      float3 noisePosition = midpointPos_CS / widthiness_CS;
+      // BrushBaker includes strand 1's curl at time zero and intensity 0.1.
+      // Remove it before applying the animated strand, rather than adding curl twice.
+      float3 bakedDisp = displacementAtTime(noisePosition, 1.0, 0.0) * widthiness_CS;
+      float3 disp = displacement(noisePosition, mod) * widthiness_CS;
+      positionOS -= bakedDisp * 0.1 * envelopePow;
+#if !SHARP_AND_BLOOMY
+      positionOS = midpointPos_CS + (positionOS - midpointPos_CS) * 1.6;
+#endif
+#ifdef AUDIO_REACTIVE
+      disp *= (_BeatOutput.x + .5);
+      disp.y += (tex2Dlod(_WaveFormTex, float4(v.texcoord0.x,0,0,0)).r - .5f) * .1;
+      v.color = v.color * .5 + v.color * _BeatOutput.z * .5;
+#endif
+      positionOS += disp * _DisplacementIntensity * envelopePow;
+    }
+#else
     float envelope = sin(v.texcoord0.x * (3.14159));
     float envelopePow =  (1-pow(1  - envelope, 10));
 
@@ -128,12 +173,13 @@ CGINCLUDE
 #endif
 
     // This recreates the standard ribbon position with some tapering at edges
-    v.vertex.xyz = midpointPos_CS + offsetFromMiddleToEdge_CS * envelopePow * widthScale;
+    positionOS = midpointPos_CS + offsetFromMiddleToEdge_CS * envelopePow * widthScale;
 
     // This adds curl noise
-    v.vertex.xyz += disp * _DisplacementIntensity * envelopePow;
+    positionOS += disp * _DisplacementIntensity * envelopePow;
+#endif
 
-    o.vertex = UnityObjectToClipPos(v.vertex);
+    o.vertex = UnityObjectToClipPos(positionOS);
     // TODO(b/123094204) bloom is turned off on mobile as it completely broke the shader
     // for still-unknown reasons.
 #if SHARP_AND_BLOOMY
@@ -208,6 +254,8 @@ Category {
 
 
   SubShader {
+    Tags { "RenderPipeline"="UniversalPipeline" }
+
     Pass {
       Name "ElectricityStrand1"
       Tags { "LightMode"="UniversalForward" }
@@ -243,6 +291,54 @@ Category {
     Pass {
       Name "ElectricityStrand3"
       Tags { "LightMode"="UniversalForwardOnly" }
+
+      CGPROGRAM
+      #pragma multi_compile __ SHADER_SCRIPTING_ON
+      #pragma vertex vert_3
+      #pragma fragment frag
+      #pragma target 3.0
+      #pragma multi_compile_particles
+      #pragma multi_compile __ AUDIO_REACTIVE
+      #pragma multi_compile __ HDR_EMULATED HDR_SIMPLE
+      #pragma multi_compile __ ODS_RENDER ODS_RENDER_CM
+      ENDCG
+    }
+  }
+
+  // Built-in render pipeline: no LightMode tags, so every strand draws as "Always".
+  SubShader {
+    Pass {
+      Name "ElectricityStrand1"
+
+      CGPROGRAM
+      #pragma multi_compile __ SHADER_SCRIPTING_ON
+      #pragma vertex vert_1
+      #pragma fragment frag
+      #pragma target 3.0
+      #pragma multi_compile_particles
+      #pragma multi_compile __ AUDIO_REACTIVE
+      #pragma multi_compile __ HDR_EMULATED HDR_SIMPLE
+      #pragma multi_compile __ ODS_RENDER ODS_RENDER_CM
+      ENDCG
+    }
+
+    Pass {
+      Name "ElectricityStrand2"
+
+      CGPROGRAM
+      #pragma multi_compile __ SHADER_SCRIPTING_ON
+      #pragma vertex vert_2
+      #pragma fragment frag
+      #pragma target 3.0
+      #pragma multi_compile_particles
+      #pragma multi_compile __ AUDIO_REACTIVE
+      #pragma multi_compile __ HDR_EMULATED HDR_SIMPLE
+      #pragma multi_compile __ ODS_RENDER ODS_RENDER_CM
+      ENDCG
+    }
+
+    Pass {
+      Name "ElectricityStrand3"
 
       CGPROGRAM
       #pragma multi_compile __ SHADER_SCRIPTING_ON
