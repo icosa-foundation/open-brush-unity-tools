@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Shader calculates normals per triangle using a geometry shader.
+// Shader calculates flat triangle normals from world-position derivatives.
+// Avoid geometry stages so the brush also works with mobile XR multiview.
 // Uses Blinn-Phong lighting model for the main directional light and SH
 // for all additional lighting.
 //
@@ -48,11 +49,9 @@ SubShader {
     HLSLPROGRAM
 
     #pragma vertex vert
-    #pragma geometry geom
     #pragma fragment frag
     #pragma multi_compile_instancing
-    #pragma target 4.5
-    #pragma require geometry
+    #pragma target 3.5
     #pragma multi_compile __ SHADER_SCRIPTING_ON
     #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
     #pragma multi_compile_fragment _ _SHADOWS_SOFT
@@ -81,21 +80,9 @@ SubShader {
       UNITY_VERTEX_INPUT_INSTANCE_ID
     };
 
-    struct VaryingsToGeom {
-      float4 positionCS : SV_POSITION;
-      float2 uv : TEXCOORD0;
-      float3 positionWS : TEXCOORD1;
-      float4 color : TEXCOORD2;
-      float id : TEXCOORD3;
-
-      UNITY_VERTEX_INPUT_INSTANCE_ID
-      UNITY_VERTEX_OUTPUT_STEREO
-    };
-
     struct Varyings {
       float4 positionCS : SV_POSITION;
       float2 uv : TEXCOORD0;
-      float3 normalWS : TEXCOORD1;
       float3 positionWS : TEXCOORD2;
       float4 color : TEXCOORD3;
       float id : TEXCOORD4;
@@ -124,8 +111,8 @@ SubShader {
       return dither8x8[y * 8 + x] / 64.0;
     }
 
-    VaryingsToGeom vert(Attributes v) {
-      VaryingsToGeom o;
+    Varyings vert(Attributes v) {
+      Varyings o = (Varyings)0;
       UNITY_SETUP_INSTANCE_ID(v);
       UNITY_TRANSFER_INSTANCE_ID(v, o);
       UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
@@ -138,58 +125,22 @@ SubShader {
       return o;
     }
 
-    // Called once per triangle primitive, values outputted to triangle's pixels.
-    [maxvertexcount(3)]
-    void geom(triangle VaryingsToGeom i[3], inout TriangleStream<Varyings> stream) {
-      float3 p0 = i[0].positionWS;
-      float3 p1 = i[1].positionWS;
-      float3 p2 = i[2].positionWS;
-
-      float3 triangleNormal = normalize(cross(p1 - p0, p2 - p0));
-
-      Varyings o = (Varyings)0;
-      o.normalWS = triangleNormal;
-
-      UNITY_TRANSFER_INSTANCE_ID(i[0], o);
-      UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(i[0], o);
-      o.positionCS = i[0].positionCS;
-      o.uv = i[0].uv;
-      o.positionWS = i[0].positionWS;
-      o.color = i[0].color;
-      o.id = i[0].id;
-      stream.Append(o);
-
-      UNITY_TRANSFER_INSTANCE_ID(i[1], o);
-      UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(i[1], o);
-      o.positionCS = i[1].positionCS;
-      o.uv = i[1].uv;
-      o.positionWS = i[1].positionWS;
-      o.color = i[1].color;
-      o.id = i[1].id;
-      stream.Append(o);
-
-      UNITY_TRANSFER_INSTANCE_ID(i[2], o);
-      UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(i[2], o);
-      o.positionCS = i[2].positionCS;
-      o.uv = i[2].uv;
-      o.positionWS = i[2].positionWS;
-      o.color = i[2].color;
-      o.id = i[2].id;
-      stream.Append(o);
-    }
-
     half4 frag(Varyings i) : SV_TARGET {
       UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);
+      // Evaluate derivatives before any discard, while all lanes are active.
+      float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.positionWS);
+      float3 normalWS = normalize(cross(ddy(i.positionWS), ddx(i.positionWS)));
+      // Back faces are culled; orient the face normal toward the current eye.
+      // This also handles render-target Y flips without requiring mesh normals.
+      if (dot(normalWS, viewDir) < 0) normalWS = -normalWS;
       #ifdef SHADER_SCRIPTING_ON
       if (_ClipEnd > 0 && !(i.id > _ClipStart && i.id < _ClipEnd)) discard;
       if (_Dissolve < 1 && Dither8x8(i.positionCS.xy) >= _Dissolve) discard;
       #endif
 
-      half3 normalWS = normalize(i.normalWS);
       Light mainLight = GetMainLight(TransformWorldToShadowCoord(i.positionWS));
       half3 lightColor = mainLight.color * mainLight.shadowAttenuation;
 
-      half3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.positionWS);
       half3 halfDir = normalize(mainLight.direction + viewDir);
       half nDotL = saturate(dot(normalWS, mainLight.direction));
 
@@ -212,12 +163,10 @@ SubShader {
     Tags { "LightMode" = "ShadowCaster"}
 
     HLSLPROGRAM
-    #pragma target 4.5
+    #pragma target 3.5
     #pragma vertex vert
     #pragma fragment frag
     #pragma multi_compile_instancing
-    #pragma geometry geom
-    #pragma require geometry
 
     #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
@@ -227,13 +176,6 @@ SubShader {
       UNITY_VERTEX_INPUT_INSTANCE_ID
     };
 
-    struct VaryingsToGeom {
-      float4 positionCS : SV_POSITION;
-
-      UNITY_VERTEX_INPUT_INSTANCE_ID
-      UNITY_VERTEX_OUTPUT_STEREO
-    };
-
     struct Varyings {
       float4 positionCS : SV_POSITION;
 
@@ -241,30 +183,13 @@ SubShader {
       UNITY_VERTEX_OUTPUT_STEREO
     };
 
-    VaryingsToGeom vert(Attributes v) {
-      VaryingsToGeom o;
+    Varyings vert(Attributes v) {
+      Varyings o = (Varyings)0;
       UNITY_SETUP_INSTANCE_ID(v);
       UNITY_TRANSFER_INSTANCE_ID(v, o);
       UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
       o.positionCS = TransformObjectToHClip(v.positionOS.xyz);
       return o;
-    }
-
-    [maxvertexcount(3)]
-    void geom(triangle VaryingsToGeom i[3], inout TriangleStream<Varyings> stream) {
-      Varyings o = (Varyings)0;
-      UNITY_TRANSFER_INSTANCE_ID(i[0], o);
-      UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(i[0], o);
-      o.positionCS = i[0].positionCS;
-      stream.Append(o);
-      UNITY_TRANSFER_INSTANCE_ID(i[1], o);
-      UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(i[1], o);
-      o.positionCS = i[1].positionCS;
-      stream.Append(o);
-      UNITY_TRANSFER_INSTANCE_ID(i[2], o);
-      UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(i[2], o);
-      o.positionCS = i[2].positionCS;
-      stream.Append(o);
     }
 
     half4 frag() : SV_TARGET {
@@ -287,13 +212,11 @@ SubShader {
     CGPROGRAM
 
     #pragma vertex vert
-    #pragma geometry geom
     #pragma fragment frag
     #pragma multi_compile __ SHADER_SCRIPTING_ON
     #pragma multi_compile _ SHADOWS_SCREEN
     #pragma multi_compile_instancing
-    #pragma target 4.0
-    #pragma require geometry
+    #pragma target 3.5
 
     #include "UnityCG.cginc"
     #include "AutoLight.cginc"
@@ -340,7 +263,6 @@ SubShader {
     struct v2f {
       float4 pos : SV_POSITION;
       float2 uv : TEXCOORD0;
-      float3 normal : TEXCOORD1;
       float3 worldPos : TEXCOORD2;
       float4 color : TEXCOORD3;
       float id : TEXCOORD4;
@@ -363,34 +285,15 @@ SubShader {
       o.id = (float)v.id;
       TRANSFER_SHADOW(o);
 
-      // normal is set in geom method
       return o;
-    }
-
-    // Called once per triangle primitive, values outputted to triangle's
-    // pixels' frag methods.
-    [maxvertexcount(3)]
-    void geom(triangle v2f i[3], inout TriangleStream<v2f> stream) {
-      float3 p0 = i[0].worldPos;
-      float3 p1 = i[1].worldPos;
-      float3 p2 = i[2].worldPos;
-
-      float3 v0 = p1 - p0;
-      float3 v1 = p2 - p0;
-
-      float3 triangleNormal = normalize(cross(v0, v1));
-
-      i[0].normal = triangleNormal;
-      i[1].normal = triangleNormal;
-      i[2].normal = triangleNormal;
-
-      stream.Append(i[0]);
-      stream.Append(i[1]);
-      stream.Append(i[2]);
     }
 
     float4 frag(v2f i) : SV_TARGET {
       UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(i);
+      // Keep derivatives outside the scripting discard branches.
+      float3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPos);
+      float3 normal = normalize(cross(ddy(i.worldPos), ddx(i.worldPos)));
+      if (dot(normal, viewDir) < 0) normal = -normal;
 
       #ifdef SHADER_SCRIPTING_ON
       if (_ClipEnd > 0 && !(i.id > _ClipStart && i.id < _ClipEnd)) discard;
@@ -404,9 +307,7 @@ SubShader {
       // Add main directional light's effect.
 
       // Calculate vectors to be used in lighting model.
-      float3 normal = i.normal;
       float3 lightDir = _WorldSpaceLightPos0.xyz;
-      float3 viewDir = normalize(_WorldSpaceCameraPos - i.worldPos);
       float3 halfDir = normalize(lightDir + viewDir);
       float nDotl = saturate(dot(normal, normalize(lightDir)));
 
@@ -438,7 +339,7 @@ SubShader {
 
     CGPROGRAM
 
-    #pragma target 4.0
+    #pragma target 3.5
     #pragma vertex vert
     #pragma fragment frag
 
