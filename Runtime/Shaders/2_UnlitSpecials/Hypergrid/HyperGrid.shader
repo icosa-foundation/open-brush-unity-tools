@@ -108,7 +108,9 @@ Category {
 
 #ifdef AUDIO_REACTIVE
         worldPos.y -= release * fmod(_BeatOutputAccum.x - v.texcoord1.w, 5);
-        worldPos.y += .3 * release * pow(sin(_BeatOutputAccum.x * 2 + worldPos.x),5);
+        float wave = sin(_BeatOutputAccum.x * 2 + worldPos.x);
+        float waveSquared = wave * wave;
+        worldPos.y += .3 * release * waveSquared * waveSquared * wave;
 #endif
         // Quantize vertices
         float q = (1.0f / size) * .5;

@@ -30,7 +30,7 @@ float thinFilmReflectance(float cos0, float lambda, float thickness, float n0, f
     const float delta = d10 + d12;
 
     // Cosine of the reflected angle.
-    const float sin1 = pow(n0 / n1, 2) * (1 - pow(cos0, 2));
+    const float sin1 = pow(n0 / n1, 2) * (1 - (cos0 * cos0));
 
     // Total internal reflection.
     if (sin1 > 1) return 1.0;
@@ -38,7 +38,7 @@ float thinFilmReflectance(float cos0, float lambda, float thickness, float n0, f
 
     // Cosine of the final transmitted angle, i.e. cos(theta_2)
     // This angle is for the Fresnel term at the bottom interface.
-    const float sin2 = pow(n0 / n2, 2) * (1 - pow(cos0, 2));
+    const float sin2 = pow(n0 / n2, 2) * (1 - (cos0 * cos0));
 
     // Total internal reflection.
     if (sin2 > 1) return 1.0;
@@ -60,8 +60,8 @@ float thinFilmReflectance(float cos0, float lambda, float thickness, float n0, f
     const float phi = (2 * PI / lambda) * (2 * n1 * thickness * cos1) + delta;
 
     // Evaluate the transmitted intensity for the two possible polarizations.
-    const float ts = pow(beta_s, 2) / (pow(alpha_s, 2) - 2 * alpha_s * cos(phi) + 1);
-    const float tp = pow(beta_p, 2) / (pow(alpha_p, 2) - 2 * alpha_p * cos(phi) + 1);
+    const float ts = (beta_s * beta_s) / ((alpha_s * alpha_s) - 2 * alpha_s * cos(phi) + 1);
+    const float tp = (beta_p * beta_p) / ((alpha_p * alpha_p) - 2 * alpha_p * cos(phi) + 1);
 
     // Take into account conservation of energy for transmission.
     const float beamRatio = (n2 * cos2) / (n0 * cos0);
