@@ -419,7 +419,8 @@ void HypercolorFamilyAudioPositionWithDirection_float(float3 positionOS, float3 
     float strokeWidth = abs(uv.z) * 1.2;
     float t = _BeatOutputAccum.z * 5.0;
     float waveIntensity = _BeatOutput.z * 0.1 * strokeWidth;
-    float wave = pow(1.0 - (sin(t + uv.x * 5.0 + uv.y * 10.0) + 1.0), 2.0);
+    float wave = sin(t + uv.x * 5.0 + uv.y * 10.0);
+    wave *= wave;
     outPositionOS += wave * displacementOS * waveIntensity;
 #endif
 }
@@ -441,7 +442,8 @@ void HypercolorFamilyAudioPositionWithDirection_half(half3 positionOS, half3 dis
     half strokeWidth = abs(uv.z) * 1.2h;
     half t = (half)(_BeatOutputAccum.z * 5.0);
     half waveIntensity = (half)_BeatOutput.z * 0.1h * strokeWidth;
-    half wave = pow(1.0h - (sin(t + uv.x * 5.0h + uv.y * 10.0h) + 1.0h), 2.0h);
+    half wave = sin(t + uv.x * 5.0h + uv.y * 10.0h);
+    wave *= wave;
     outPositionOS += wave * displacementOS * waveIntensity;
 #endif
 }
@@ -595,7 +597,8 @@ void DiscoAudioPosition_float(float3 graphPosition, float3 basePosition, float3 
     float waveform = SampleWaveformTex(uv.x * 2).b - 0.5;
     float theta = fmod(uv.y, 1);
     outPosition = basePosition + waveform * normal * 0.2;
-    outPosition += pow(1 - (sin(t + uv.x * uTileRate + theta * 10) + 1), 2) * normal * waveIntensity * radius;
+    float wave = sin(t + uv.x * uTileRate + theta * 10);
+    outPosition += wave * wave * normal * waveIntensity * radius;
 #else
     outPosition = graphPosition;
 #endif
@@ -610,7 +613,8 @@ void DiscoAudioPosition_half(half3 graphPosition, half3 basePosition, half3 norm
     float waveform = SampleWaveformTex(uv.x * 2).b - 0.5;
     float theta = fmod(uv.y, 1);
     float3 audioPosition = (float3)basePosition + waveform * (float3)normal * 0.2;
-    audioPosition += pow(1 - (sin(t + uv.x * uTileRate + theta * 10) + 1), 2) * (float3)normal * waveIntensity * radius;
+    float wave = sin(t + uv.x * uTileRate + theta * 10);
+    audioPosition += wave * wave * (float3)normal * waveIntensity * radius;
     outPosition = (half3)audioPosition;
 #else
     outPosition = graphPosition;
@@ -624,7 +628,9 @@ void HyperGridAudioPosition_float(float3 positionOS, float4 uv1, out float3 outP
     float release = saturate(lifetime);
 #ifdef AUDIO_REACTIVE
     positionWS.y -= release * fmod(_BeatOutputAccum.x - uv1.w, 5);
-    positionWS.y += 0.3 * release * pow(sin(_BeatOutputAccum.x * 2 + positionWS.x), 5);
+    float wave = sin(_BeatOutputAccum.x * 2 + positionWS.x);
+    float waveSquared = wave * wave;
+    positionWS.y += 0.3 * release * waveSquared * waveSquared * wave;
 #endif
     float size = max(length(uv1.xyz), 0.0001);
     float q = (1.0 / size) * 0.5;
@@ -639,7 +645,9 @@ void HyperGridAudioPosition_half(half3 positionOS, half4 uv1, out half3 outPosit
     float release = saturate(lifetime);
 #ifdef AUDIO_REACTIVE
     positionWS.y -= release * fmod(_BeatOutputAccum.x - (float)uv1.w, 5);
-    positionWS.y += 0.3 * release * pow(sin(_BeatOutputAccum.x * 2 + positionWS.x), 5);
+    float wave = sin(_BeatOutputAccum.x * 2 + positionWS.x);
+    float waveSquared = wave * wave;
+    positionWS.y += 0.3 * release * waveSquared * waveSquared * wave;
 #endif
     float size = max(length((float3)uv1.xyz), 0.0001);
     float q = (1.0 / size) * 0.5;

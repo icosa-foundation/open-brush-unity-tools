@@ -109,7 +109,8 @@ Category {
 				v.color.rgb *= incolor * pow(1 - t01, 2) * 10;
 				*/
 
-				float displacement = pow(v.texcoord.x,_DisplacementExponent);
+				// Fractional powers require non-negative UVs in runtime and exported meshes.
+				float displacement = pow(max(v.texcoord.x, 0.0), _DisplacementExponent);
 				v.vertex.xyz += v.normal * displacement * _DisplacementAmount;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.texcoord = TRANSFORM_TEX(v.texcoord,_MainTex);
@@ -133,7 +134,8 @@ Category {
 
 				// Distort U coord to taste. This makes the effect to "slow down" towards the end of the stroke
 				// by clumping UV's closer together toward the beginning of the stroke
-				i.texcoord.x = pow(i.texcoord.x, _StretchDistortionExponent);
+				// MSAA edge interpolation can extrapolate U below zero.
+				i.texcoord.x = pow(max(i.texcoord.x, 0.0), _StretchDistortionExponent);
 
 				// Rescale time to go between 0 : u_scale, where u_scale is the range of warped u coords on the stroke
 				float u_scale = _Speed;

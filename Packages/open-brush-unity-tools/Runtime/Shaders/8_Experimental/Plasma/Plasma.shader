@@ -163,7 +163,9 @@ Category {
         tex += tex2D(_MainTex, half2(us[2], vs[2]));
 
         // render 3 procedural lines
-        half3 procline = 1 - saturate(pow((vs - LINE_POS)/LINE_WIDTH, 2));
+        // Square signed distances directly; pow is undefined for negative bases.
+        half3 lineDistance = (vs - LINE_POS) / LINE_WIDTH;
+        half3 procline = 1 - saturate(lineDistance * lineDistance);
         tex += dot(procline, half3(1,1,1));
 
         // adjust brightness; modulate by color

@@ -159,7 +159,7 @@ Category {
         half4 tex = half4(flames,flames,flames,1.0);
         float flame_fade  = lerp(_FlameFadeMin,_FlameFadeMax,flame_fade_mix);
 
-        tex.xyz *= pow(1.0-i.texcoord.x, flame_fade) * (flame_fade*2);
+        tex.xyz *= pow(max(1.0 - i.texcoord.x, 0.0), flame_fade) * (flame_fade*2);
 
         float4 color = i.color * tex;
         color = encodeHdr(color.rgb * color.a);
