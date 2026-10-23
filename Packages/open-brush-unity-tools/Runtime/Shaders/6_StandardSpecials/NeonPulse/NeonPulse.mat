@@ -34,6 +34,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses:
+  - ShadowCaster
   - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
