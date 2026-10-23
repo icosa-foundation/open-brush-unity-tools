@@ -34,8 +34,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: UnlitHull
-  m_Shader: {fileID: -6465566751694194690, guid: 286c16fdd0381854cb875392608b62df,
-    type: 3}
+  m_Shader: {fileID: 4800000, guid: 0688c89ab91f95a49a7395fe0da3a0a6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
