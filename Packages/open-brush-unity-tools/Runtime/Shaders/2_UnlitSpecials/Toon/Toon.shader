@@ -14,6 +14,7 @@
 
 Shader "Brush/Special/Toon" {
 Properties {
+  [HideInInspector] _Cull ("Shadow Culling", Float) = 2
   _MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
   _OutlineMax("Maximum outline size", Range(0, .5)) = .005
 
@@ -164,6 +165,8 @@ ENDCG
 SubShader {
   // Universal Render Pipeline: retain the existing forward/outline pass tags.
   Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Opaque" }
+  // Match the old opaque Diffuse fallback caster (no outline/vertex deformation).
+  UsePass "Universal Render Pipeline/Lit/SHADOWCASTER"
   // For exportManifest.json:
   //   GltfCull Back
   Pass{

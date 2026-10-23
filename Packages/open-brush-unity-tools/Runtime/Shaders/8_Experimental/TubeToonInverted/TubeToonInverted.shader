@@ -14,6 +14,7 @@
 
 Shader "Brush/Special/TubeToonInverted" {
 Properties {
+  [HideInInspector] _Cull ("Shadow Culling", Float) = 2
   _MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
 
   _Dissolve("Dissolve", Range(0,1)) = 1
@@ -113,6 +114,8 @@ ENDCG
 SubShader {
   // Universal Render Pipeline: retain the existing forward/outline pass tags.
   Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Opaque" }
+  // Match the old opaque Diffuse fallback caster (no outline/vertex deformation).
+  UsePass "Universal Render Pipeline/Lit/SHADOWCASTER"
   Pass{
     Name "Forward"
     Tags { "LightMode" = "UniversalForward" }
