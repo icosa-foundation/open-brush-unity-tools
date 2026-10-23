@@ -1,3 +1,5 @@
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/Include/NoFog.hlsl"
+
 // Amplitude reflection coefficient (s-polarized)
 float rs(float n1, float n2, float cosI, float cosT) {
     return (n1 * cosI - n2 * cosT) / (n1 * cosI + n2 * cosT);

@@ -1,3 +1,5 @@
+#include "Packages/com.icosa.open-brush-unity-tools/Runtime/Shaders/Include/NoFog.hlsl"
+
 // Copyright 2020 The Tilt Brush Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
