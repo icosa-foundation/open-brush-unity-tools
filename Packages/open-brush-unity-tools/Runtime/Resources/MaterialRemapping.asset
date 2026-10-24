@@ -105,6 +105,10 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 385a5e69e3ac58b4c8c7f1c29dad3a6a, type: 2}
   - key: TaperedMarker
     material: {fileID: 2100000, guid: 848eecf12724db540b371b0528c9de33, type: 2}
+  - key: TaperedMarkerGeo
+    material: {fileID: 2100000, guid: 848eecf12724db540b371b0528c9de33, type: 2}
+  - key: TaperedMarkerGeometry
+    material: {fileID: 2100000, guid: 848eecf12724db540b371b0528c9de33, type: 2}
   - key: TaperedMarker_Flat
     material: {fileID: 2100000, guid: 1a26b8c08a074f8a9facd2ef36e0cad0, type: 2}
   - key: ThickPaint
