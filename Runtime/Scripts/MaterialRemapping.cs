@@ -24,6 +24,7 @@ public class MaterialRemapping : ScriptableObject
         { "dea67637-cd1a-27e4-c9b1-52f4bbcb84e5", "WetPaint" },
         { "429ed64a-4e97-4466-84d3-145a861ef684", "Marker" },
         { "d90c6ad8-af0f-4b54-b422-e0f92abe1b3c", "TaperedMarker" },
+        { "ec4fa4d9-212e-df34-0afb-99330c2392d6", "TaperedMarkerGeo" },
         { "1a26b8c0-8a07-4f8a-9fac-d2ef36e0cad0", "TaperedMarker_Flat" },
         { "0d3889f3-3ede-470c-8af4-de4813306126", "DoubleTaperedMarker" },
         { "cf019139-d41c-4eb0-a1d0-5cf54b0a42f3", "Highlighter" },
